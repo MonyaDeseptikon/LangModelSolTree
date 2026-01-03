@@ -1,11 +1,11 @@
-package deseptikon.monya.parce;
+package deseptikon.monya.io_excel;
 
 import org.dhatim.fastexcel.reader.Cell;
 import org.dhatim.fastexcel.reader.CellType;
 
 import java.math.BigDecimal;
 
-public interface ServiceParce {
+public interface ServiceForExcel {
 
     static BigDecimal commaToDotCell(Cell cell){
         BigDecimal areaCheck;

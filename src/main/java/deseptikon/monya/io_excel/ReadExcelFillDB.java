@@ -1,7 +1,7 @@
 
-package deseptikon.monya.parce;
+package deseptikon.monya.io_excel;
 
-import deseptikon.monya.db.FillDB;
+import deseptikon.monya.db.list_real_estate.FillDB;
 import org.apache.commons.lang3.time.StopWatch;
 import org.dhatim.fastexcel.reader.*;
 
@@ -16,13 +16,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 //import static deseptikon.monya.parce.ServiceParce.commaToDotCell;
 
-public class ParceExcel implements ServiceParce {
+public class ReadExcelFillDB implements ServiceForExcel {
 
     public static void main(String[] args) throws IOException, SQLException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
 
-        ParceExcel test = new ParceExcel();
+        ReadExcelFillDB test = new ReadExcelFillDB();
         test.IO();
 
         stopWatch.stop();
@@ -32,11 +32,11 @@ public class ParceExcel implements ServiceParce {
 
 
 
-    //    FileInputStream is = new FileInputStream("E:\\ЦКО БТИ УР\\1C\\Алнашский_ОКС_ЗемУчасток_16.04.25092543_Абрамова_ОМС.xlsx");
-    FileInputStream is = new FileInputStream("E:\\ЦКО БТИ УР\\Языковая модель\\ЗУ 2022 allUseLogicTree.xlsm");
+
+    FileInputStream is = new FileInputStream("E:\\ЦКО БТИ УР\\Определение кода\\Данные\\ЗУ 2026 allUseLogicTree.xlsm");
     FillDB fillDB = new FillDB();
 
-    public ParceExcel() throws IOException, SQLException {
+    public ReadExcelFillDB() throws IOException, SQLException {
 
     }
 
@@ -53,7 +53,7 @@ public class ParceExcel implements ServiceParce {
                     i.getAndIncrement();
                     if (i.get() > 1 && !Objects.equals(r.getCellText(0), "")) {
 
-                            fillDB.fillRow(r.getCellText(0), ServiceParce.commaToDotCell(r.getCell(1)), r.getCellText(2), r.getCellText(3),
+                            fillDB.fillRow(r.getCellText(0), ServiceForExcel.commaToDotCell(r.getCell(1)), r.getCellText(2), r.getCellText(3),
                                     r.getCellText(4), r.getCellText(5), r.getCellText(6),
                                     r.getCellText(7), r.getCellText(8), r.getCellText(9), r.getCellText(10),
                                     r.getCellText(11), r.getCellText(12), r.getCellText(13));
