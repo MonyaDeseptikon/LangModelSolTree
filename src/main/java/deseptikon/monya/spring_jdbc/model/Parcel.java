@@ -171,4 +171,11 @@ public class Parcel {
 //                ", usageCode='" + usageCode + '\'' +
 //                '}';
 //    }
+
+//        @Override
+//    public String toString() {
+//        return
+//               id +
+//                ", " + cadastralNumber;
+//    }
 }

@@ -4,19 +4,24 @@ import deseptikon.monya.spring_jdbc.model.Parcel;
 import deseptikon.monya.spring_jdbc.util.ParcelMapperPredicted;
 import deseptikon.monya.spring_jdbc.util.ParcelMapperSimple;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
 import java.util.List;
+import java.util.Set;
 
 public class QueryParcel implements ParcelDAO {
-    //    private DataSource dataSource;
+        private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
+    private NamedParameterJdbcTemplate template;
 
 
     @Override
     public void setDataSource(DataSource dataSource) {
-//        this.dataSource = dataSource;
+        this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+        this.template = new NamedParameterJdbcTemplate(jdbcTemplate);
 
     }
 
@@ -27,10 +32,14 @@ public class QueryParcel implements ParcelDAO {
     }
 
     @Override
-    public void updateParcels(Integer id, String predicatedUsageCode) {
+    public void updateParcels(Set<Integer> idList, String predicatedUsageCode) {
 
-        String SQLUpdate = "UPDATE PARCELS.PRIVISIONAL_2026 SET PREDICTED_USAGE_CODE = ? WHERE id = ?";
-        jdbcTemplate.update(SQLUpdate, predicatedUsageCode, id);
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("predicatedUsageCode", predicatedUsageCode);
+        parameters.addValue("idList", idList);
+
+        String SQLUpdate = "UPDATE PARCELS.PRIVISIONAL_2026 SET PREDICTED_USAGE_CODE = :predicatedUsageCode WHERE id IN (:idList)";
+        template.update(SQLUpdate, parameters);
     }
 
 
