@@ -11,8 +11,11 @@ public interface ParcelDAO {
 
     public List<Parcel> getListParcels();
 
-    public List<Parcel> getListParcelsByICN(String innerCN);
+    public List<Parcel> getListParcelsByTagsWithoutICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea);
+    public List<Parcel> getListParcelsByTagsWithICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea);
 
     public void updateParcels(Set<Integer> idList, String usageCode);
+
+    public List<Parcel> getListParcelsByTags(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea);
 
 }
