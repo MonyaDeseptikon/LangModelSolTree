@@ -1,4 +1,4 @@
-package deseptikon.monya.spring_jdbc.model;
+package deseptikon.monya.spring_jdbc_parcels.model;
 
 public class Parcel {
 

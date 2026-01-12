@@ -1,8 +1,11 @@
 
-package deseptikon.monya.io_excel;
+package deseptikon.monya.io_excel.transfer;
 
 import deseptikon.monya.db.list_real_estate.FillDB;
-import org.apache.commons.lang3.time.StopWatch;
+import deseptikon.monya.io_excel.services.ServiceForExcel;
+import deseptikon.monya.io_excel.mapper.FillRow;
+import deseptikon.monya.spring_jdbc_parcels.model.Parcel;
+import org.dhatim.fastexcel.Worksheet;
 import org.dhatim.fastexcel.reader.*;
 
 import java.io.FileInputStream;
@@ -10,14 +13,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 //import static deseptikon.monya.parce.ServiceParce.commaToDotCell;
 
-public class IOExcelDB implements ServiceForExcel {
+public class IOExcelDB implements ServiceForExcel , ExcelDAO, FillRow {
 
 
     public void readExcelFillDBParcelsProvisionalList(String filePath, int worksheetIndex) throws FileNotFoundException, SQLException {
@@ -52,6 +53,18 @@ public class IOExcelDB implements ServiceForExcel {
         }
     }
 
+    @Override
+    public void readDBFillExcel(Worksheet ws, Set<Parcel> parcelList) throws FileNotFoundException, SQLException {
+        int row = 0;
+        Iterator<Parcel> parcelIterator = parcelList.iterator();
+        while (parcelIterator.hasNext()){
+            Parcel parcel = parcelIterator.next();
+            parcelsFull(ws,row, parcel);
+
+            row++;
+        }
+
+    }
 
 
 }

@@ -1,4 +1,4 @@
-package deseptikon.monya.service;
+package deseptikon.monya.io_excel.services;
 
 public class ReplaceChar {
     public static String replaceChar(String checkString) {

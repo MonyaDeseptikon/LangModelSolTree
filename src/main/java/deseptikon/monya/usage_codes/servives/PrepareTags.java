@@ -1,4 +1,4 @@
-package deseptikon.monya.service;
+package deseptikon.monya.usage_codes.servives;
 
 import java.util.List;
 import java.util.Optional;

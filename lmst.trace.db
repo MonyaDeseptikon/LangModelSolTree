@@ -250,11 +250,11 @@ INSERT INTO PARCELS.PRIVISIONAL_2026 (cadastral_number, area, OKATO, KLADR, loca
 	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
 	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:315)
 	at deseptikon.monya.db.list_real_estate.FillDB.fillRow(FillDB.java:33)
-	at deseptikon.monya.io_excel.IOExcelDB.lambda$IO$0(ParceExcel.java:46)
+	at deseptikon.monya.io_excel.transfer.IOExcelDB.lambda$IO$0(ParceExcel.java:46)
 	at org.dhatim.fastexcel.reader.RowSpliterator.tryAdvance(RowSpliterator.java:48)
 	at java.base/java.util.Spliterator.forEachRemaining(Spliterator.java:332)
 	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
-	at deseptikon.monya.io_excel.IOExcelDB.IO(ParceExcel.java:38)
+	at deseptikon.monya.io_excel.transfer.IOExcelDB.IO(ParceExcel.java:38)
 	at deseptikon.monya.CodesHandler.main(Main.java:18)
 2025-12-20 20:32:52 database: flush
 org.h2.message.DbException: Внутренняя ошибка: "java.lang.IllegalStateException: The file is locked: nio:E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [1.4.199/7]"
@@ -1502,7 +1502,7 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО �
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
 	at deseptikon.monya.db.list_real_estate.FillDB.getConnections(FillDB.java:54)
 	at deseptikon.monya.db.list_real_estate.FillDB.<init>(FillDB.java:11)
-	at deseptikon.monya.io_excel.IOExcelDB.<init>(ParceExcel.java:21)
+	at deseptikon.monya.io_excel.transfer.IOExcelDB.<init>(ParceExcel.java:21)
 	at deseptikon.monya.CodesHandler.main(Main.java:17)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]"
 General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]" [50000-240]
@@ -1538,7 +1538,7 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО �
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
 	at deseptikon.monya.db.list_real_estate.FillDB.getConnections(FillDB.java:54)
 	at deseptikon.monya.db.list_real_estate.FillDB.<init>(FillDB.java:11)
-	at deseptikon.monya.io_excel.IOExcelDB.<init>(ParceExcel.java:21)
+	at deseptikon.monya.io_excel.transfer.IOExcelDB.<init>(ParceExcel.java:21)
 	at deseptikon.monya.CodesHandler.main(Main.java:17)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]"
 General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]" [50000-240]
@@ -1574,8 +1574,8 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО �
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
 	at deseptikon.monya.db.list_real_estate.FillDB.getConnections(FillDB.java:54)
 	at deseptikon.monya.db.list_real_estate.FillDB.<init>(FillDB.java:11)
-	at deseptikon.monya.io_excel.IOExcelDB.<init>(ParceExcel.java:38)
-	at deseptikon.monya.io_excel.IOExcelDB.main(ParceExcel.java:26)
+	at deseptikon.monya.io_excel.transfer.IOExcelDB.<init>(ParceExcel.java:38)
+	at deseptikon.monya.io_excel.transfer.IOExcelDB.main(ParceExcel.java:26)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]"
 General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]" [50000-240]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
@@ -1701,7 +1701,7 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО �
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
 	at deseptikon.monya.db.list_real_estate.ConnectionDB.getConnections(ConnectionDB.java:23)
-	at deseptikon.monya.service.ReplaceLatin.<clinit>(ReplaceLatin.java:18)
+	at deseptikon.monya.db.list_real_estate.ReplaceLatin.<clinit>(ReplaceLatin.java:18)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]"
 General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]" [50000-240]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
@@ -1790,7 +1790,7 @@ UPDATE PARCELS.PRIVISIONAL_2026 SET utilization_by_doc = 'для строите�
 	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:190)
 	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:147)
 	at deseptikon.monya.db.UpdateRow.updateRowRS(UpdateRow.java:20)
-	at deseptikon.monya.service.ReplaceLatin.main(ReplaceLatin.java:45)
+	at deseptikon.monya.db.list_real_estate.ReplaceLatin.main(ReplaceLatin.java:45)
 2025-12-23 14:35:51.117753+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "UPDATE PARCELS.PRIVISIONAL_2026 SET utilization_by_doc = 'Благоустройство территории (код 12.0.2) - Размещение декоративных, технических,' планировочных, конструктивных устройств, элементов озеленения, различных видов оборудования и оформления, малых архитектурных форм, некапитальных нестационарных строений и со[*]' WHERE id = 474704"
 Syntax error in SQL statement "UPDATE PARCELS.PRIVISIONAL_2026 SET utilization_by_doc = 'Благоустройство территории (код 12.0.2) - Размещение декоративных, технических,' планировочных, конструктивных устройств, элементов озеленения, различных видов оборудования и оформления, малых архитектурных форм, некапитальных нестационарных строений и со[*]' WHERE id = 474704"; SQL statement:
@@ -2549,7 +2549,7 @@ Invalid value "1" for parameter "parameterIndex" [90008-240]
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
-	at deseptikon.monya.spring_jdbc.jdbc.QueryParcel.getListParcelsByICN(QueryParcel.java:65)
+	at deseptikon.monya.spring_jdbc_parcels.jdbc.QueryParcel.getListParcelsByICN(QueryParcel.java:65)
 	at deseptikon.monya.usage_codes.UC01_010.assignmentCode(UC01_010SpringJDBC.java:75)
 	at deseptikon.monya.CodesHandler.main(CodesHandler.java:23)
 2026-01-03 18:54:37.364075+04:00 jdbc[3]: exception
@@ -2635,7 +2635,7 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО �
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
-	at deseptikon.monya.spring_jdbc.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:61)
+	at deseptikon.monya.spring_jdbc_parcels.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:61)
 	at deseptikon.monya.usage_codes.UC01_010.assignmentCode(UC01_010SpringJDBC.java:84)
 	at deseptikon.monya.CodesHandler.main(CodesHandler.java:23)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]"
@@ -2681,7 +2681,7 @@ The database is open in exclusive mode; can not open additional connections [901
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
-	at deseptikon.monya.spring_jdbc.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:70)
+	at deseptikon.monya.spring_jdbc_parcels.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:70)
 	at deseptikon.monya.usage_codes.UC01_010.assignmentCode(UC01_010.java:74)
 	at deseptikon.monya.CodesHandler.main(CodesHandler.java:23)
 2026-01-05 00:29:18.250237+04:00 jdbc[3]: exception
@@ -2759,7 +2759,7 @@ SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE LOWER(utilization_by_doc) REGEXP ? 
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
-	at deseptikon.monya.spring_jdbc.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:52)
+	at deseptikon.monya.spring_jdbc_parcels.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:52)
 	at deseptikon.monya.usage_codes.UC01_150.assignmentCode(UC01_150.java:66)
 	at deseptikon.monya.CodesHandler.main(CodesHandler.java:25)
 Caused by: java.util.regex.PatternSyntaxException: Unclosed character class near index 26

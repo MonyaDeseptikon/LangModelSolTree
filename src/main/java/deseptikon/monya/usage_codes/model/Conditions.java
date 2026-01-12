@@ -1,4 +1,4 @@
-package deseptikon.monya.usage_codes;
+package deseptikon.monya.usage_codes.model;
 
 import java.util.List;
 

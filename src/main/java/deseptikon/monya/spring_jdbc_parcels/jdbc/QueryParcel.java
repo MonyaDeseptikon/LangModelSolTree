@@ -1,8 +1,7 @@
-package deseptikon.monya.spring_jdbc.jdbc;
+package deseptikon.monya.spring_jdbc_parcels.jdbc;
 
-import deseptikon.monya.spring_jdbc.model.Parcel;
-import deseptikon.monya.spring_jdbc.util.ParcelMapperPredicted;
-import deseptikon.monya.spring_jdbc.util.ParcelMapperSimple;
+import deseptikon.monya.spring_jdbc_parcels.model.Parcel;
+import deseptikon.monya.spring_jdbc_parcels.util.ParcelMapperPredicted;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

@@ -1,9 +1,10 @@
 package deseptikon.monya.usage_codes;
 
 import deseptikon.monya.db.list_real_estate.CreateTables;
-import deseptikon.monya.service.PrepareTags;
-import deseptikon.monya.spring_jdbc.jdbc.QueryParcel;
-import deseptikon.monya.spring_jdbc.model.Parcel;
+import deseptikon.monya.spring_jdbc_parcels.jdbc.QueryParcel;
+import deseptikon.monya.spring_jdbc_parcels.model.Parcel;
+import deseptikon.monya.usage_codes.model.Conditions;
+import deseptikon.monya.usage_codes.servives.PrepareTags;
 
 import java.sql.SQLException;
 import java.util.*;

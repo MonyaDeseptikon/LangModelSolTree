@@ -1,6 +1,6 @@
 package deseptikon.monya.io_excel.handlers;
 
-import deseptikon.monya.io_excel.IOExcelDB;
+import deseptikon.monya.io_excel.transfer.IOExcelDB;
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.io.IOException;
@@ -12,8 +12,7 @@ public class ExcelTODB {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
 
-        IOExcelDB ioExcelDB = new IOExcelDB();
-        ioExcelDB.readExcelFillDBParcelsProvisionalList("E:\\ЦКО БТИ УР\\Определение кода\\Данные\\ЗУ 2026 allUseLogicTree.xlsm", 1);
+        new IOExcelDB().readExcelFillDBParcelsProvisionalList("E:\\ЦКО БТИ УР\\Определение кода\\Данные\\ЗУ 2026 allUseLogicTree.xlsm", 1);
 
         stopWatch.stop();
         long timeTaken = stopWatch.getTime();

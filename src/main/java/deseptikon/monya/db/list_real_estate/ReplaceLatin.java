@@ -1,4 +1,4 @@
-package deseptikon.monya.service;
+package deseptikon.monya.db.list_real_estate;
 
 
 
@@ -11,7 +11,7 @@ public class ReplaceLatin {
 
 
 
-
+// не доделан - нет связи с БД
 
     public static void main(String[] args) throws SQLException {
 

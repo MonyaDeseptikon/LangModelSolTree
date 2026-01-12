@@ -1,7 +1,7 @@
 package deseptikon.monya;
 
 import deseptikon.monya.db.list_real_estate.CreateTables;
-import deseptikon.monya.spring_jdbc.jdbc.QueryParcel;
+import deseptikon.monya.spring_jdbc_parcels.jdbc.QueryParcel;
 import deseptikon.monya.usage_codes.UC01_010;
 import deseptikon.monya.usage_codes.UC01_150;
 import org.apache.commons.lang3.time.StopWatch;
