@@ -18,4 +18,5 @@ public interface ParcelDAO {
 
     public List<Parcel> getListParcelsByTags(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea);
 
+    void concatParcelsPredictedUsageCode(Set<Integer> idList, String predicatedUsageCode);
 }

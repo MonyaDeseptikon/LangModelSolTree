@@ -1,6 +1,6 @@
 package deseptikon.monya.usage_codes;
 
-import deseptikon.monya.db.list_real_estate.CreateDB;
+import deseptikon.monya.db.list_real_estate.CreateTables;
 import deseptikon.monya.service.PrepareTags;
 import deseptikon.monya.spring_jdbc.jdbc.QueryParcel;
 import deseptikon.monya.spring_jdbc.model.Parcel;
@@ -10,7 +10,7 @@ import java.util.*;
 
 public class UC01_010 implements PrepareTags {
     List<String> excludeTagsTemplate = List.of("животноводс", "скотоводс", "садоводс", "звероводс", "птицеводс", "пчеловодс", "свиноводс", "рыбоводс", "индивиду", "отдых",
-            "жил", "дачн", "овощеводст", "личн");
+            "жил", "дачн", "овощеводст", "личн", "строительст");
 
     //Точку внутри кода обязательно экранировать, - иначе воспринимает как любой символ
     Conditions codeOnly = new Conditions(List.of("[^\\d\\.]" + "1\\s*\\.\\s*1" + "[^\\.\\d]"),
@@ -44,7 +44,7 @@ public class UC01_010 implements PrepareTags {
 
     String usageCode = "01:010";
 
-    public void assignmentCode(QueryParcel queryTemplate) {
+    public void assignmentCode(QueryParcel queryTemplate) throws SQLException {
         Set<Parcel> parcelList = new HashSet<>();
 
         parcelList.addAll(queryTemplate.getListParcelsByTags(queryTagForCode(codeOnly.getTags()), queryExcludeTags(codeOnly.getExcludeTags()),
@@ -59,10 +59,10 @@ public class UC01_010 implements PrepareTags {
 
             parcelList.addAll(queryTemplate.getListParcelsByTagsWithoutICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea()));
         }
-//        CreateDB.erasePredictedUC();
-//        Set<Integer> idList = new HashSet<>();
-//        parcelList.forEach(p -> idList.add(p.getId()));
-//        queryTemplate.updateParcels(idList, usageCode);
+        CreateTables.erasePredictedUC();
+        Set<Integer> idList = new HashSet<>();
+        parcelList.forEach(p -> idList.add(p.getId()));
+        queryTemplate.concatParcelsPredictedUsageCode(idList, usageCode);
 
         int codeCount = 0;
         for (Parcel parcel : parcelList) {

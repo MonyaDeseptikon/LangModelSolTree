@@ -27,7 +27,7 @@ public class QueryParcel implements ParcelDAO {
     @Override
     public List<Parcel> getListParcels() {
         String SQLQuery = "SELECT * FROM PARCELS.PRIVISIONAL_2026";
-        return jdbcTemplate.query(SQLQuery, new ParcelMapperSimple());
+        return jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted());
     }
 
     @Override
@@ -75,6 +75,22 @@ public class QueryParcel implements ParcelDAO {
                 "area <= ?";
         return jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted(), arg);
 
+    }
+
+    @Override
+    public void concatParcelsPredictedUsageCode(Set<Integer> idList, String predicatedUsageCode) {
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("predicatedUsageCode", predicatedUsageCode);
+        parameters.addValue("idList", idList);
+        String SQLUpdate = "UPDATE PARCELS.PRIVISIONAL_2026 SET PREDICTED_USAGE_CODE = " +
+                "CASE " +
+                "WHEN PREDICTED_USAGE_CODE = '' " +
+                    "THEN :predicatedUsageCode " +
+                    "ELSE CONCAT(PREDICTED_USAGE_CODE, '; ', :predicatedUsageCode) " +
+                "END " +
+                "WHERE id IN (:idList)";
+        template.update(SQLUpdate, parameters);
     }
 
 }

@@ -7,7 +7,6 @@ import deseptikon.monya.spring_jdbc.model.Parcel;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 public class UC01_150 implements PrepareTags {
@@ -60,7 +59,7 @@ public class UC01_150 implements PrepareTags {
 
     String usageCode = "01:150";
 
-    public void assignmentCode(QueryParcel queryTemplate) {
+    public void assignmentCode(QueryParcel queryTemplate) throws SQLException {
         Set<Parcel> parcelList = new HashSet<>();
 
         parcelList.addAll(queryTemplate.getListParcelsByTags(queryTagForCode(codeOnly.getTags()), queryExcludeTags(codeOnly.getExcludeTags()),
@@ -76,9 +75,9 @@ public class UC01_150 implements PrepareTags {
             parcelList.addAll(queryTemplate.getListParcelsByTagsWithICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea()));
         }
 //        CreateDB.erasePredictedUC();
-//        Set<Integer> idList = new HashSet<>();
-//        parcelList.forEach(p -> idList.add(p.getId()));
-//        queryTemplate.updateParcels(idList, usageCode);
+        Set<Integer> idList = new HashSet<>();
+        parcelList.forEach(p -> idList.add(p.getId()));
+        queryTemplate.concatParcelsPredictedUsageCode(idList, usageCode);
 
         int codeCount = 0;
         for (Parcel parcel : parcelList) {

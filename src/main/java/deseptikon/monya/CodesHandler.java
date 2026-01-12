@@ -1,5 +1,6 @@
 package deseptikon.monya;
 
+import deseptikon.monya.db.list_real_estate.CreateTables;
 import deseptikon.monya.spring_jdbc.jdbc.QueryParcel;
 import deseptikon.monya.usage_codes.UC01_010;
 import deseptikon.monya.usage_codes.UC01_150;
@@ -21,8 +22,9 @@ public class CodesHandler {
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring _config.xml");
         QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
 
+        CreateTables.erasePredictedUC();
         new UC01_010().assignmentCode(queryTemplate);
-//        new UC01_150().assignmentCode(queryTemplate);
+        new UC01_150().assignmentCode(queryTemplate);
 
         stopWatch.stop();
         long timeTaken = stopWatch.getTime();

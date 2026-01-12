@@ -5,26 +5,30 @@ import java.sql.*;
 import static deseptikon.monya.db.list_real_estate.ConnectionDB.closeCon;
 import static deseptikon.monya.db.list_real_estate.ConnectionDB.getConnections;
 
-public class CreateDB {
+public class CreateTables {
 
 
     public static void main(String[] args) throws SQLException {
-       CreateDB createDB = new CreateDB();
+       CreateTables CreateTables = new CreateTables();
 
-//        createDB.createNewDB();
-//        CreateDB.erasePredictedUC();
+//        CreateTables.createProvisionalList();
+//        erasePredictedUC();
     }
 
-
-    private void createNewDB() throws SQLException {
+    private void createScheme() throws SQLException {
         Connection con = getConnections();
         Statement statement = con.createStatement();
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//        statement.execute("DROP TABLE PARCELS.PRIVISIONAL_2026");
-//        statement.execute("DROP SCHEMA PARCELS");
-//        statement.execute("CREATE SCHEMA IF NOT EXISTS PARCELS");
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        statement.execute("DROP TABLE PARCELS.PRIVISIONAL_2026");
+        statement.execute("DROP SCHEMA PARCELS");
+//        statement.execute("DROP SCHEMA PARCELS CASCADE"); ??????????????
+        statement.execute("CREATE SCHEMA IF NOT EXISTS PARCELS");
+    }
+
+
+    private void createProvisionalList() throws SQLException {
+        Connection con = getConnections();
+        Statement statement = con.createStatement();
 
         statement.execute("CREATE TABLE IF NOT EXISTS PARCELS.PRIVISIONAL_2026 " +
                 "(id INT AUTO_INCREMENT PRIMARY KEY, " +
@@ -55,7 +59,7 @@ public class CreateDB {
         statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 DROP COLUMN IF EXISTS PREDICTED_USAGE_CODE;");
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS PREDICTED_USAGE_CODE VARCHAR(15) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS PREDICTED_USAGE_CODE VARCHAR(MAX) DEFAULT ('');");
 
         closeCon(con);
     }
