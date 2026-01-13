@@ -2,6 +2,7 @@ package deseptikon.monya.spring_jdbc_parcels.jdbc;
 
 import deseptikon.monya.spring_jdbc_parcels.model.Parcel;
 import deseptikon.monya.spring_jdbc_parcels.util.ParcelMapperPredicted;
+import deseptikon.monya.spring_jdbc_parcels.util.ParcelMapperPredictedColName;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -21,6 +22,12 @@ public class QueryParcel implements ParcelDAO {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.template = new NamedParameterJdbcTemplate(jdbcTemplate);
 
+    }
+
+    @Override
+    public List<Parcel> getListColumnName() {
+        String SQLQuery = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'PRIVISIONAL_2026'";
+        return jdbcTemplate.query(SQLQuery, new ParcelMapperPredictedColName());
     }
 
     @Override

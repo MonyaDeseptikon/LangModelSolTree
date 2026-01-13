@@ -24,8 +24,9 @@ public class DBtoExcel {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring _config.xml");
         QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
-
-        Set<Parcel> parcelList = new HashSet<>(queryTemplate.getListParcels());
+        Set<Parcel> parcelList = new HashSet<>();
+//        parcelList.addAll(queryTemplate.getListColumnName());
+        parcelList.addAll(queryTemplate.getListParcels());
 
         File file = new File("E:\\ЦКО БТИ УР\\Определение кода\\Данные\\Test.xlsx");
         FileOutputStream os = new FileOutputStream(file);

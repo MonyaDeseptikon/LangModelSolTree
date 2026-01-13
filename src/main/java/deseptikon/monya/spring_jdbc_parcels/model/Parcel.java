@@ -1,8 +1,11 @@
 package deseptikon.monya.spring_jdbc_parcels.model;
 
+import jdk.jfr.Name;
+
 public class Parcel {
 
     private Integer id;
+
     private String cadastralNumber;
     private Double area;
     private String OKATO;
