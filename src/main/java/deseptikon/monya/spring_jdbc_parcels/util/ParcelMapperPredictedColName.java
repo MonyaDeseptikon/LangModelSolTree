@@ -5,13 +5,13 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
-public class ParcelMapperPredicted implements RowMapper {
+public class ParcelMapperPredictedColName implements RowMapper {
     @Override
     public Parcel mapRow(ResultSet rs, int rowNum) throws SQLException {
         Parcel parcel = new Parcel();
-
-        parcel.setId(rs.getInt("id"));
+        parcel.setIdHead(rs.getString("id"));
         parcel.setCadastralNumber(rs.getString("cadastral_number"));
         parcel.setArea(rs.getDouble("area"));
         parcel.setNote(rs.getString("note"));

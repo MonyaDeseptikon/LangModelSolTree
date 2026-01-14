@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class DBtoExcel {
@@ -25,7 +26,9 @@ public class DBtoExcel {
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring _config.xml");
         QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
         Set<Parcel> parcelList = new HashSet<>();
-//        parcelList.addAll(queryTemplate.getListColumnName());
+        //Включаем заголовок
+        parcelList.addAll(queryTemplate.getListColumnName());
+        //Данные
         parcelList.addAll(queryTemplate.getListParcels());
 
         File file = new File("E:\\ЦКО БТИ УР\\Определение кода\\Данные\\Test.xlsx");

@@ -1,26 +1,54 @@
 package deseptikon.monya.spring_jdbc_parcels.model;
 
-import jdk.jfr.Name;
-
 public class Parcel {
 
     private Integer id;
+    private String idHead;
 
     private String cadastralNumber;
+    private String cadastralNumberHead;
+
     private Double area;
+    private String areaHead;
+
     private String OKATO;
+    private String OKATOHead;
+
     private String KLADR;
+    private String KLADRHead;
+
     private String locality;
+    private String localityHead;
+
     private String other;
+    private String otherHead;
+
     private String note;
+    private String noteHead;
+
     private String approvalDocumentName;
+    private String approvalDocumentNameHead;
+
     private String category;
+    private String categoryHead;
+
     private String utilizationLandUse;
+    private String utilizationLandUseHead;
+
     private String utilizationByDoc;
+    private String utilizationByDocHead;
+
     private String utilizationPermittedUseText;
+    private String utilizationPermittedUseTextHead;
+
     private String innerCadastralNumbers;
+    private String innerCadastralNumbersHead;
+
     private String usageCode;
+    private String usageCodeHead;
+
     private String predicatedUsageCode;
+    private String predicatedUsageCodeHead;
 
     public Integer getId() {
         return id;
@@ -148,6 +176,142 @@ public class Parcel {
 
     public void setPredictedUsageCode(String predicatedUsageCode) {
         this.predicatedUsageCode = predicatedUsageCode;
+    }
+
+    public String getIdHead() {
+        return idHead;
+    }
+
+    public void setIdHead(String idHead) {
+        this.idHead = idHead;
+    }
+
+    public String getCadastralNumberHead() {
+        return cadastralNumberHead;
+    }
+
+    public void setCadastralNumberHead(String cadastralNumberHead) {
+        this.cadastralNumberHead = cadastralNumberHead;
+    }
+
+    public String getAreaHead() {
+        return areaHead;
+    }
+
+    public void setAreaHead(String areaHead) {
+        this.areaHead = areaHead;
+    }
+
+    public String getOKATOHead() {
+        return OKATOHead;
+    }
+
+    public void setOKATOHead(String OKATOHead) {
+        this.OKATOHead = OKATOHead;
+    }
+
+    public String getKLADRHead() {
+        return KLADRHead;
+    }
+
+    public void setKLADRHead(String KLADRHead) {
+        this.KLADRHead = KLADRHead;
+    }
+
+    public String getLocalityHead() {
+        return localityHead;
+    }
+
+    public void setLocalityHead(String localityHead) {
+        this.localityHead = localityHead;
+    }
+
+    public String getOtherHead() {
+        return otherHead;
+    }
+
+    public void setOtherHead(String otherHead) {
+        this.otherHead = otherHead;
+    }
+
+    public String getNoteHead() {
+        return noteHead;
+    }
+
+    public void setNoteHead(String noteHead) {
+        this.noteHead = noteHead;
+    }
+
+    public String getApprovalDocumentNameHead() {
+        return approvalDocumentNameHead;
+    }
+
+    public void setApprovalDocumentNameHead(String approvalDocumentNameHead) {
+        this.approvalDocumentNameHead = approvalDocumentNameHead;
+    }
+
+    public String getCategoryHead() {
+        return categoryHead;
+    }
+
+    public void setCategoryHead(String categoryHead) {
+        this.categoryHead = categoryHead;
+    }
+
+    public String getUtilizationLandUseHead() {
+        return utilizationLandUseHead;
+    }
+
+    public void setUtilizationLandUseHead(String utilizationLandUseHead) {
+        this.utilizationLandUseHead = utilizationLandUseHead;
+    }
+
+    public String getUtilizationByDocHead() {
+        return utilizationByDocHead;
+    }
+
+    public void setUtilizationByDocHead(String utilizationByDocHead) {
+        this.utilizationByDocHead = utilizationByDocHead;
+    }
+
+    public String getUtilizationPermittedUseTextHead() {
+        return utilizationPermittedUseTextHead;
+    }
+
+    public void setUtilizationPermittedUseTextHead(String utilizationPermittedUseTextHead) {
+        this.utilizationPermittedUseTextHead = utilizationPermittedUseTextHead;
+    }
+
+    public String getInnerCadastralNumbersHead() {
+        return innerCadastralNumbersHead;
+    }
+
+    public void setInnerCadastralNumbersHead(String innerCadastralNumbersHead) {
+        this.innerCadastralNumbersHead = innerCadastralNumbersHead;
+    }
+
+    public String getUsageCodeHead() {
+        return usageCodeHead;
+    }
+
+    public void setUsageCodeHead(String usageCodeHead) {
+        this.usageCodeHead = usageCodeHead;
+    }
+
+    public String getPredicatedUsageCode() {
+        return predicatedUsageCode;
+    }
+
+    public void setPredicatedUsageCode(String predicatedUsageCode) {
+        this.predicatedUsageCode = predicatedUsageCode;
+    }
+
+    public String getPredicatedUsageCodeHead() {
+        return predicatedUsageCodeHead;
+    }
+
+    public void setPredicatedUsageCodeHead(String predicatedUsageCodeHead) {
+        this.predicatedUsageCodeHead = predicatedUsageCodeHead;
     }
 
     @Override

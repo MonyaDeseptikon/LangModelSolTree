@@ -1,14 +1,12 @@
 package deseptikon.monya.io_excel.mapper;
 
 import deseptikon.monya.spring_jdbc_parcels.model.Parcel;
-import jdk.jfr.AnnotationElement;
-import jdk.jfr.Name;
 import org.dhatim.fastexcel.Worksheet;
 
-import java.lang.annotation.Annotation;
+import java.util.List;
 
 public interface FillRow {
-    default void parcelsFull(Worksheet ws, int row, Parcel parcel) {
+    default void parcelsFill(Worksheet ws, int row, Parcel parcel) {
 
         ws.value(row, 0, parcel.getCadastralNumber());
         ws.value(row, 1, parcel.getArea());
@@ -22,6 +20,22 @@ public interface FillRow {
 //         ws.value(row,9, parcel.getId());
 
     }
+
+//    default void parcelsHeads(Worksheet ws, int row, List<String> heads) {
+//
+//        ws.value(row, 0, heads.get(1));
+//        ws.value(row, 1, heads.get(2));
+//        ws.value(row, 2, heads.get(9));
+//        ws.value(row, 3, heads.get(5));
+//        ws.value(row, 4, heads.get(7));
+//        ws.value(row, 5, heads.get(11));
+//        ws.value(row, 6, heads.get(7));
+//        ws.value(row, 7, heads.get(8));
+//        ws.value(row, 8, heads.get());
+//
+//
+//
+//    }
 
 
 }

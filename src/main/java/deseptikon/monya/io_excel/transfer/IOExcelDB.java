@@ -56,10 +56,11 @@ public class IOExcelDB implements ServiceForExcel, ExcelDAO, FillRow {
     @Override
     public void readDBFillExcel(Worksheet ws, Set<Parcel> parcelList) throws FileNotFoundException, SQLException {
         int row = 0;
+
         Iterator<Parcel> parcelIterator = parcelList.iterator();
         while (parcelIterator.hasNext()) {
             Parcel parcel = parcelIterator.next();
-            parcelsFull(ws, row, parcel);
+            parcelsFill(ws, row, parcel);
 
             row++;
         }
