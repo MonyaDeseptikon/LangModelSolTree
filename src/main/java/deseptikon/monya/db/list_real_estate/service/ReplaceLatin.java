@@ -1,4 +1,4 @@
-package deseptikon.monya.db.list_real_estate;
+package deseptikon.monya.db.list_real_estate.service;
 
 
 

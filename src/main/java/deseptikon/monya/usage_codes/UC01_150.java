@@ -11,13 +11,16 @@ import java.util.List;
 import java.util.Set;
 
 public class UC01_150 implements PrepareTags {
+
+    //Исключаемые тэги
     List<String> excludeTagsTemplate = List.of("индивиду", "1.7", "обеспеч", "пашн", "обслуживан", "отдых",
             "жил", "дачн", "личн");
-
+    //Поиск кода вида использования и условий
     //Точку внутри кода обязательно экранировать, - иначе воспринимает как любой символ
     Conditions codeOnly = new Conditions(List.of("[^\\d\\.]" + "1\\s*\\.\\s*15" + "[^\\.\\d]"),
             excludeTagsTemplate, 0F, Float.POSITIVE_INFINITY, 0.1F);
 
+    //Поиск тэгов и условий
     List<Conditions> conditionsList = List.of(
             new Conditions(List.of("сельскохозяйственное", "производство"),
                     excludeTagsTemplate, 0F, 1000000F, 0.1F),

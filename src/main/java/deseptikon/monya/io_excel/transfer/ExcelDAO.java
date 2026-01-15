@@ -10,5 +10,5 @@ import java.util.Set;
 
 public interface ExcelDAO {
     void readExcelFillDBParcelsProvisionalList(String filePath, int worksheetIndex) throws FileNotFoundException, SQLException;
-    void readDBFillExcel(Worksheet ws, Set<Parcel> parcelList) throws FileNotFoundException, SQLException;
+    void readDBFillExcel(Worksheet ws, Set<Parcel> parcelList, List<String> colHeads) throws FileNotFoundException, SQLException;
 }

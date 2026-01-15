@@ -18,8 +18,8 @@ General error: "org.h2.mvstore.MVStoreException: Could not open file E:/ЦКО �
 	at org.h2.Driver.connect(Driver.java:59)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
-	at deseptikon.monya.db.list_real_estate.CreateTables.getConnections(JDBC.java:43)
-	at deseptikon.monya.db.list_real_estate.CreateTables.main(JDBC.java:12)
+	at deseptikon.monya.db.list_real_estate.create_tables.CreateTables.getConnections(JDBC.java:43)
+	at deseptikon.monya.db.list_real_estate.create_tables.CreateTables.main(JDBC.java:12)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: Could not open file E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/1]"
 General error: "org.h2.mvstore.MVStoreException: Could not open file E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/1]" [50000-240]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
@@ -55,8 +55,8 @@ IO Exception: "E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.
 	at org.h2.Driver.connect(Driver.java:59)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
-	at deseptikon.monya.db.list_real_estate.CreateTables.getConnections(JDBC.java:43)
-	at deseptikon.monya.db.list_real_estate.CreateTables.main(JDBC.java:12)
+	at deseptikon.monya.db.list_real_estate.create_tables.CreateTables.getConnections(JDBC.java:43)
+	at deseptikon.monya.db.list_real_estate.create_tables.CreateTables.main(JDBC.java:12)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Ошибка ввода/вывода: "E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db"
 IO Exception: "E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db" [90028-240]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
@@ -99,8 +99,8 @@ General error: "org.h2.mvstore.MVStoreException: Could not open file E:/ЦКО �
 	at org.h2.Driver.connect(Driver.java:59)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
-	at deseptikon.monya.db.list_real_estate.CreateTables.getConnections(JDBC.java:43)
-	at deseptikon.monya.db.list_real_estate.CreateTables.main(JDBC.java:12)
+	at deseptikon.monya.db.list_real_estate.create_tables.CreateTables.getConnections(JDBC.java:43)
+	at deseptikon.monya.db.list_real_estate.create_tables.CreateTables.main(JDBC.java:12)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: Could not open file E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/1]"
 General error: "org.h2.mvstore.MVStoreException: Could not open file E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/1]" [50000-240]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
@@ -136,8 +136,8 @@ IO Exception: "E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.
 	at org.h2.Driver.connect(Driver.java:59)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
-	at deseptikon.monya.db.list_real_estate.CreateTables.getConnections(JDBC.java:43)
-	at deseptikon.monya.db.list_real_estate.CreateTables.main(JDBC.java:12)
+	at deseptikon.monya.db.list_real_estate.create_tables.CreateTables.getConnections(JDBC.java:43)
+	at deseptikon.monya.db.list_real_estate.create_tables.CreateTables.main(JDBC.java:12)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Ошибка ввода/вывода: "E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db"
 IO Exception: "E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db" [90028-240]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
@@ -184,7 +184,7 @@ DROP TABLE test.testTable [90079-240]
 	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160)
 	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
-	at deseptikon.monya.db.list_real_estate.CreateTables.main(CreateDB.java:20)
+	at deseptikon.monya.db.list_real_estate.create_tables.CreateTables.main(CreateDB.java:20)
 2025-12-18 18:44:09.677804+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Схема "PARCELS" не найдена
 Schema "PARCELS" not found; SQL statement:
@@ -211,7 +211,7 @@ SELECT * FROM parcels.testTable; [90079-240]
 	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:563)
 	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160)
 	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:94)
-	at deseptikon.monya.db.list_real_estate.CreateTables.main(CreateDB.java:40)
+	at deseptikon.monya.db.list_real_estate.create_tables.CreateTables.main(CreateDB.java:40)
 2025-12-20 15:15:47.914964+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "INSERT INTO PARCELS.PRIVISIONAL_2026 (cadastral_number, area, OKATO, KLADR, locality, approval_document_name, category, utilization_land_use, utilization_by_doc, utilization_permitted_use_text, inner_cadastral_numbers,  usage_code) VALUES (18:01:000000:1495800942020000001800200000000Удмуртская Республика, Алнашский районПостановление Правительства Удмуртской Республики от 24.10.2022 [*]№ 565Земли промышленности, энергетики, транспорта, связи, радиовещания, телевидения, информатики, земли для обеспечения космической деятельности, земли обороны, безопасности и земли иного специального назначенияДля размещения и эксплуатации объектов железнодорожного транспортаГорьковская ж/дДля размещения и эксплуатации объектов железнодорожного транспорта);"
 Syntax error in SQL statement "INSERT INTO PARCELS.PRIVISIONAL_2026 (cadastral_number, area, OKATO, KLADR, locality, approval_document_name, category, utilization_land_use, utilization_by_doc, utilization_permitted_use_text, inner_cadastral_numbers,  usage_code) VALUES (18:01:000000:1495800942020000001800200000000Удмуртская Республика, Алнашский районПостановление Правительства Удмуртской Республики от 24.10.2022 [*]№ 565Земли промышленности, энергетики, транспорта, связи, радиовещания, телевидения, информатики, земли для обеспечения космической деятельности, земли обороны, безопасности и земли иного специального назначенияДля размещения и эксплуатации объектов железнодорожного транспортаГорьковская ж/дДля размещения и эксплуатации объектов железнодорожного транспорта);"; SQL statement:
@@ -1701,7 +1701,7 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО �
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
 	at deseptikon.monya.db.list_real_estate.ConnectionDB.getConnections(ConnectionDB.java:23)
-	at deseptikon.monya.db.list_real_estate.ReplaceLatin.<clinit>(ReplaceLatin.java:18)
+	at deseptikon.monya.db.list_real_estate.service.ReplaceLatin.<clinit>(ReplaceLatin.java:18)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]"
 General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]" [50000-240]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
@@ -1740,7 +1740,7 @@ ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS PREDICTED_USAGE_CO
 	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160)
 	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
-	at deseptikon.monya.db.list_real_estate.CreateTables.main(CreateDB.java:48)
+	at deseptikon.monya.db.list_real_estate.create_tables.CreateTables.main(CreateDB.java:48)
 2025-12-23 13:41:22.629207+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "EMPTY" не найден
 Column "EMPTY" not found; SQL statement:
@@ -1767,7 +1767,7 @@ ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS PREDICTED_USAGE_CO
 	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160)
 	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
-	at deseptikon.monya.db.list_real_estate.CreateTables.main(CreateDB.java:48)
+	at deseptikon.monya.db.list_real_estate.create_tables.CreateTables.main(CreateDB.java:48)
 2025-12-23 14:34:32.861085+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта
 The database has been closed; SQL statement:
@@ -1790,7 +1790,7 @@ UPDATE PARCELS.PRIVISIONAL_2026 SET utilization_by_doc = 'для строите�
 	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:190)
 	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:147)
 	at deseptikon.monya.db.UpdateRow.updateRowRS(UpdateRow.java:20)
-	at deseptikon.monya.db.list_real_estate.ReplaceLatin.main(ReplaceLatin.java:45)
+	at deseptikon.monya.db.list_real_estate.service.ReplaceLatin.main(ReplaceLatin.java:45)
 2025-12-23 14:35:51.117753+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "UPDATE PARCELS.PRIVISIONAL_2026 SET utilization_by_doc = 'Благоустройство территории (код 12.0.2) - Размещение декоративных, технических,' планировочных, конструктивных устройств, элементов озеленения, различных видов оборудования и оформления, малых архитектурных форм, некапитальных нестационарных строений и со[*]' WHERE id = 474704"
 Syntax error in SQL statement "UPDATE PARCELS.PRIVISIONAL_2026 SET utilization_by_doc = 'Благоустройство территории (код 12.0.2) - Размещение декоративных, технических,' планировочных, конструктивных устройств, элементов озеленения, различных видов оборудования и оформления, малых архитектурных форм, некапитальных нестационарных строений и со[*]' WHERE id = 474704"; SQL statement:
@@ -2465,7 +2465,7 @@ ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS PREDICTED_USAGE_CO
 	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160)
 	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
-	at deseptikon.monya.db.list_real_estate.CreateTables.main(CreateDB.java:45)
+	at deseptikon.monya.db.list_real_estate.create_tables.CreateTables.main(CreateDB.java:45)
 2026-01-03 02:02:00.964050+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE utilization_by_doc IN(REGEXP [*]?)"; ожидалось "(, ., [, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"
 Syntax error in SQL statement "SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE utilization_by_doc IN(REGEXP [*]?)"; expected "(, ., [, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:

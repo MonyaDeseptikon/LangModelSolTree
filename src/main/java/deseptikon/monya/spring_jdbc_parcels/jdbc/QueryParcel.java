@@ -25,7 +25,7 @@ public class QueryParcel implements ParcelDAO {
     }
 
     @Override
-    public List<Parcel> getListColumnName() {
+    public List<String> getListColumnName() {
         String SQLQuery = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'PRIVISIONAL_2026'";
         return jdbcTemplate.query(SQLQuery, new ParcelMapperPredictedColName());
     }

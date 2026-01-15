@@ -26,8 +26,8 @@ public class DBtoExcel {
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring _config.xml");
         QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
         Set<Parcel> parcelList = new HashSet<>();
-        //Включаем заголовок
-        parcelList.addAll(queryTemplate.getListColumnName());
+
+
         //Данные
         parcelList.addAll(queryTemplate.getListParcels());
 
@@ -36,7 +36,7 @@ public class DBtoExcel {
         Workbook wb = new Workbook(os, "MonyaDes", "1.0");
         Worksheet ws = wb.newWorksheet("PrdtUC");
 
-        new IOExcelDB().readDBFillExcel(ws, parcelList);
+        new IOExcelDB().readDBFillExcel(ws, parcelList, queryTemplate.getListColumnName());
 
         wb.finish();
 

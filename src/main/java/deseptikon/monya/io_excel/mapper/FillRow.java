@@ -21,21 +21,21 @@ public interface FillRow {
 
     }
 
-//    default void parcelsHeads(Worksheet ws, int row, List<String> heads) {
-//
-//        ws.value(row, 0, heads.get(1));
-//        ws.value(row, 1, heads.get(2));
-//        ws.value(row, 2, heads.get(9));
-//        ws.value(row, 3, heads.get(5));
-//        ws.value(row, 4, heads.get(7));
-//        ws.value(row, 5, heads.get(11));
-//        ws.value(row, 6, heads.get(7));
-//        ws.value(row, 7, heads.get(8));
-//        ws.value(row, 8, heads.get());
-//
-//
-//
-//    }
+    default void parcelsHeads(Worksheet ws, int row, List<String> heads) {
+
+        ws.value(row, 0, heads.get(1));
+        ws.value(row, 1, heads.get(2));
+        ws.value(row, 2, heads.get(9));
+        ws.value(row, 3, heads.get(5));
+        ws.value(row, 4, heads.get(7));
+        ws.value(row, 5, heads.get(11));
+        ws.value(row, 6, heads.get(13));
+        ws.value(row, 7, heads.get(14));
+        ws.value(row, 8, heads.get(15));
+
+
+
+    }
 
 
 }

@@ -9,7 +9,7 @@ import java.util.Set;
 public interface ParcelDAO {
     public void setDataSource(DataSource dataSource);
 
-    List<Parcel> getListColumnName();
+    List<String> getListColumnName();
 
     List<Parcel> getListParcels();
 
