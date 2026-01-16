@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 import java.util.List;
 import java.util.Set;
 
-public class QueryParcel implements ParcelDAO {
+public class QueryParcel implements ParcelDAO , UpdateParcelDAO{
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate template;
@@ -36,15 +36,6 @@ public class QueryParcel implements ParcelDAO {
         return jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted());
     }
 
-    @Override
-    public void updateParcels(Set<Integer> idList, String predicatedUsageCode) {
-
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("predicatedUsageCode", predicatedUsageCode);
-        parameters.addValue("idList", idList);
-        String SQLUpdate = "UPDATE PARCELS.PRIVISIONAL_2026 SET PREDICTED_USAGE_CODE = :predicatedUsageCode WHERE id IN (:idList)";
-        template.update(SQLUpdate, parameters);
-    }
 
     @Override
     public List<Parcel> getListParcelsByTags(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea) {
@@ -80,7 +71,17 @@ public class QueryParcel implements ParcelDAO {
                 "area >= ? AND " +
                 "area <= ?";
         return jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted(), arg);
+    }
 
+
+    @Override
+    public void updatePredictedUC(Set<Integer> idList, String predictedUsageCode) {
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("predictedUsageCode", predictedUsageCode);
+        parameters.addValue("idList", idList);
+        String SQLUpdate = "UPDATE PARCELS.PRIVISIONAL_2026 SET PREDICTED_USAGE_CODE = :predictedUsageCode WHERE id IN (:idList)";
+        template.update(SQLUpdate, parameters);
     }
 
     @Override
@@ -92,11 +93,12 @@ public class QueryParcel implements ParcelDAO {
         String SQLUpdate = "UPDATE PARCELS.PRIVISIONAL_2026 SET PREDICTED_USAGE_CODE = " +
                 "CASE " +
                 "WHEN PREDICTED_USAGE_CODE = '' " +
-                    "THEN :predicatedUsageCode " +
-                    "ELSE CONCAT(PREDICTED_USAGE_CODE, '; ', :predicatedUsageCode) " +
+                "THEN :predicatedUsageCode " +
+                "ELSE CONCAT(PREDICTED_USAGE_CODE, '; ', :predicatedUsageCode) " +
                 "END " +
                 "WHERE id IN (:idList)";
         template.update(SQLUpdate, parameters);
     }
+
 
 }

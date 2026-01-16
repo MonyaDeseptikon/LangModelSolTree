@@ -3,6 +3,10 @@ package deseptikon.monya.db.list_real_estate.service;
 
 
 
+import deseptikon.monya.spring_jdbc_parcels.jdbc.QueryParcel;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.sql.SQLException;
 
 
@@ -14,6 +18,8 @@ public class ReplaceLatin {
 // не доделан - нет связи с БД
 
     public static void main(String[] args) throws SQLException {
+        ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring _config.xml");
+        QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
 
     }
 

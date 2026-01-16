@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface ParcelDAO {
-    public void setDataSource(DataSource dataSource);
+    void setDataSource(DataSource dataSource);
 
     List<String> getListColumnName();
 
@@ -17,9 +17,7 @@ public interface ParcelDAO {
 
     List<Parcel> getListParcelsByTagsWithICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea);
 
-    void updateParcels(Set<Integer> idList, String usageCode);
-
     List<Parcel> getListParcelsByTags(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea);
 
-    void concatParcelsPredictedUsageCode(Set<Integer> idList, String predicatedUsageCode);
+
 }
