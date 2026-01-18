@@ -249,13 +249,13 @@ INSERT INTO PARCELS.PRIVISIONAL_2026 (cadastral_number, area, OKATO, KLADR, loca
 	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160)
 	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
 	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:315)
-	at deseptikon.monya.db.list_real_estate.FillDB.fillRow(FillDB.java:33)
+	at deseptikon.monya.db.FillDB.fillRow(FillDB.java:33)
 	at deseptikon.monya.io_excel.ReadExcelFillDB.lambda$IO$0(ParceExcel.java:46)
 	at org.dhatim.fastexcel.reader.RowSpliterator.tryAdvance(RowSpliterator.java:48)
 	at java.base/java.util.Spliterator.forEachRemaining(Spliterator.java:332)
 	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
 	at deseptikon.monya.io_excel.ReadExcelFillDB.IO(ParceExcel.java:38)
-	at deseptikon.monya.CodesHandler.main(Main.java:18)
+	at deseptikon.monya.parcels.CodesHandler.main(Main.java:18)
 2025-12-20 20:32:52 database: flush
 org.h2.message.DbException: Внутренняя ошибка: "java.lang.IllegalStateException: The file is locked: nio:E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [1.4.199/7]"
 General error: "java.lang.IllegalStateException: The file is locked: nio:E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [1.4.199/7]" [50000-199]
@@ -1500,10 +1500,10 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО �
 	at org.h2.Driver.connect(Driver.java:59)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
-	at deseptikon.monya.db.list_real_estate.FillDB.getConnections(FillDB.java:54)
-	at deseptikon.monya.db.list_real_estate.FillDB.<init>(FillDB.java:11)
+	at deseptikon.monya.db.FillDB.getConnections(FillDB.java:54)
+	at deseptikon.monya.db.FillDB.<init>(FillDB.java:11)
 	at deseptikon.monya.io_excel.ReadExcelFillDB.<init>(ParceExcel.java:21)
-	at deseptikon.monya.CodesHandler.main(Main.java:17)
+	at deseptikon.monya.parcels.CodesHandler.main(Main.java:17)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]"
 General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]" [50000-240]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
@@ -1536,10 +1536,10 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО �
 	at org.h2.Driver.connect(Driver.java:59)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
-	at deseptikon.monya.db.list_real_estate.FillDB.getConnections(FillDB.java:54)
-	at deseptikon.monya.db.list_real_estate.FillDB.<init>(FillDB.java:11)
+	at deseptikon.monya.db.FillDB.getConnections(FillDB.java:54)
+	at deseptikon.monya.db.FillDB.<init>(FillDB.java:11)
 	at deseptikon.monya.io_excel.ReadExcelFillDB.<init>(ParceExcel.java:21)
-	at deseptikon.monya.CodesHandler.main(Main.java:17)
+	at deseptikon.monya.parcels.CodesHandler.main(Main.java:17)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]"
 General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]" [50000-240]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
@@ -1572,8 +1572,8 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО �
 	at org.h2.Driver.connect(Driver.java:59)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
-	at deseptikon.monya.db.list_real_estate.FillDB.getConnections(FillDB.java:54)
-	at deseptikon.monya.db.list_real_estate.FillDB.<init>(FillDB.java:11)
+	at deseptikon.monya.db.FillDB.getConnections(FillDB.java:54)
+	at deseptikon.monya.db.FillDB.<init>(FillDB.java:11)
 	at deseptikon.monya.io_excel.ReadExcelFillDB.<init>(ParceExcel.java:38)
 	at deseptikon.monya.io_excel.ReadExcelFillDB.main(ParceExcel.java:26)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]"
@@ -1636,7 +1636,7 @@ SELECT id, area, utilization_by_doc, inner_cadastral_numbers, PREDICTED_USAGE_CO
 	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160)
 	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:94)
 	at deseptikon.monya.db.RetrieveRow.retrieveRowRS(RetrieveRow.java:21)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:48)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:48)
 2025-12-22 17:39:42.281987+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "PREDICTED_USAGE_CODE" не найден
 Column "PREDICTED_USAGE_CODE" not found; SQL statement:
@@ -1659,7 +1659,7 @@ SELECT id, area, utilization_by_doc, inner_cadastral_numbers, PREDICTED_USAGE_CO
 	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160)
 	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:94)
 	at deseptikon.monya.db.RetrieveRow.retrieveRowRS(RetrieveRow.java:21)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:48)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:48)
 2025-12-22 17:42:33.146507+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "ALTER TABLE PARCELS.PRIVISIONAL_2026 DROP COLUMN [*]IF NOT EXISTS PREDICTED_01_010 VARCHAR(15);"; ожидалось "identifier"
 Syntax error in SQL statement "ALTER TABLE PARCELS.PRIVISIONAL_2026 DROP COLUMN [*]IF NOT EXISTS PREDICTED_01_010 VARCHAR(15);"; expected "identifier"; SQL statement:
@@ -1700,7 +1700,7 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО �
 	at org.h2.Driver.connect(Driver.java:59)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
-	at deseptikon.monya.db.list_real_estate.ConnectionDB.getConnections(ConnectionDB.java:23)
+	at deseptikon.monya.db.ConnectionDB.getConnections(ConnectionDB.java:23)
 	at deseptikon.monya.service.ReplaceLatin.<clinit>(ReplaceLatin.java:18)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]"
 General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]" [50000-240]
@@ -1858,8 +1858,8 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО �
 	at org.h2.Driver.connect(Driver.java:59)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
-	at deseptikon.monya.db.list_real_estate.ConnectionDB.getConnections(ConnectionDB.java:23)
-	at deseptikon.monya.usage_codes.UC01_010.<clinit>(uc01_010.java:47)
+	at deseptikon.monya.db.ConnectionDB.getConnections(ConnectionDB.java:23)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.<clinit>(uc01_010.java:47)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]"
 General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]" [50000-240]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
@@ -1884,7 +1884,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:66)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:66)
 2025-12-24 02:53:41.044734+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -1898,7 +1898,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.checkColumnIndex(JdbcResultSet.java:3522)
 	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:283)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:70)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:70)
 2025-12-24 02:56:45.189817+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -1912,7 +1912,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.checkColumnIndex(JdbcResultSet.java:3522)
 	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:283)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:76)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:76)
 2025-12-24 03:04:24.297608+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -1926,7 +1926,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.checkColumnIndex(JdbcResultSet.java:3522)
 	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:283)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:76)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:76)
 2025-12-24 03:13:35.399604+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -1940,7 +1940,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.checkColumnIndex(JdbcResultSet.java:3522)
 	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:283)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:78)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:78)
 2025-12-24 03:16:47.887733+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -1954,7 +1954,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.checkColumnIndex(JdbcResultSet.java:3522)
 	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:283)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:78)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:78)
 2025-12-24 03:21:33.794178+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -1968,7 +1968,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.checkColumnIndex(JdbcResultSet.java:3522)
 	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:283)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:78)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:78)
 2025-12-24 03:26:14.624279+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -1982,7 +1982,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.checkColumnIndex(JdbcResultSet.java:3522)
 	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:283)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:74)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:74)
 2025-12-24 03:30:35.170692+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Функция "REGEXP" не найдена
 Function "REGEXP" not found; SQL statement:
@@ -2054,7 +2054,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 15:47:06.606390+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2067,7 +2067,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 15:51:48.154336+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2080,7 +2080,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 15:55:07.276567+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2093,7 +2093,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 15:57:58.974666+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2107,7 +2107,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.checkColumnIndex(JdbcResultSet.java:3522)
 	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:283)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:70)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:70)
 2025-12-24 15:58:19.174826+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2120,7 +2120,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 15:58:56.179746+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2133,7 +2133,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 15:59:14.342586+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2146,7 +2146,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 15:59:46.364702+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2159,7 +2159,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:00:07.510992+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2172,7 +2172,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:01:07.610365+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2185,7 +2185,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:01:33.640140+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2198,7 +2198,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:02:27.295010+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2211,7 +2211,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:03:21.634390+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2225,7 +2225,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.checkColumnIndex(JdbcResultSet.java:3522)
 	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:283)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:70)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:70)
 2025-12-24 16:06:14.278564+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2238,7 +2238,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:07:20.293733+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2251,7 +2251,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:07:37.305301+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2264,7 +2264,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:09:03.779949+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2277,7 +2277,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:10:05.220830+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2290,7 +2290,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:14:03.598844+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2303,7 +2303,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:14:16.745933+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2316,7 +2316,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:14:49.000063+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2329,7 +2329,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:17:04.373428+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2342,7 +2342,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:18:41.616750+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2355,7 +2355,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:25:40.334025+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2368,7 +2368,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:32:02.608890+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2381,7 +2381,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:34:28.155450+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2394,7 +2394,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:35:21.699062+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2407,7 +2407,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 16:38:35.926375+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2420,7 +2420,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1302)
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:124)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:68)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:68)
 2025-12-24 22:23:57.385530+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM, добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
@@ -2434,7 +2434,7 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3539)
 	at org.h2.jdbc.JdbcResultSet.checkColumnIndex(JdbcResultSet.java:3522)
 	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:283)
-	at deseptikon.monya.usage_codes.UC01_010.main(uc01_010.java:87)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.main(uc01_010.java:87)
 2025-12-30 22:49:15.952808+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM [*]FROM PARCELS.PRIVISIONAL_2026"; ожидалось "identifier"
 Syntax error in SQL statement "SELECT * FROM [*]FROM PARCELS.PRIVISIONAL_2026"; expected "identifier"; SQL statement:
@@ -2549,9 +2549,9 @@ Invalid value "1" for parameter "parameterIndex" [90008-240]
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
-	at deseptikon.monya.spring_jdbc.jdbc.QueryParcel.getListParcelsByICN(QueryParcel.java:65)
-	at deseptikon.monya.usage_codes.UC01_010.assignmentCode(UC01_010SpringJDBC.java:75)
-	at deseptikon.monya.CodesHandler.main(CodesHandler.java:23)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsByICN(QueryParcel.java:65)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.assignmentCode(UC01_010SpringJDBC.java:75)
+	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:23)
 2026-01-03 18:54:37.364075+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE inner_cadastral_numbers is [*]blanc"; ожидалось "NOT, OF, JSON, NULL, DISTINCT, TRUE, FALSE, UNKNOWN"
 Syntax error in SQL statement "SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE inner_cadastral_numbers is [*]blanc"; expected "NOT, OF, JSON, NULL, DISTINCT, TRUE, FALSE, UNKNOWN"; SQL statement:
@@ -2635,9 +2635,9 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО �
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
-	at deseptikon.monya.spring_jdbc.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:61)
-	at deseptikon.monya.usage_codes.UC01_010.assignmentCode(UC01_010SpringJDBC.java:84)
-	at deseptikon.monya.CodesHandler.main(CodesHandler.java:23)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:61)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.assignmentCode(UC01_010SpringJDBC.java:84)
+	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:23)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]"
 General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]" [50000-240]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
@@ -2681,9 +2681,9 @@ The database is open in exclusive mode; can not open additional connections [901
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
-	at deseptikon.monya.spring_jdbc.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:70)
-	at deseptikon.monya.usage_codes.UC01_010.assignmentCode(UC01_010.java:74)
-	at deseptikon.monya.CodesHandler.main(CodesHandler.java:23)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:70)
+	at deseptikon.monya.parcels.usage_codes.UC01_010.assignmentCode(UC01_010.java:74)
+	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:23)
 2026-01-05 00:29:18.250237+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND LOWER(utilization_by_doc) NOT REGEXP ? AND inner_cadastral_numbers [*]? AND area >= ? AND area <= ?"
 Syntax error in SQL statement "SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND LOWER(utilization_by_doc) NOT REGEXP ? AND inner_cadastral_numbers [*]? AND area >= ? AND area <= ?"; SQL statement:
@@ -2759,9 +2759,9 @@ SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE LOWER(utilization_by_doc) REGEXP ? 
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
-	at deseptikon.monya.spring_jdbc.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:52)
-	at deseptikon.monya.usage_codes.UC01_150.assignmentCode(UC01_150.java:66)
-	at deseptikon.monya.CodesHandler.main(CodesHandler.java:25)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:52)
+	at deseptikon.monya.parcels.usage_codes.UC01_150.assignmentCode(UC01_150.java:66)
+	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:25)
 Caused by: java.util.regex.PatternSyntaxException: Unclosed character class near index 26
 .*[^\d\.]1\s*\.\s*15[^\.\.*
                           ^
@@ -2809,7 +2809,7 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: D:/Applicat
 	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:965)
 	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:986)
 	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.update(NamedParameterJdbcTemplate.java:339)
-	at deseptikon.monya.spring_jdbc_parcels.jdbc.QueryParcelTest.concatParcelsPredictedUsageCode(QueryParcelTest.java:40)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcelTest.concatParcelsPredictedUsageCode(QueryParcelTest.java:40)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701)
@@ -2911,3 +2911,72 @@ UPDATE PARCELS.PRIVISIONAL_2026 SET ?: = CASE WHEN PREDICTED_USAGE_CODE = '' THE
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "UPDATE PARCELS.PRIVISIONAL_2026 SET ([*]?) = CASE WHEN PREDICTED_USAGE_CODE = '' THEN ? ELSE CONCAT(PREDICTED_USAGE_CODE, '; ', ?) END WHERE id IN (?, ?)"; ожидалось "identifier"
 Syntax error in SQL statement "UPDATE PARCELS.PRIVISIONAL_2026 SET ([*]?) = CASE WHEN PREDICTED_USAGE_CODE = '' THEN ? ELSE CONCAT(PREDICTED_USAGE_CODE, '; ', ?) END WHERE id IN (?, ?)"; expected "identifier"; SQL statement:
 UPDATE PARCELS.PRIVISIONAL_2026 SET (?) = CASE WHEN PREDICTED_USAGE_CODE = '' THEN ? ELSE CONCAT(PREDICTED_USAGE_CODE, '; ', ?) END WHERE id IN (?, ?) [42001-240]
+2026-01-17 13:10:27.138531+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "QUERYTEMPLATE" не найден
+Column "QUERYTEMPLATE" not found; SQL statement:
+SELECT utilization_by_doc, category, note, locality, queryTemplate FROM PARCELS.PRIVISIONAL_2026 [42122-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:244)
+	at org.h2.expression.ExpressionColumn.optimizeOther(ExpressionColumn.java:226)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:213)
+	at org.h2.command.query.Select.lambda$prepareExpressions$2(Select.java:1209)
+	at java.base/java.util.ArrayList.replaceAllRange(ArrayList.java:1795)
+	at java.base/java.util.ArrayList.replaceAll(ArrayList.java:1785)
+	at org.h2.command.query.Select.prepareExpressions(Select.java:1209)
+	at org.h2.command.query.Query.prepare(Query.java:235)
+	at org.h2.command.Parser.prepareCommand(Parser.java:492)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:647)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:563)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:94)
+	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:479)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:413)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:492)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:502)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsForReplaceLatin(QueryParcel.java:110)
+	at service.deseptikon.monya.db.ReplaceLatin.main(ReplaceLatin.java:25)
+2026-01-17 13:11:17.069899+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "id" не найден
+Column "id" not found [42122-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3492)
+	at org.h2.jdbc.JdbcResultSet.getInt(JdbcResultSet.java:337)
+	at deseptikon.monya.parcels.spring_jdbc.util.ParcelMapperPredicted.mapRow(ParcelMapperPredicted.java:14)
+	at deseptikon.monya.parcels.spring_jdbc.util.ParcelMapperPredicted.mapRow(ParcelMapperPredicted.java:9)
+	at org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:110)
+	at org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:62)
+	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:480)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:413)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:492)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:502)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsForReplaceLatin(QueryParcel.java:110)
+	at service.deseptikon.monya.db.ReplaceLatin.main(ReplaceLatin.java:25)
+2026-01-17 13:14:08.526632+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "cadastral_number" не найден
+Column "cadastral_number" not found [42122-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3492)
+	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:301)
+	at deseptikon.monya.parcels.spring_jdbc.util.ParcelMapperPredicted.mapRow(ParcelMapperPredicted.java:15)
+	at deseptikon.monya.parcels.spring_jdbc.util.ParcelMapperPredicted.mapRow(ParcelMapperPredicted.java:9)
+	at org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:110)
+	at org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:62)
+	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:480)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:413)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:492)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:502)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsForReplaceLatin(QueryParcel.java:110)
+	at service.deseptikon.monya.db.ReplaceLatin.main(ReplaceLatin.java:25)
+2026-01-17 23:37:45.827424+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "UPDATE PARCELS.PRIVISIONAL_2026 SET utilization_by_doc = [*]:utilization_by_docList, category = :categoryList, note = :noteList, locality = :localityList WHERE id = :idList"; ожидалось "DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "UPDATE PARCELS.PRIVISIONAL_2026 SET utilization_by_doc = [*]:utilization_by_docList, category = :categoryList, note = :noteList, locality = :localityList WHERE id = :idList"; expected "DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+UPDATE PARCELS.PRIVISIONAL_2026 SET utilization_by_doc = :utilization_by_docList, category = :categoryList, note = :noteList, locality = :localityList WHERE id = :idList [42001-240]

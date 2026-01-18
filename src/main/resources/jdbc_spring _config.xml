@@ -15,7 +15,7 @@
 
     <!-- Here we're defining studentJDBCTemplate bean -->
     <bean id="dataSourceForJdbcTemplateParcelDaoImpl"
-          class="deseptikon.monya.spring_jdbc_parcels.jdbc.QueryParcel">
+          class="deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel">
         <property name="dataSource" ref="dataSourceConnection"/>
     </bean>
 

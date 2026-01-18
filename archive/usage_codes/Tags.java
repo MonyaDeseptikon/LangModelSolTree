@@ -1,4 +1,4 @@
-package deseptikon.monya.usage_codes;
+package deseptikon.monya.parcels.usage_codes;
 
 import java.math.BigDecimal;
 import java.util.List;

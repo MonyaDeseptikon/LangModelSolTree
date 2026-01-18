@@ -1,6 +1,6 @@
 package deseptikon.monya.service;
 
-import deseptikon.monya.usage_codes.servives.PrepareTags;
+import deseptikon.monya.parcels.usage_codes.auxiliary.PrepareTags;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
