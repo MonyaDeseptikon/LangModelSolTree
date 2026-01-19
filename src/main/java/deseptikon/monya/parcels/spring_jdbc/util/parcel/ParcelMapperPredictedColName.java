@@ -1,4 +1,4 @@
-package deseptikon.monya.parcels.spring_jdbc.util;
+package deseptikon.monya.parcels.spring_jdbc.util.parcel;
 
 import org.springframework.jdbc.core.RowMapper;
 

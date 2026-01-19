@@ -1,6 +1,6 @@
-package deseptikon.monya.parcels.spring_jdbc.util;
+package deseptikon.monya.parcels.spring_jdbc.util.parcel;
 
-import deseptikon.monya.parcels.spring_jdbc.model.Parcel;
+import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -13,7 +13,7 @@ public class ParcelMapperPredicted implements RowMapper {
 
         parcel.setId(rs.getInt("id"));
         parcel.setCadastralNumber(rs.getString("cadastral_number"));
-        parcel.setArea(rs.getDouble("area"));
+        parcel.setArea(rs.getFloat("area"));
         parcel.setNote(rs.getString("note"));
         parcel.setCategory(rs.getString("category"));
         parcel.setUtilizationByDoc(rs.getString("utilization_by_doc"));

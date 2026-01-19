@@ -4,7 +4,7 @@ package deseptikon.monya.parcels.io_excel.transfer;
 import deseptikon.monya.parcels.db.FillDB;
 import deseptikon.monya.parcels.io_excel.auxiliary.ServiceForExcel;
 import deseptikon.monya.parcels.io_excel.mapper.FillRow;
-import deseptikon.monya.parcels.spring_jdbc.model.Parcel;
+import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.dhatim.fastexcel.Worksheet;
 import org.dhatim.fastexcel.reader.*;
 
@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 //import static deseptikon.monya.parce.ServiceParce.commaToDotCell;
 
-public class IOExcelDB implements ServiceForExcel,  FillRow {
+public class IOExcelDB implements ServiceForExcel,  FillRow, ParcelIOExcel {
 
 
     public void readExcelFillDBParcelsProvisionalList(String filePath, int worksheetIndex) throws FileNotFoundException, SQLException {

@@ -2549,7 +2549,7 @@ Invalid value "1" for parameter "parameterIndex" [90008-240]
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
-	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsByICN(QueryParcel.java:65)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel.getListParcelsByICN(QueryParcel.java:65)
 	at deseptikon.monya.parcels.usage_codes.UC01_010.assignmentCode(UC01_010SpringJDBC.java:75)
 	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:23)
 2026-01-03 18:54:37.364075+04:00 jdbc[3]: exception
@@ -2635,7 +2635,7 @@ General error: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО �
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
-	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:61)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel.getListParcelsByTags(QueryParcel.java:61)
 	at deseptikon.monya.parcels.usage_codes.UC01_010.assignmentCode(UC01_010SpringJDBC.java:84)
 	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:23)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: E:/ЦКО БТИ УР/Приложения/LangModelSolTree/lmst.mv.db [2.4.240/7]"
@@ -2681,7 +2681,7 @@ The database is open in exclusive mode; can not open additional connections [901
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
-	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:70)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel.getListParcelsByTags(QueryParcel.java:70)
 	at deseptikon.monya.parcels.usage_codes.UC01_010.assignmentCode(UC01_010.java:74)
 	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:23)
 2026-01-05 00:29:18.250237+04:00 jdbc[3]: exception
@@ -2759,7 +2759,7 @@ SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE LOWER(utilization_by_doc) REGEXP ? 
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
-	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsByTags(QueryParcel.java:52)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel.getListParcelsByTags(QueryParcel.java:52)
 	at deseptikon.monya.parcels.usage_codes.UC01_150.assignmentCode(UC01_150.java:66)
 	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:25)
 Caused by: java.util.regex.PatternSyntaxException: Unclosed character class near index 26
@@ -2936,7 +2936,7 @@ SELECT utilization_by_doc, category, note, locality, queryTemplate FROM PARCELS.
 	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:413)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:492)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:502)
-	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsForReplaceLatin(QueryParcel.java:110)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel.getListParcelsForReplaceLatin(QueryParcel.java:110)
 	at service.deseptikon.monya.db.ReplaceLatin.main(ReplaceLatin.java:25)
 2026-01-17 13:11:17.069899+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "id" не найден
@@ -2947,15 +2947,15 @@ Column "id" not found [42122-240]
 	at org.h2.message.DbException.get(DbException.java:199)
 	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3492)
 	at org.h2.jdbc.JdbcResultSet.getInt(JdbcResultSet.java:337)
-	at deseptikon.monya.parcels.spring_jdbc.util.ParcelMapperPredicted.mapRow(ParcelMapperPredicted.java:14)
-	at deseptikon.monya.parcels.spring_jdbc.util.ParcelMapperPredicted.mapRow(ParcelMapperPredicted.java:9)
+	at deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelMapperPredicted.mapRow(ParcelMapperPredicted.java:14)
+	at deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelMapperPredicted.mapRow(ParcelMapperPredicted.java:9)
 	at org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:110)
 	at org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:62)
 	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:480)
 	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:413)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:492)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:502)
-	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsForReplaceLatin(QueryParcel.java:110)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel.getListParcelsForReplaceLatin(QueryParcel.java:110)
 	at service.deseptikon.monya.db.ReplaceLatin.main(ReplaceLatin.java:25)
 2026-01-17 13:14:08.526632+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "cadastral_number" не найден
@@ -2966,17 +2966,29 @@ Column "cadastral_number" not found [42122-240]
 	at org.h2.message.DbException.get(DbException.java:199)
 	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3492)
 	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:301)
-	at deseptikon.monya.parcels.spring_jdbc.util.ParcelMapperPredicted.mapRow(ParcelMapperPredicted.java:15)
-	at deseptikon.monya.parcels.spring_jdbc.util.ParcelMapperPredicted.mapRow(ParcelMapperPredicted.java:9)
+	at deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelMapperPredicted.mapRow(ParcelMapperPredicted.java:15)
+	at deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelMapperPredicted.mapRow(ParcelMapperPredicted.java:9)
 	at org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:110)
 	at org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:62)
 	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:480)
 	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:413)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:492)
 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:502)
-	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel.getListParcelsForReplaceLatin(QueryParcel.java:110)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel.getListParcelsForReplaceLatin(QueryParcel.java:110)
 	at service.deseptikon.monya.db.ReplaceLatin.main(ReplaceLatin.java:25)
 2026-01-17 23:37:45.827424+04:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "UPDATE PARCELS.PRIVISIONAL_2026 SET utilization_by_doc = [*]:utilization_by_docList, category = :categoryList, note = :noteList, locality = :localityList WHERE id = :idList"; ожидалось "DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
 Syntax error in SQL statement "UPDATE PARCELS.PRIVISIONAL_2026 SET utilization_by_doc = [*]:utilization_by_docList, category = :categoryList, note = :noteList, locality = :localityList WHERE id = :idList"; expected "DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
 UPDATE PARCELS.PRIVISIONAL_2026 SET utilization_by_doc = :utilization_by_docList, category = :categoryList, note = :noteList, locality = :localityList WHERE id = :idList [42001-240]
+2026-01-19 15:06:56.294848+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 (id INT AUTO_INCREMENT PRIMARY KEY, cadastral_number VARCHAR(20) NOT NULL, building_name VARCHAR(MAX) NULL, area FLOAT NULL, note VARCHAR(MAX) NULL, usage_code VARCHAR(15) [*]NULLparcel_cadastral_numbers VARCHAR(MAX) NULL, );"; ожидалось "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"
+Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 (id INT AUTO_INCREMENT PRIMARY KEY, cadastral_number VARCHAR(20) NOT NULL, building_name VARCHAR(MAX) NULL, area FLOAT NULL, note VARCHAR(MAX) NULL, usage_code VARCHAR(15) [*]NULLparcel_cadastral_numbers VARCHAR(MAX) NULL, );"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 (id INT AUTO_INCREMENT PRIMARY KEY, cadastral_number VARCHAR(20) NOT NULL, building_name VARCHAR(MAX) NULL, area FLOAT NULL, note VARCHAR(MAX) NULL, usage_code VARCHAR(15) NULLparcel_cadastral_numbers VARCHAR(MAX) NULL, ); [42001-240]
+2026-01-19 15:07:35.978123+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 (id INT AUTO_INCREMENT PRIMARY KEY, cadastral_number VARCHAR(20) NOT NULL, building_name VARCHAR(MAX) NULL, area FLOAT NULL, note VARCHAR(MAX) NULL, usage_code VARCHAR(15) NULL [*]parcel_cadastral_numbers VARCHAR(MAX) NULL, );"; ожидалось "DEFAULT, GENERATED, ON UPDATE, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"
+Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 (id INT AUTO_INCREMENT PRIMARY KEY, cadastral_number VARCHAR(20) NOT NULL, building_name VARCHAR(MAX) NULL, area FLOAT NULL, note VARCHAR(MAX) NULL, usage_code VARCHAR(15) NULL [*]parcel_cadastral_numbers VARCHAR(MAX) NULL, );"; expected "DEFAULT, GENERATED, ON UPDATE, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 (id INT AUTO_INCREMENT PRIMARY KEY, cadastral_number VARCHAR(20) NOT NULL, building_name VARCHAR(MAX) NULL, area FLOAT NULL, note VARCHAR(MAX) NULL, usage_code VARCHAR(15) NULL parcel_cadastral_numbers VARCHAR(MAX) NULL, ); [42001-240]
+2026-01-19 15:08:23.769279+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 (id INT AUTO_INCREMENT PRIMARY KEY, cadastral_number VARCHAR(20) NOT NULL, building_name VARCHAR(MAX) NULL, area FLOAT NULL, note VARCHAR(MAX) NULL, usage_code VARCHAR(15) NULL, parcel_cadastral_numbers VARCHAR(MAX) NULL, [*]);"; ожидалось "identifier"
+Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 (id INT AUTO_INCREMENT PRIMARY KEY, cadastral_number VARCHAR(20) NOT NULL, building_name VARCHAR(MAX) NULL, area FLOAT NULL, note VARCHAR(MAX) NULL, usage_code VARCHAR(15) NULL, parcel_cadastral_numbers VARCHAR(MAX) NULL, [*]);"; expected "identifier"; SQL statement:
+CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 (id INT AUTO_INCREMENT PRIMARY KEY, cadastral_number VARCHAR(20) NOT NULL, building_name VARCHAR(MAX) NULL, area FLOAT NULL, note VARCHAR(MAX) NULL, usage_code VARCHAR(15) NULL, parcel_cadastral_numbers VARCHAR(MAX) NULL, ); [42001-240]

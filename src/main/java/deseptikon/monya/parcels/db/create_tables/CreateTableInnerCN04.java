@@ -1,4 +1,4 @@
-package deseptikon.monya.inner_cn.db.create_tables;
+package deseptikon.monya.parcels.db.create_tables;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -27,8 +27,8 @@ public class CreateTableInnerCN04 {
                 "building_name VARCHAR(MAX) NULL, " +
                 "area FLOAT NULL, " +
                 "note VARCHAR(MAX) NULL, " +
-                "usage_code VARCHAR(15) NULL" +
-                "parcel_cadastral_numbers VARCHAR(MAX) NULL, " +
+                "usage_code VARCHAR(15) NULL, " +
+                "parcel_cadastral_numbers VARCHAR(MAX) NULL" +
                 ");");
 
         closeCon(con);

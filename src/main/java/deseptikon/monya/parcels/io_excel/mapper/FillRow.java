@@ -1,6 +1,6 @@
 package deseptikon.monya.parcels.io_excel.mapper;
 
-import deseptikon.monya.parcels.spring_jdbc.model.Parcel;
+import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.dhatim.fastexcel.Worksheet;
 
 import java.util.List;

@@ -1,6 +1,6 @@
-package deseptikon.monya.parcels.spring_jdbc.util;
+package deseptikon.monya.parcels.spring_jdbc.util.parcel;
 
-import deseptikon.monya.parcels.spring_jdbc.model.Parcel;
+import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

@@ -1,8 +1,9 @@
 package deseptikon.monya.parcels.io_excel.handlers;
 
 import deseptikon.monya.parcels.io_excel.transfer.IOExcelDB;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel;
-import deseptikon.monya.parcels.spring_jdbc.model.Parcel;
+import deseptikon.monya.parcels.io_excel.transfer.ParcelIOExcel;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel;
+import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.apache.commons.lang3.time.StopWatch;
 import org.dhatim.fastexcel.Workbook;
 import org.dhatim.fastexcel.Worksheet;
@@ -25,6 +26,7 @@ public class DBtoExcel {
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring _config.xml");
         QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
         Set<Parcel> parcelList = new HashSet<>();
+        ParcelIOExcel parcelIOExcel = new IOExcelDB();
 
 
         //Данные
@@ -35,7 +37,7 @@ public class DBtoExcel {
         Workbook wb = new Workbook(os, "MonyaDes", "1.0");
         Worksheet ws = wb.newWorksheet("PrdtUC");
 
-        new IOExcelDB().readDBFillExcel(ws, parcelList, queryTemplate.getListColumnName());
+        parcelIOExcel.readDBFillExcel(ws, parcelList, queryTemplate.getListColumnName());
 
         wb.finish();
 

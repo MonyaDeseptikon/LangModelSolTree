@@ -1,9 +1,10 @@
-package deseptikon.monya.inner_cn.spring_jdbc.jdbc;
+package deseptikon.monya.parcels.spring_jdbc.jdbc.parcel;
 
-import deseptikon.monya.inner_cn.spring_jdbc.model.Parcel;
-import deseptikon.monya.inner_cn.spring_jdbc.util.ParcelMapperPredicted;
-import deseptikon.monya.inner_cn.spring_jdbc.util.ParcelMapperPredictedColName;
-import deseptikon.monya.inner_cn.spring_jdbc.util.ParcelMapperReplaceLatin;
+import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
+import deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelArrayMakerToDBForReplaceLatinInterFace;
+import deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelMapperPredicted;
+import deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelMapperPredictedColName;
+import deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelMapperReplaceLatin;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -12,7 +13,7 @@ import javax.sql.DataSource;
 import java.util.List;
 import java.util.Set;
 
-public class QueryParcel implements GetParcelDAO, UpdateParcelDAO {
+public class QueryParcel implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMakerToDBForReplaceLatinInterFace {
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate template;
@@ -112,42 +113,14 @@ public class QueryParcel implements GetParcelDAO, UpdateParcelDAO {
 
     @Override
     public void updateParcelsForReplaceLatin(final List<Parcel> parcels) {
-//        List<ArrayList<Object>> parameters = new ArrayList<>(List.of());
-//
-//        parameters.addAll(parcels.stream().map(parcel -> new ArrayList<Object>(List.of(parcel.getUtilizationByDoc(), parcel.getCategory(), parcel.getNote(), parcel.getLocality(), parcel.getId()))).toList());
 
-
-//        MapSqlParameterSource parameters = new MapSqlParameterSource();
-//        parameters.addValue("idList", parcels.stream().map(p-> p.getId()).toList());
-//        parameters.addValue("utilization_by_docList", parcels.stream().map(p-> p.getUtilizationByDoc()).toList());
-//        parameters.addValue("categoryList", parcels.stream().map(p-> p.getCategory()).toList());
-//        parameters.addValue("noteList", parcels.stream().map(p-> p.getNote()).toList());
-//        parameters.addValue("localityList", parcels.stream().map(p-> p.getLocality()).toList());
-
-        MapSqlParameterSource[] parameters = new MapSqlParameterSource[parcels.size()];
-        int count = 0;
-        for (Parcel parcel: parcels) {
-            MapSqlParameterSource parameter = new MapSqlParameterSource();
-            parameter.addValue("idList", parcel.getId());
-            parameter.addValue("utilization_by_docList", parcel.getUtilizationByDoc());
-            parameter.addValue("categoryList", parcel.getCategory());
-            parameter.addValue("noteList", parcel.getNote());
-            parameter.addValue("localityList", parcel.getLocality());
-            parameters[count++] = parameter;
-        }
-//
         String SQLUpdate = "UPDATE PARCELS.PRIVISIONAL_2026 SET " +
                 "utilization_by_doc = :utilization_by_docList, " +
                 "category = :categoryList, " +
                 "note = :noteList, " +
                 "locality = :localityList " +
                 "WHERE id = :idList";
-//        String SQLUpdate = "UPDATE PARCELS.PRIVISIONAL_2026 SET " +
-//                "utilization_by_doc = ?, " +
-//                "category = ?, " +
-//                "note = ?, " +
-//                "locality = ? " +
-//                "WHERE id = ?";
-        template.batchUpdate(SQLUpdate, parameters);
+
+        template.batchUpdate(SQLUpdate, ParcelArrayMakerToDBForReplaceLatin(parcels));
     }
 }

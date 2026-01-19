@@ -1,6 +1,6 @@
-package deseptikon.monya.parcels.spring_jdbc.jdbc;
+package deseptikon.monya.parcels.spring_jdbc.jdbc.parcel;
 
-import deseptikon.monya.parcels.spring_jdbc.model.Parcel;
+import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 
 import javax.sql.DataSource;
 import java.util.List;

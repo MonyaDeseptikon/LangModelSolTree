@@ -1,4 +1,4 @@
-package deseptikon.monya.inner_cn.spring_jdbc.model;
+package deseptikon.monya.parcels.spring_jdbc.models;
 
 public class Parcel {
 
@@ -6,7 +6,7 @@ public class Parcel {
 
     private String cadastralNumber;
 
-    private Double area;
+    private Float area;
 
     private String OKATO;
 
@@ -51,11 +51,11 @@ public class Parcel {
         this.cadastralNumber = cadastralNumber;
     }
 
-    public Double getArea() {
+    public Float getArea() {
         return area;
     }
 
-    public void setArea(Double area) {
+    public void setArea(Float area) {
         this.area = area;
     }
 

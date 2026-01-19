@@ -1,7 +1,7 @@
 package deseptikon.monya.parcels.usage_codes;
 
-import deseptikon.monya.parcels.spring_jdbc.jdbc.QueryParcel;
-import deseptikon.monya.parcels.spring_jdbc.model.Parcel;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel;
+import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import deseptikon.monya.parcels.usage_codes.model.Conditions;
 import deseptikon.monya.parcels.usage_codes.auxiliary.PrepareTags;
 
