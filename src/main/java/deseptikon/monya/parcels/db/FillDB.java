@@ -1,6 +1,5 @@
 package deseptikon.monya.parcels.db;
 
-import java.math.BigDecimal;
 import java.sql.*;
 
 import static deseptikon.monya.auxiliary.ConnectionDB.getConnections;
@@ -14,7 +13,7 @@ public class FillDB {
     }
 
     public void fillProvisionalList(String cadastral_number,
-                                    BigDecimal area,
+                                    Float area,
                                     String OKATO,
                                     String KLADR,
                                     String locality,
@@ -32,7 +31,7 @@ public class FillDB {
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         statement = con.prepareStatement(fillRowSQL);
         statement.setString(1, cadastral_number);
-        statement.setBigDecimal(2, area);
+        statement.setFloat(2, area);
         statement.setString(3, OKATO);
         statement.setString(4, KLADR);
         statement.setString(5, locality);

@@ -18,12 +18,9 @@ public class QueryParcel implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMa
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate template;
 
-
-    @Override
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.template = new NamedParameterJdbcTemplate(jdbcTemplate);
-
     }
 
     @Override

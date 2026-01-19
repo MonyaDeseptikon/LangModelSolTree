@@ -19,4 +19,9 @@
         <property name="dataSource" ref="dataSourceConnection"/>
     </bean>
 
+    <bean id="dataSourceForJdbcTemplateInnerCN"
+          class="ddeseptikon.monya.parcels.spring_jdbc.jdbc.QueryInnerCN">
+        <property name="dataSourceInnerCN" ref="dataSourceConnection"/>
+    </bean>
+
 </beans>

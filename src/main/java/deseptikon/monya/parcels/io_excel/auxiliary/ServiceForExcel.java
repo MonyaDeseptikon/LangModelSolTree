@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 public interface ServiceForExcel {
 
-    static BigDecimal commaToDotCell(Cell cell){
+    default Float commaToDotCell(Cell cell){
         BigDecimal areaCheck;
         if( cell.getType().equals(CellType.NUMBER)){
             areaCheck = cell.asNumber();
@@ -22,5 +22,18 @@ public interface ServiceForExcel {
             areaCheck = new BigDecimal(cellNorm);
         }
         return areaCheck;
+    }
+
+     default String replaceChar(String checkString) {
+        String resultString;
+
+        if (checkString.matches(".*['].*")) {
+            resultString = checkString;
+            resultString = resultString.replace("'", " ");
+
+            return resultString;
+        }
+
+        return checkString;
     }
 }

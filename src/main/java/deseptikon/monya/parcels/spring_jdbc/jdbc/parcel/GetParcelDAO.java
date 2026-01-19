@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 public interface GetParcelDAO {
-    void setDataSource(DataSource dataSource);
+
 
     List<String> getListColumnName();
 
