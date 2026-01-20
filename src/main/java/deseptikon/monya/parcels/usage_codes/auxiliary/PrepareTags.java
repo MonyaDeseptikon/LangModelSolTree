@@ -35,6 +35,7 @@ public interface PrepareTags {
         StringBuilder queryExcludeTags = new StringBuilder();
         if (!tags.isEmpty()) {
             for (String eTag : tags) {
+                eTag = trimEnding(eTag);
                 if (queryExcludeTags.isEmpty()) {
                     queryExcludeTags.append(".*").append(eTag).append(".*");
                 } else {

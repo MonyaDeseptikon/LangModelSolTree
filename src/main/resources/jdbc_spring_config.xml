@@ -13,14 +13,14 @@
         <property name="password" value=""/>
     </bean>
 
-    <!-- Here we're defining studentJDBCTemplate bean -->
+    <!-- Here we're defining bean -->
     <bean id="dataSourceForJdbcTemplateParcelDaoImpl"
           class="deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel">
         <property name="dataSource" ref="dataSourceConnection"/>
     </bean>
 
     <bean id="dataSourceForJdbcTemplateInnerCN"
-          class="ddeseptikon.monya.parcels.spring_jdbc.jdbc.QueryInnerCN">
+          class="deseptikon.monya.parcels.spring_jdbc.jdbc.QueryInnerCN">
         <property name="dataSourceInnerCN" ref="dataSourceConnection"/>
     </bean>
 

@@ -23,7 +23,7 @@ public class DBtoExcel {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring _config.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
         QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
         Set<Parcel> parcelList = new HashSet<>();
         ParcelIOExcel parcelIOExcel = new IOExcelDB();

@@ -2992,3 +2992,51 @@ CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 (id INT AUTO_INCREMENT PRIMARY KE
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 (id INT AUTO_INCREMENT PRIMARY KEY, cadastral_number VARCHAR(20) NOT NULL, building_name VARCHAR(MAX) NULL, area FLOAT NULL, note VARCHAR(MAX) NULL, usage_code VARCHAR(15) NULL, parcel_cadastral_numbers VARCHAR(MAX) NULL, [*]);"; ожидалось "identifier"
 Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 (id INT AUTO_INCREMENT PRIMARY KEY, cadastral_number VARCHAR(20) NOT NULL, building_name VARCHAR(MAX) NULL, area FLOAT NULL, note VARCHAR(MAX) NULL, usage_code VARCHAR(15) NULL, parcel_cadastral_numbers VARCHAR(MAX) NULL, [*]);"; expected "identifier"; SQL statement:
 CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 (id INT AUTO_INCREMENT PRIMARY KEY, cadastral_number VARCHAR(20) NOT NULL, building_name VARCHAR(MAX) NULL, area FLOAT NULL, note VARCHAR(MAX) NULL, usage_code VARCHAR(15) NULL, parcel_cadastral_numbers VARCHAR(MAX) NULL, ); [42001-240]
+2026-01-20 14:07:37.846402+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "CADASTRAL_NUMBERLIST" не найден
+Column "CADASTRAL_NUMBERLIST" not found; SQL statement:
+INSERT INTO PARCELS.INNER_CN_04 (cadastral_number, building_name, area, note, usage_code, parcel_cadastral_numbers) VALUES (cadastral_numberList, building_nameList, areaList, noteList, usage_codeList, parcel_cadastral_numbersList) [42122-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:244)
+	at org.h2.expression.ExpressionColumn.optimizeOther(ExpressionColumn.java:226)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:213)
+	at org.h2.command.dml.Insert.doPrepare(Insert.java:299)
+	at org.h2.command.dml.DataChangeStatement.prepare(DataChangeStatement.java:40)
+	at org.h2.command.Parser.prepareCommand(Parser.java:492)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:647)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:563)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:315)
+	at org.springframework.jdbc.core.JdbcTemplate$SimplePreparedStatementCreator.createPreparedStatement(JdbcTemplate.java:1709)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:667)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:710)
+	at org.springframework.jdbc.core.JdbcTemplate.batchUpdate(JdbcTemplate.java:1042)
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.batchUpdate(NamedParameterJdbcTemplate.java:379)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.QueryInnerCN.insertInnerCN(QueryInnerCN.java:35)
+	at deseptikon.monya.parcels.io_excel.handlers.excel_to_db.ParcelsInnerCN.main(ParcelsInnerCN.java:29)
+2026-01-20 16:58:33.207703+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel.getListParcelsByTagsWithICN(QueryParcel.java:72)
+	at deseptikon.monya.parcels.usage_codes.UC06_090.assignmentCode(UC06_090.java:57)
+	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:31)

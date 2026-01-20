@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface GetParcelDAO {
 
-
     List<String> getListColumnName();
 
     List<Parcel> getListParcels();

@@ -83,6 +83,7 @@ public class IOExcelDB implements ServiceForExcel, FillRow, ParcelIOExcel, Inner
             innerCN.setUsage_code(row.getCellText(4));
             innerCN.setParcel_cadastral_numbers(row.getCellText(5));
             innerCNList.add(innerCN);
+            System.out.println(innerCN);
         }
         return innerCNList;
     }

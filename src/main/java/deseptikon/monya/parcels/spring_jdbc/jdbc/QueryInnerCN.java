@@ -14,7 +14,7 @@ public class QueryInnerCN implements InnerCNArrayMakerToDB {
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate template;
 
-    public void setDataSource(DataSource dataSourceInnerCN) {
+    public void setDataSourceInnerCN(DataSource dataSourceInnerCN) {
         this.jdbcTemplate = new JdbcTemplate(dataSourceInnerCN);
         this.template = new NamedParameterJdbcTemplate(jdbcTemplate);
 
@@ -26,12 +26,11 @@ public class QueryInnerCN implements InnerCNArrayMakerToDB {
                 innerCNTableName;
         return jdbcTemplate.query(SQLQuery, new InnerCNMapper());
     }
-
     public void insertInnerCN(final List <InnerCN> innerCNList, String innerCNTableName) throws SQLException {
         String insertRowSQL = "INSERT INTO PARCELS." +
                 innerCNTableName + " " +
                 "(cadastral_number, building_name, area, note, usage_code, parcel_cadastral_numbers) " +
-                "VALUES (cadastral_numberList, building_nameList, areaList, noteList, usage_codeList, parcel_cadastral_numbersList)";
+                "VALUES (:cadastral_numberList, :building_nameList, :areaList, :noteList, :usage_codeList, :parcel_cadastral_numbersList)";
 
         template.batchUpdate(insertRowSQL, insertInnerCNArrayMakerToDB(innerCNList));
     }

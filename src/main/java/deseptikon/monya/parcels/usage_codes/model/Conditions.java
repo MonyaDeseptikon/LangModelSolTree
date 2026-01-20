@@ -20,6 +20,10 @@ public class Conditions {
         this.utilizationByDocLen = tags.stream().mapToInt(tag->tag.length()).sum();
     }
 
+    public Conditions() {
+
+    }
+
     public List<String> getTags() {
         return tags;
     }

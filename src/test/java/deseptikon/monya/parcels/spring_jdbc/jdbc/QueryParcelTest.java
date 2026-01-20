@@ -15,7 +15,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class QueryParcelTest {
-    ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring _config.xml");
+    ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
 
     JdbcTemplate jdbcTemplate = new JdbcTemplate((DataSource) context.getBean("dataSourceConnection"));
     NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);

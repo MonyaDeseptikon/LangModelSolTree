@@ -4,17 +4,18 @@ import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import deseptikon.monya.parcels.usage_codes.model.Conditions;
 import deseptikon.monya.parcels.usage_codes.auxiliary.PrepareTags;
+import deseptikon.monya.parcels.usage_codes.model.UC;
 
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class UC01_150 implements PrepareTags {
+public class UC01_150 extends UC {
 
-    //Исключаемые тэги
-    List<String> excludeTagsTemplate = List.of("индивиду", "1.7", "обеспеч", "пашн", "обслуживан", "отдых",
-            "жил", "дачн", "личн");
+    //Исключаемые тэги. Два нижнего подчеркивания после 1.7 - это костыль, чтобы не обрезалось значений шифра
+    List<String> excludeTagsTemplate = List.of("индивидуальный", "1.7__", "обеспечение", "пашня", "обслуживание", "отдых",
+            "жилой", "дачный", "личный");
     //Поиск кода вида использования и условий
     //Точку внутри кода обязательно экранировать, - иначе воспринимает как любой символ
     Conditions codeOnly = new Conditions(List.of("[^\\d\\.]" + "1\\s*\\.\\s*15" + "[^\\.\\d]"),
@@ -29,10 +30,8 @@ public class UC01_150 implements PrepareTags {
             new Conditions(List.of("зернохранилище"),
                     excludeTagsTemplate, 0F, 1000000F, 0.1F),
 
-
             new Conditions(List.of("крестьянское", "хозяйство"),
                     excludeTagsTemplate, 0F, 100000F, 0.1F),
-
 
             new Conditions(List.of("хранение", "переработка", "сельскохозяйственной"),
                     excludeTagsTemplate, 0F, 1000000F, 0.1F),
@@ -62,7 +61,7 @@ public class UC01_150 implements PrepareTags {
     );
 
     String usageCode = "01:150";
-
+@Override
     public void assignmentCode(QueryParcel queryTemplate) throws SQLException {
         Set<Parcel> parcelList = new HashSet<>();
 
@@ -78,16 +77,20 @@ public class UC01_150 implements PrepareTags {
 
             parcelList.addAll(queryTemplate.getListParcelsByTagsWithICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea()));
         }
-//        CreateDB.erasePredictedUC();
+
         Set<Integer> idList = new HashSet<>();
         parcelList.forEach(p -> idList.add(p.getId()));
         queryTemplate.concatParcelsPredictedUsageCode(idList, usageCode);
 
-        int codeCount = 0;
-        for (Parcel parcel : parcelList) {
-            System.out.println(parcel);
-            codeCount++;
-        }
-        System.out.println(codeCount);
+//        int codeCount = 0;
+//        for (Parcel parcel : parcelList) {
+//            System.out.println(parcel);
+//            codeCount++;
+//        }
+//        System.out.println(codeCount);
+
+        System.out.println(parcelList.size());
     }
+
+
 }

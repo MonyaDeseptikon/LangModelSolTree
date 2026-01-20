@@ -18,7 +18,7 @@ public class ReplaceLatinHandler implements ReplaceLatin {
     public static void main(String[] args) throws SQLException {
 
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring _config.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
         QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
 
         List<Parcel> parcelList = queryTemplate.getListParcelsForReplaceLatin(List.of(

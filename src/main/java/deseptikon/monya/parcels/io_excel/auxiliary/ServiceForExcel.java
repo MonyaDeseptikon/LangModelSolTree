@@ -8,18 +8,16 @@ import java.math.BigDecimal;
 public interface ServiceForExcel {
 
     default Float commaToDotCell(Cell cell){
-        BigDecimal areaCheck;
+        Float areaCheck;
         if( cell.getType().equals(CellType.NUMBER)){
-            areaCheck = cell.asNumber();
+            areaCheck = cell.asNumber().floatValue();
         } else {
-//            System.out.println(i.get());
-//            System.out.println(r.getCell(1).asString());
             String cellNorm =  cell.getText();
             if (cellNorm.contains(",")){
                 cellNorm= cellNorm.replace(',', '.');
             }
             if (cellNorm.isEmpty()) cellNorm="0";
-            areaCheck = new BigDecimal(cellNorm);
+            areaCheck = Float.valueOf(cellNorm);
         }
         return areaCheck;
     }
