@@ -63,7 +63,7 @@ public class UC04_040 extends UC {
             StringBuilder excludeTags = new StringBuilder();
             excludeTags = queryExcludeTags(condition.getExcludeTags());
 
-            parcelList.addAll(queryTemplate.getListParcelsByTagsWithICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea()));
+            parcelList.addAll(queryTemplate.getListParcelsByTags(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea()));
         }
 
         Set<Integer> idList = new HashSet<>();

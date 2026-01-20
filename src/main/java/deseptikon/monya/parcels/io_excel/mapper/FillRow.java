@@ -13,11 +13,11 @@ public interface FillRow {
         ws.value(row, 2, parcel.getCategory());
         ws.value(row, 3, parcel.getLocality());
         ws.value(row, 4, parcel.getNote());
-        ws.value(row, 5, parcel.getUtilizationByDoc());
-        ws.value(row, 6, parcel.getInnerCadastralNumbers());
-        ws.value(row, 7, parcel.getUsageCode());
-        ws.value(row, 8, parcel.getPredictedUsageCode());
-//         ws.value(row,9, parcel.getId());
+        ws.value(row, 5, parcel.getInnerCadastralNumbers());
+        ws.value(row, 6, parcel.getUsageCode());
+        ws.value(row, 7, parcel.getPredictedUsageCode());
+        ws.value(row, 8, parcel.getUtilizationByDoc());
+
 
     }
 
@@ -28,11 +28,10 @@ public interface FillRow {
         ws.value(row, 2, heads.get(9));
         ws.value(row, 3, heads.get(5));
         ws.value(row, 4, heads.get(7));
-        ws.value(row, 5, heads.get(11));
-        ws.value(row, 6, heads.get(13));
-        ws.value(row, 7, heads.get(14));
-        ws.value(row, 8, heads.get(15));
-
+        ws.value(row, 5, heads.get(13));
+        ws.value(row, 6, heads.get(14));
+        ws.value(row, 7, heads.get(15));
+        ws.value(row, 8, heads.get(11));
     }
 
 

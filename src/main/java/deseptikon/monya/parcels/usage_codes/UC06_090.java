@@ -13,7 +13,7 @@ import java.util.Set;
 public class UC06_090 extends UC {
     //Нижние подчеркивания после тэга - это костыль, чтобы не обрезалось окончание
     //Исключаемые тэги.
-    List<String> excludeTagsTemplate = List.of("железнодорожный", "перевалочный", "линия_", "электропередача", "казарма", "зерновой", "растениеводство");
+    List<String> excludeTagsTemplate = List.of("железнодорожный", "перевалочный", "линия_", "электропередача", "казарма", "зерно_", "растениеводство", "сельскохозяйственный");
     //Поиск кода вида использования и условий
     //Точку внутри кода обязательно экранировать, - иначе воспринимает как любой символ
     Conditions codeOnly = new Conditions(List.of("[^\\d\\.]" + "6\\s*\\.\\s*9" + "[^\\.\\d]"),
@@ -24,7 +24,8 @@ public class UC06_090 extends UC {
             new Conditions(List.of("погрузочный", "терминал"),
                     excludeTagsTemplate, 0F, Float.POSITIVE_INFINITY, 0F),
             new Conditions(List.of("склад__"),
-                    excludeTagsTemplate, 0F, Float.POSITIVE_INFINITY, 0F),
+                    excludeTagsTemplate, 0F, Float.POSITIVE_INFINITY, 0F)
+            ,
             new Conditions(List.of("промышленная", "база_"),
                     excludeTagsTemplate, 0F, Float.POSITIVE_INFINITY, 0F),
             new Conditions(List.of("производственная", "база_"),
@@ -38,7 +39,7 @@ public class UC06_090 extends UC {
     );
 
 
-            String usageCode = "06:090";
+    String usageCode = "06:090";
 
     @Override
     public void assignmentCode(QueryParcel queryTemplate) throws SQLException {
@@ -54,7 +55,7 @@ public class UC06_090 extends UC {
             StringBuilder excludeTags = new StringBuilder();
             excludeTags = queryExcludeTags(condition.getExcludeTags());
 
-            parcelList.addAll(queryTemplate.getListParcelsByTagsWithICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea()));
+            parcelList.addAll(queryTemplate.getListParcelsByTags(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea()));
         }
 
         Set<Integer> idList = new HashSet<>();

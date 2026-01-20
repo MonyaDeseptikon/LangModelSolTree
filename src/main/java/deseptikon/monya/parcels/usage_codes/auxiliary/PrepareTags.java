@@ -15,7 +15,10 @@ public interface PrepareTags {
         for (String tag : tags) {
             tag = trimEnding(tag);
             if (queryTags.isEmpty()) {
-                queryTags.append(".*").append("\\W").append(tag).append(".*");
+//                queryTags.append("\\W+").append(tag);
+                queryTags.append(".*").append("(^|[^а-яА-Я])").append(tag).append(".*");
+                // ((^|\\W)склад)
+//                append("[\\W]")
             } else {
                 queryTags.append(tag).append(".*");
             }
