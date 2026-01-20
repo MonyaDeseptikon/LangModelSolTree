@@ -15,7 +15,7 @@ public interface PrepareTags {
         for (String tag : tags) {
             tag = trimEnding(tag);
             if (queryTags.isEmpty()) {
-                queryTags.append(".*").append(tag).append(".*");
+                queryTags.append(".*").append("\\W").append(tag).append(".*");
             } else {
                 queryTags.append(tag).append(".*");
             }

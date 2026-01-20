@@ -3040,3 +3040,159 @@ The database is open in exclusive mode; can not open additional connections [901
 	at deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel.getListParcelsByTagsWithICN(QueryParcel.java:72)
 	at deseptikon.monya.parcels.usage_codes.UC06_090.assignmentCode(UC06_090.java:57)
 	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:31)
+2026-01-20 17:17:41.560436+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Ошибка в LIKE ESCAPE: ".*\\mпогрузочн.*термин.*"
+Error in LIKE ESCAPE: ".*\\mпогрузочн.*термин.*"; SQL statement:
+SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND LOWER(utilization_by_doc) NOT REGEXP ? AND inner_cadastral_numbers != '' AND area >= ? AND area <= ? [22025-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:518)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.expression.condition.CompareLike.initPattern(CompareLike.java:463)
+	at org.h2.expression.condition.CompareLike.optimize(CompareLike.java:181)
+	at org.h2.expression.condition.ConditionAndOr.optimize(ConditionAndOr.java:136)
+	at org.h2.expression.condition.ConditionAndOrN.optimize(ConditionAndOrN.java:169)
+	at org.h2.expression.Expression.optimizeCondition(Expression.java:149)
+	at org.h2.command.query.Select.prepareExpressions(Select.java:1215)
+	at org.h2.command.query.Query.prepare(Query.java:235)
+	at org.h2.command.CommandContainer.recompileIfRequired(CommandContainer.java:118)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:217)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel.getListParcelsByTagsWithICN(QueryParcel.java:72)
+	at deseptikon.monya.parcels.usage_codes.UC06_090.assignmentCode(UC06_090.java:57)
+	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:31)
+Caused by: java.util.regex.PatternSyntaxException: Illegal/unsupported escape sequence near index 3
+.*\mпогрузочн.*термин.*
+   ^
+	at java.base/java.util.regex.Pattern.error(Pattern.java:2204)
+	at java.base/java.util.regex.Pattern.escape(Pattern.java:2785)
+	at java.base/java.util.regex.Pattern.atom(Pattern.java:2462)
+	at java.base/java.util.regex.Pattern.sequence(Pattern.java:2335)
+	at java.base/java.util.regex.Pattern.expr(Pattern.java:2245)
+	at java.base/java.util.regex.Pattern.compile(Pattern.java:1945)
+	at java.base/java.util.regex.Pattern.<init>(Pattern.java:1576)
+	at java.base/java.util.regex.Pattern.compile(Pattern.java:1101)
+	at org.h2.expression.condition.CompareLike.initPattern(CompareLike.java:460)
+	... 18 more
+2026-01-20 17:19:54.758954+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Ошибка в LIKE ESCAPE: ".*\\mпогрузочн.*термин.*"
+Error in LIKE ESCAPE: ".*\\mпогрузочн.*термин.*"; SQL statement:
+SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND LOWER(utilization_by_doc) NOT REGEXP ? AND inner_cadastral_numbers != '' AND area >= ? AND area <= ? [22025-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:518)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.expression.condition.CompareLike.initPattern(CompareLike.java:463)
+	at org.h2.expression.condition.CompareLike.optimize(CompareLike.java:181)
+	at org.h2.expression.condition.ConditionAndOr.optimize(ConditionAndOr.java:136)
+	at org.h2.expression.condition.ConditionAndOrN.optimize(ConditionAndOrN.java:169)
+	at org.h2.expression.Expression.optimizeCondition(Expression.java:149)
+	at org.h2.command.query.Select.prepareExpressions(Select.java:1215)
+	at org.h2.command.query.Query.prepare(Query.java:235)
+	at org.h2.command.CommandContainer.recompileIfRequired(CommandContainer.java:118)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:217)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel.getListParcelsByTagsWithICN(QueryParcel.java:72)
+	at deseptikon.monya.parcels.usage_codes.UC06_090.assignmentCode(UC06_090.java:57)
+	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:31)
+Caused by: java.util.regex.PatternSyntaxException: Illegal/unsupported escape sequence near index 3
+.*\mпогрузочн.*термин.*
+   ^
+	at java.base/java.util.regex.Pattern.error(Pattern.java:2204)
+	at java.base/java.util.regex.Pattern.escape(Pattern.java:2785)
+	at java.base/java.util.regex.Pattern.atom(Pattern.java:2462)
+	at java.base/java.util.regex.Pattern.sequence(Pattern.java:2335)
+	at java.base/java.util.regex.Pattern.expr(Pattern.java:2245)
+	at java.base/java.util.regex.Pattern.compile(Pattern.java:1945)
+	at java.base/java.util.regex.Pattern.<init>(Pattern.java:1576)
+	at java.base/java.util.regex.Pattern.compile(Pattern.java:1101)
+	at org.h2.expression.condition.CompareLike.initPattern(CompareLike.java:460)
+	... 18 more
+2026-01-20 17:22:54.618390+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Ошибка в LIKE ESCAPE: ".*\\m+погрузочн.*термин.*"
+Error in LIKE ESCAPE: ".*\\m+погрузочн.*термин.*"; SQL statement:
+SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND LOWER(utilization_by_doc) NOT REGEXP ? AND inner_cadastral_numbers != '' AND area >= ? AND area <= ? [22025-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:518)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.expression.condition.CompareLike.initPattern(CompareLike.java:463)
+	at org.h2.expression.condition.CompareLike.optimize(CompareLike.java:181)
+	at org.h2.expression.condition.ConditionAndOr.optimize(ConditionAndOr.java:136)
+	at org.h2.expression.condition.ConditionAndOrN.optimize(ConditionAndOrN.java:169)
+	at org.h2.expression.Expression.optimizeCondition(Expression.java:149)
+	at org.h2.command.query.Select.prepareExpressions(Select.java:1215)
+	at org.h2.command.query.Query.prepare(Query.java:235)
+	at org.h2.command.CommandContainer.recompileIfRequired(CommandContainer.java:118)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:217)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel.getListParcelsByTagsWithICN(QueryParcel.java:72)
+	at deseptikon.monya.parcels.usage_codes.UC06_090.assignmentCode(UC06_090.java:57)
+	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:31)
+Caused by: java.util.regex.PatternSyntaxException: Illegal/unsupported escape sequence near index 3
+.*\m+погрузочн.*термин.*
+   ^
+	at java.base/java.util.regex.Pattern.error(Pattern.java:2204)
+	at java.base/java.util.regex.Pattern.escape(Pattern.java:2785)
+	at java.base/java.util.regex.Pattern.atom(Pattern.java:2462)
+	at java.base/java.util.regex.Pattern.sequence(Pattern.java:2335)
+	at java.base/java.util.regex.Pattern.expr(Pattern.java:2245)
+	at java.base/java.util.regex.Pattern.compile(Pattern.java:1945)
+	at java.base/java.util.regex.Pattern.<init>(Pattern.java:1576)
+	at java.base/java.util.regex.Pattern.compile(Pattern.java:1101)
+	at org.h2.expression.condition.CompareLike.initPattern(CompareLike.java:460)
+	... 18 more
+2026-01-20 17:24:31.126606+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Ошибка в LIKE ESCAPE: ".*\\mпогрузочн.*термин.*"
+Error in LIKE ESCAPE: ".*\\mпогрузочн.*термин.*"; SQL statement:
+SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND LOWER(utilization_by_doc) NOT REGEXP ? AND inner_cadastral_numbers != '' AND area >= ? AND area <= ? [22025-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:518)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.expression.condition.CompareLike.initPattern(CompareLike.java:463)
+	at org.h2.expression.condition.CompareLike.optimize(CompareLike.java:181)
+	at org.h2.expression.condition.ConditionAndOr.optimize(ConditionAndOr.java:136)
+	at org.h2.expression.condition.ConditionAndOrN.optimize(ConditionAndOrN.java:169)
+	at org.h2.expression.Expression.optimizeCondition(Expression.java:149)
+	at org.h2.command.query.Select.prepareExpressions(Select.java:1215)
+	at org.h2.command.query.Query.prepare(Query.java:235)
+	at org.h2.command.CommandContainer.recompileIfRequired(CommandContainer.java:118)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:217)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:756)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:824)
+	at deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel.getListParcelsByTagsWithICN(QueryParcel.java:72)
+	at deseptikon.monya.parcels.usage_codes.UC06_090.assignmentCode(UC06_090.java:57)
+	at deseptikon.monya.parcels.CodesHandler.main(CodesHandler.java:31)
+Caused by: java.util.regex.PatternSyntaxException: Illegal/unsupported escape sequence near index 3
+.*\mпогрузочн.*термин.*
+   ^
+	at java.base/java.util.regex.Pattern.error(Pattern.java:2204)
+	at java.base/java.util.regex.Pattern.escape(Pattern.java:2785)
+	at java.base/java.util.regex.Pattern.atom(Pattern.java:2462)
+	at java.base/java.util.regex.Pattern.sequence(Pattern.java:2335)
+	at java.base/java.util.regex.Pattern.expr(Pattern.java:2245)
+	at java.base/java.util.regex.Pattern.compile(Pattern.java:1945)
+	at java.base/java.util.regex.Pattern.<init>(Pattern.java:1576)
+	at java.base/java.util.regex.Pattern.compile(Pattern.java:1101)
+	at org.h2.expression.condition.CompareLike.initPattern(CompareLike.java:460)
+	... 18 more
