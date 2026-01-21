@@ -1,10 +1,8 @@
 package deseptikon.monya.parcels.usage_codes;
 
-import deseptikon.monya.parcels.db.create_tables.CreateProvisionalList;
 import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import deseptikon.monya.parcels.usage_codes.model.Conditions;
-import deseptikon.monya.parcels.usage_codes.auxiliary.PrepareTags;
 import deseptikon.monya.parcels.usage_codes.model.UC;
 
 import java.sql.SQLException;
@@ -13,6 +11,7 @@ import java.util.*;
 public class UC01_010 extends UC {
 
     //Исключаемые тэги
+
     List<String> excludeTagsTemplate = List.of("животноводство", "скотоводство", "садоводство", "звероводство", "птицеводство", "пчеловодство", "свиноводство", "рыбоводство", "индивидуальный", "отдых",
             "жилой", "дачный", "овощеводство", "личный", "строительство");
 
@@ -26,8 +25,7 @@ public class UC01_010 extends UC {
             new Conditions(List.of("сельскохозяйственное", "использование"),
                     excludeTagsTemplate, 0F, Float.POSITIVE_INFINITY, 0.1F),
             new Conditions(List.of("сельскохозяйственное", "производство"),
-                    List.of(), 1000000F, Float.POSITIVE_INFINITY, 0.1F)
-            ,
+                    List.of(), 0F, Float.POSITIVE_INFINITY, 0.1F),
             new Conditions(List.of("сельскохозяйственная", "деятельность"),
                     excludeTagsTemplate, 0F, Float.POSITIVE_INFINITY, 0.1F),
 
@@ -49,6 +47,10 @@ public class UC01_010 extends UC {
 
     String usageCode = "01:010";
 
+
+    //Ячейка с внутренним кадастровым номером пуста?
+    Boolean isEmptyInnerCN = true;
+
     @Override
     public void assignmentCode(QueryParcel queryTemplate) throws SQLException {
         Set<Parcel> parcelList = new HashSet<>();
@@ -57,13 +59,13 @@ public class UC01_010 extends UC {
                 codeOnly.getMoreThisArea(), codeOnly.getLessThisArea()));
 
         for (Conditions condition : conditionsList) {
-            StringBuilder tags = new StringBuilder();
+            StringBuilder tags;
             tags = queryTags(condition.getTags());
 
-            StringBuilder excludeTags = new StringBuilder();
+            StringBuilder excludeTags;
             excludeTags = queryExcludeTags(condition.getExcludeTags());
 
-            parcelList.addAll(queryTemplate.getListParcelsByTagsWithoutICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea()));
+            parcelList.addAll(queryTemplate.getListParcelsByTagsInnerCNCondition(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea(), isEmptyInnerCN));
         }
 
         Set<Integer> idList = new HashSet<>();

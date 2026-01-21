@@ -57,10 +57,10 @@ public class UC04_040 extends UC {
                 codeOnly.getMoreThisArea(), codeOnly.getLessThisArea()));
 
         for (Conditions condition : conditionsList) {
-            StringBuilder tags = new StringBuilder();
+            StringBuilder tags;
             tags = queryTags(condition.getTags());
 
-            StringBuilder excludeTags = new StringBuilder();
+            StringBuilder excludeTags;
             excludeTags = queryExcludeTags(condition.getExcludeTags());
 
             parcelList.addAll(queryTemplate.getListParcelsByTags(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea()));
@@ -69,7 +69,6 @@ public class UC04_040 extends UC {
         Set<Integer> idList = new HashSet<>();
         parcelList.forEach(p -> idList.add(p.getId()));
         queryTemplate.concatParcelsPredictedUsageCode(idList, usageCode);
-
 
         System.out.println(parcelList.size());
     }

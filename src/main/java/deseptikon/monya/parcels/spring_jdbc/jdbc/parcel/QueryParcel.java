@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 import java.util.List;
 import java.util.Set;
 
-public class QueryParcel implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMakerToDBForReplaceLatinInterFace {
+public class QueryParcel implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMakerToDBForReplaceLatinInterFace, CombineMethodsParcel {
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate template;
@@ -34,6 +34,18 @@ public class QueryParcel implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMa
         String SQLQuery = "SELECT * FROM PARCELS.PRIVISIONAL_2026";
         return jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted());
     }
+
+
+    @Override
+    public List<Parcel> getListParcelsByTagsInnerCNCondition(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, Boolean isEmptyInnerCN) {
+
+            if (isEmptyInnerCN) {
+                return getListParcelsByTagsWithoutICN(tags, excludeTags, moreArea, lessArea);
+            } else {
+                return getListParcelsByTagsWithICN(tags, excludeTags, moreArea, lessArea);
+            }
+        }
+
 
 
     @Override

@@ -14,7 +14,7 @@ public class ParcelsProvisionalList {
         stopWatch.start();
 
         ParcelIOExcel parcelIOExcel = new IOExcelDB();
-        parcelIOExcel.readExcelFillDBParcelsProvisionalList("\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Объекты из группы 04 из предперечня ОКС 2027.xlsx", 1);
+        parcelIOExcel.readExcelFillDBParcelsProvisionalList("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Объекты из группы 04 из предперечня ОКС 2027.xlsx", 1);
 
         stopWatch.stop();
         long timeTaken = stopWatch.getTime();

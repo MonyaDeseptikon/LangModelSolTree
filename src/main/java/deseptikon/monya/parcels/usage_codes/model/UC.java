@@ -12,8 +12,7 @@ import java.util.Set;
 
 public abstract class UC implements PrepareTags {
     //Исключаемые тэги
-    protected List<String> excludeTagsTemplate = List.of();
-
+    protected List<String> excludeTagsTemplate;
 
     //Поиск кода вида использования и условий
     //Точку внутри кода обязательно экранировать, - иначе воспринимает как любой символ
@@ -23,7 +22,15 @@ public abstract class UC implements PrepareTags {
     //Поиск тэгов и условий
     protected List<Conditions> conditionsList = List.of();
 
+    //Код расчета вида использования
     String usageCode;
+
+    //Ячейка с внутренним кадастровым номером пуста?
+    Boolean isEmptyInnerCN;
+
+    protected UC() {
+
+    }
 
     protected abstract void assignmentCode(QueryParcel queryTemplate) throws SQLException;
 }

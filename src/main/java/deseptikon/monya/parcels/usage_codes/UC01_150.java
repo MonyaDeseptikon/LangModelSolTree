@@ -3,7 +3,6 @@ package deseptikon.monya.parcels.usage_codes;
 import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import deseptikon.monya.parcels.usage_codes.model.Conditions;
-import deseptikon.monya.parcels.usage_codes.auxiliary.PrepareTags;
 import deseptikon.monya.parcels.usage_codes.model.UC;
 
 import java.sql.SQLException;
@@ -61,6 +60,9 @@ public class UC01_150 extends UC {
     );
 
     String usageCode = "01:150";
+
+    //Ячейка с внутренним кадастровым номером пуста?
+    Boolean isEmptyInnerCN = false;
 @Override
     public void assignmentCode(QueryParcel queryTemplate) throws SQLException {
         Set<Parcel> parcelList = new HashSet<>();
@@ -69,13 +71,13 @@ public class UC01_150 extends UC {
                 codeOnly.getMoreThisArea(), codeOnly.getLessThisArea()));
 
         for (Conditions condition : conditionsList) {
-            StringBuilder tags = new StringBuilder();
+            StringBuilder tags;
             tags = queryTags(condition.getTags());
 
-            StringBuilder excludeTags = new StringBuilder();
+            StringBuilder excludeTags;
             excludeTags = queryExcludeTags(condition.getExcludeTags());
 
-            parcelList.addAll(queryTemplate.getListParcelsByTagsWithICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea()));
+            parcelList.addAll(queryTemplate.getListParcelsByTagsInnerCNCondition(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea(), isEmptyInnerCN));
         }
 
         Set<Integer> idList = new HashSet<>();
