@@ -30,7 +30,6 @@ public class CreateTableInnerCN04 {
                 "usage_code VARCHAR(15) NULL, " +
                 "parcel_cadastral_numbers VARCHAR(MAX) NULL" +
                 ");");
-
         closeCon(con);
     }
 

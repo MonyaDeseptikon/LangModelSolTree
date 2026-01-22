@@ -25,10 +25,10 @@ public class CodesHandler {
         QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
 
         CreateProvisionalList.erasePredictedUC();
-        new UC01_010().assignmentCode(queryTemplate);
-        new UC01_150().assignmentCode(queryTemplate);
+//        new UC01_010().assignmentCode(queryTemplate);
+//        new UC01_150().assignmentCode(queryTemplate);
         new UC04_040().assignmentCode(queryTemplate);
-        new UC06_090().assignmentCode(queryTemplate);
+//        new UC06_090().assignmentCode(queryTemplate);
 
         stopWatch.stop();
         long timeTaken = stopWatch.getTime();

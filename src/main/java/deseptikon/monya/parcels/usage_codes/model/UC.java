@@ -12,25 +12,24 @@ import java.util.Set;
 
 public abstract class UC implements PrepareTags {
     //Исключаемые тэги
-    protected List<String> excludeTagsTemplate;
+    private List<String> excludeTagsTemplate;
 
     //Поиск кода вида использования и условий
     //Точку внутри кода обязательно экранировать, - иначе воспринимает как любой символ
 
-    protected Conditions codeOnly = new Conditions();
+    private Conditions codeOnly;
 
     //Поиск тэгов и условий
-    protected List<Conditions> conditionsList = List.of();
+    private List<Conditions> conditionsList;
 
     //Код расчета вида использования
-    String usageCode;
+    private String usageCode;
 
     //Ячейка с внутренним кадастровым номером пуста?
-    Boolean isEmptyInnerCN;
+    private Boolean isEmptyInnerCN;
 
-    protected UC() {
-
-    }
+    //Имя таблицы с внутренними кадастровыми номерами. Возможно нужно будет добавить список с таблицами
+    String innerCNTableName;
 
     protected abstract void assignmentCode(QueryParcel queryTemplate) throws SQLException;
 }

@@ -32,7 +32,7 @@ public class DBtoExcel {
         //Данные
         parcelList.addAll(queryTemplate.getListParcels());
 
-        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Test.xlsx");
+        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Test04_040.xlsx");
         FileOutputStream os = new FileOutputStream(file);
         Workbook wb = new Workbook(os, "MonyaDes", "1.0");
         Worksheet ws = wb.newWorksheet("PrdtUC");

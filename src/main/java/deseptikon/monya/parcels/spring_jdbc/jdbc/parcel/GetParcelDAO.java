@@ -19,5 +19,6 @@ public interface GetParcelDAO {
 
     List<Parcel> getListParcelsForReplaceLatin(List<String> columnsName);
 
+    List<Parcel> getListParcelsByTagsJoinICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, String innerCNTableName);
 
 }
