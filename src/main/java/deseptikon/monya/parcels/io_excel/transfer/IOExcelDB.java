@@ -4,7 +4,7 @@ package deseptikon.monya.parcels.io_excel.transfer;
 import deseptikon.monya.parcels.db.FillDB;
 import deseptikon.monya.parcels.io_excel.auxiliary.ServiceForExcel;
 import deseptikon.monya.parcels.io_excel.mapper.FillRow;
-import deseptikon.monya.parcels.spring_jdbc.models.InnerCN;
+import deseptikon.monya.parcels.spring_jdbc.models.Building;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.dhatim.fastexcel.Worksheet;
 import org.dhatim.fastexcel.reader.*;
@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 //import static deseptikon.monya.parce.ServiceParce.commaToDotCell;
 
-public class IOExcelDB implements ServiceForExcel, FillRow, ParcelIOExcel, InnerCNIOExcel {
+public class IOExcelDB implements ServiceForExcel, FillRow, ParcelIOExcel, BuildingIOExcel {
 
 
     public void readExcelFillDBParcelsProvisionalList(String filePath, int worksheetIndex) throws IOException, SQLException {
@@ -64,7 +64,7 @@ public class IOExcelDB implements ServiceForExcel, FillRow, ParcelIOExcel, Inner
     }
 
     @Override
-    public List<InnerCN> excelToInnerCNTable(String filePath, int worksheetIndex) throws IOException, SQLException {
+    public List<Building> excelToInnerCNTable(String filePath, int worksheetIndex) throws IOException, SQLException {
         FileInputStream is = new FileInputStream(filePath);
 
         ReadableWorkbook wb = new ReadableWorkbook(is);
@@ -73,19 +73,19 @@ public class IOExcelDB implements ServiceForExcel, FillRow, ParcelIOExcel, Inner
         //Удаление заголовка
         rowList.removeFirst();
 
-        List<InnerCN> innerCNList = new ArrayList<>();
+        List<Building> buildingList = new ArrayList<>();
         for (Row row : rowList) {
-            InnerCN innerCN = new InnerCN();
-            innerCN.setCadastral_number(row.getCellText(0));
-            innerCN.setBuilding_name(row.getCellText(1));
-            innerCN.setArea(commaToDotCell(row.getCell(2)));
-            innerCN.setNote(row.getCellText(3));
-            innerCN.setUsage_code(row.getCellText(4));
-            innerCN.setParcel_cadastral_numbers(row.getCellText(5));
-            innerCNList.add(innerCN);
-            System.out.println(innerCN);
+            Building building = new Building();
+            building.setCadastral_number(row.getCellText(0));
+            building.setBuilding_name(row.getCellText(1));
+            building.setArea(commaToDotCell(row.getCell(2)));
+            building.setNote(row.getCellText(3));
+            building.setUsage_code(row.getCellText(4));
+            building.setParcel_cadastral_numbers(row.getCellText(5));
+            buildingList.add(building);
+            System.out.println(building);
         }
-        return innerCNList;
+        return buildingList;
     }
 }
 

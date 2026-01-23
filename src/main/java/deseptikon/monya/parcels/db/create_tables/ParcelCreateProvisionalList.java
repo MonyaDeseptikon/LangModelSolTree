@@ -5,11 +5,11 @@ import java.sql.*;
 import static deseptikon.monya.auxiliary.ConnectionDB.closeCon;
 import static deseptikon.monya.auxiliary.ConnectionDB.getConnections;
 
-public class CreateProvisionalList {
+public class ParcelCreateProvisionalList {
 
 
     public static void main(String[] args) throws SQLException {
-        CreateProvisionalList createTable = new CreateProvisionalList();
+        ParcelCreateProvisionalList createTable = new ParcelCreateProvisionalList();
 
 //        createTable.createScheme();
 //        createTable.createProvisionalList();

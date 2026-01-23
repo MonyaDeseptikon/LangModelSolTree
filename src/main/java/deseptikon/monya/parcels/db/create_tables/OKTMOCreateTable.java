@@ -7,11 +7,11 @@ import java.sql.Statement;
 import static deseptikon.monya.auxiliary.ConnectionDB.closeCon;
 import static deseptikon.monya.auxiliary.ConnectionDB.getConnections;
 
-public class CreateTableInnerCN04 {
+public class OKTMOCreateTable {
 
 
     public static void main(String[] args) throws SQLException {
-        CreateTableInnerCN04 createTable = new CreateTableInnerCN04();
+        OKTMOCreateTable createTable = new OKTMOCreateTable();
 
         createTable.createTable();
 

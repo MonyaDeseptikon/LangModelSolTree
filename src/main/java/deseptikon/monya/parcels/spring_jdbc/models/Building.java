@@ -1,6 +1,6 @@
 package deseptikon.monya.parcels.spring_jdbc.models;
 
-public class InnerCN {
+public class Building {
     Integer id;
     String cadastral_number;
     String building_name;
