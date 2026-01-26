@@ -10,7 +10,7 @@ public class Parcel {
 
     private String OKATO;
 
-    private String KLADR;
+    private String OKTMO;
 
     private String locality;
 
@@ -67,12 +67,12 @@ public class Parcel {
         this.OKATO = OKATO;
     }
 
-    public String getKLADR() {
-        return KLADR;
+    public String getOKTMO() {
+        return OKTMO;
     }
 
-    public void setKLADR(String KLADR) {
-        this.KLADR = KLADR;
+    public void setOKTMO(String OKTMO) {
+        this.OKTMO = OKTMO;
     }
 
     public String getLocality() {

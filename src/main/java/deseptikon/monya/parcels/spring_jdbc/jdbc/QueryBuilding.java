@@ -26,11 +26,11 @@ public class QueryBuilding implements BuildingArrayMakerToDB {
                 innerCNTableName;
         return jdbcTemplate.query(SQLQuery, new BuildingMapper());
     }
-    public void insertInnerCN(final List <Building> buildingList, String innerCNTableName) throws SQLException {
-        String insertRowSQL = "INSERT INTO PARCELS." +
-                innerCNTableName + " " +
-                "(cadastral_number, building_name, area, note, usage_code, parcel_cadastral_numbers) " +
-                "VALUES (:cadastral_numberList, :building_nameList, :areaList, :noteList, :usage_codeList, :parcel_cadastral_numbersList)";
+    public void insertInnerCN(final List <Building> buildingList, String tableName){
+        String insertRowSQL = "INSERT INTO BUILDINGS." +
+                tableName + " " +
+                "(cadastral_number, object_type, object_name, object_assignation, object_permitted_uses, OKATO, OKTMO, area, note, usage_code, parcel_cadastral_numbers) " +
+                "VALUES (:cadastral_number, :object_type, :object_name, :object_assignation, :object_permitted_uses, :OKATO, :OKTMO, :area, :note, :usage_code, :parcel_cadastral_numbers)";
 
         template.batchUpdate(insertRowSQL, insertInnerCNArrayMakerToDB(buildingList));
     }

@@ -15,7 +15,7 @@ public class FillDB {
     public void fillProvisionalList(String cadastral_number,
                                     Float area,
                                     String OKATO,
-                                    String KLADR,
+                                    String OKTMO,
                                     String locality,
                                     String other,
                                     String note,
@@ -33,7 +33,7 @@ public class FillDB {
         statement.setString(1, cadastral_number);
         statement.setFloat(2, area);
         statement.setString(3, OKATO);
-        statement.setString(4, KLADR);
+        statement.setString(4, OKTMO);
         statement.setString(5, locality);
         statement.setString(6, other);
         statement.setString(7, note);

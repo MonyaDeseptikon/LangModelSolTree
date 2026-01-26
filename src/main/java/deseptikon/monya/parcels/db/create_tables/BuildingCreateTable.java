@@ -11,18 +11,18 @@ public class BuildingCreateTable {
 
 
     public static void main(String[] args) throws SQLException {
-        BuildingCreateTable createTable = new BuildingCreateTable();
-
-        createTable.createTable();
-
+        BuildingCreateTable createSomething = new BuildingCreateTable();
+        createSomething.createScheme();
+        createSomething.createTable();
     }
 
     private void createScheme() throws SQLException {
         Connection con = getConnections();
         Statement statement = con.createStatement();
-//Не будет удаляться, пока не удалить все таблицы, либо удалять сразу пользователя
-        statement.execute("DROP SCHEMA BUILDINGS");
-//        statement.execute("DROP SCHEMA PARCELS CASCADE"); // ?????????????? Будет ли это работать неизвестно
+//Не будет удаляться, пока не удалить все таблицы, либо удалять сразу пользователя (это для БД H2)
+//        statement.execute("DROP SCHEMA IF EXISTS BUILDINGS");
+        statement.execute("DROP SCHEMA BUILDINGS CASCADE"); // ?????????????? Будет ли это работать неизвестно
+
         statement.execute("CREATE SCHEMA IF NOT EXISTS BUILDINGS");
     }
 
@@ -30,10 +30,15 @@ public class BuildingCreateTable {
         Connection con = getConnections();
         Statement statement = con.createStatement();
 
-        statement.execute("CREATE TABLE IF NOT EXISTS PARCELS.INNER_CN_04 " +
+        statement.execute("CREATE TABLE IF NOT EXISTS BUILDINGS.PARCEL_INNER_CN " +
                 "(id INT AUTO_INCREMENT PRIMARY KEY, " +
                 "cadastral_number VARCHAR(20) NOT NULL, " +
-                "building_name VARCHAR(MAX) NULL, " +
+                "object_type VARCHAR(MAX) NULL, " +
+                "object_name VARCHAR(MAX) NULL, " +
+                "object_assignation VARCHAR(MAX) NULL, " +
+                "object_permitted_uses VARCHAR(MAX) NULL, " +
+                "OKATO VARCHAR(20) NULL, " +
+                "OKTMO VARCHAR(20) NULL, " +
                 "area FLOAT NULL, " +
                 "note VARCHAR(MAX) NULL, " +
                 "usage_code VARCHAR(15) NULL, " +

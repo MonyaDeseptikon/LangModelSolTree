@@ -3697,3 +3697,7 @@ SELECT * FROM PARCELS.PRIVISIONAL_2026 p inner join PARCELS.INNER_CN_04 on  p.in
 	at org.h2.server.web.WebThread.process(WebThread.java:190)
 	at org.h2.server.web.WebThread.run(WebThread.java:103)
 	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-01-26 17:27:15.393942+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * [*]count FROM BUILDINGS.PARCEL_INNER_CN"
+Syntax error in SQL statement "SELECT * [*]count FROM BUILDINGS.PARCEL_INNER_CN"; SQL statement:
+SELECT * count FROM BUILDINGS.PARCEL_INNER_CN [42000-240]

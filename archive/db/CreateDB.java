@@ -26,7 +26,7 @@ public class CreateDB {
                 "cadastral_number VARCHAR(20) NOT NULL, " +
                 "area FLOAT NULL, " +
                 "OKATO VARCHAR(20) NULL, " +
-                "KLADR VARCHAR(20) NULL, " +
+                "OKTMO VARCHAR(20) NULL, " +
                 "locality VARCHAR(MAX) NULL, " +
                 "other VARCHAR(MAX) NULL, " +
                 "note VARCHAR(MAX) NULL, " +

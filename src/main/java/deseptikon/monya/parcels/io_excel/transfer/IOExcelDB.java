@@ -9,17 +9,15 @@ import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.dhatim.fastexcel.Worksheet;
 import org.dhatim.fastexcel.reader.*;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-//import static deseptikon.monya.parce.ServiceParce.commaToDotCell;
 
-public class IOExcelDB implements ServiceForExcel, FillRow, ParcelIOExcel, BuildingIOExcel {
+
+public class IOExcelDB implements ServiceForExcel, FillRow, ParcelIOExcel, BuildingsIOExcel {
 
 
     public void readExcelFillDBParcelsProvisionalList(String filePath, int worksheetIndex) throws IOException, SQLException {
@@ -64,27 +62,79 @@ public class IOExcelDB implements ServiceForExcel, FillRow, ParcelIOExcel, Build
     }
 
     @Override
-    public List<Building> excelToInnerCNTable(String filePath, int worksheetIndex) throws IOException, SQLException {
-        FileInputStream is = new FileInputStream(filePath);
-
-        ReadableWorkbook wb = new ReadableWorkbook(is);
-        Optional<Sheet> sheet = wb.getSheet(worksheetIndex);
-        final List<Row> rowList = sheet.get().read();
-        //Удаление заголовка
-        rowList.removeFirst();
-
+    public List<Building> excelBuildingsDirectoryToInnerCNTable(String directoryPath, int worksheetIndex) throws IOException, SQLException {
+        File directory = new File(directoryPath);
+        if (!directory.isDirectory())
+            throw new RuntimeException("Переданный в метод excelBuildingsDirectoryToInnerCNTable путь, не является папкой");
         List<Building> buildingList = new ArrayList<>();
-        for (Row row : rowList) {
-            Building building = new Building();
-            building.setCadastral_number(row.getCellText(0));
-            building.setBuilding_name(row.getCellText(1));
-            building.setArea(commaToDotCell(row.getCell(2)));
-            building.setNote(row.getCellText(3));
-            building.setUsage_code(row.getCellText(4));
-            building.setParcel_cadastral_numbers(row.getCellText(5));
-            buildingList.add(building);
-            System.out.println(building);
+
+        for (File fileExcel : Objects.requireNonNull(directory.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File directory, String name) {
+
+                    return name.toLowerCase().contains(".xls");
+
+            }
+        }))) {
+
+            FileInputStream is = new FileInputStream(fileExcel);
+            ReadableWorkbook wb = new ReadableWorkbook(is);
+            Optional<Sheet> sheet = wb.getSheet(worksheetIndex);
+            final List<Row> rowList = sheet.get().read();
+            //Удаление заголовка
+            rowList.removeFirst();
+
+            for (Row row : rowList) {
+                Building building = new Building();
+                building.setCadastral_number(row.getCellText(2));
+                building.setObject_type(row.getCellText(6));
+                building.setObject_name(row.getCellText(5));
+                building.setObject_assignation(row.getCellText(7));
+                building.setObject_permitted_uses(row.getCellText(200));
+                building.setOKATO(row.getCellText(14));
+                building.setOKTMO(row.getCellText(15));
+                building.setArea(commaToDotCell(row.getCell(12)));
+                building.setNote(row.getCellText(44));
+                building.setUsage_code(row.getCellText(67));
+                building.setParcel_cadastral_numbers(row.getCellText(202));
+                buildingList.add(building);
+//            System.out.println(building);
+            }
         }
+        return buildingList;
+    }
+
+    @Override
+    public List<Building> excelConstructionsFileToInnerCNTable(String filePath, int worksheetIndex) throws IOException, SQLException {
+        File fileExcel = new File(filePath);
+        if (!fileExcel.isFile())
+            throw new RuntimeException("Переданный в метод excelConstructionsFileToInnerCNTable путь, не является файлом");
+        List<Building> buildingList = new ArrayList<>();
+
+            FileInputStream is = new FileInputStream(fileExcel);
+            ReadableWorkbook wb = new ReadableWorkbook(is);
+            Optional<Sheet> sheet = wb.getSheet(worksheetIndex);
+            final List<Row> rowList = sheet.get().read();
+            //Удаление заголовка
+            rowList.removeFirst();
+
+            for (Row row : rowList) {
+                Building building = new Building();
+                building.setCadastral_number(row.getCellText(2));
+                building.setObject_type(row.getCellText(6));
+                building.setObject_name(row.getCellText(5));
+                building.setObject_assignation(row.getCellText(7));
+                building.setObject_permitted_uses(row.getCellText(189));
+                building.setOKATO(row.getCellText(13));
+                building.setOKTMO(row.getCellText(14));
+                building.setArea(commaToDotCell(row.getCell(201)));
+                building.setNote(row.getCellText(41));
+                building.setUsage_code(row.getCellText(59));
+                building.setParcel_cadastral_numbers(row.getCellText(191));
+                buildingList.add(building);
+//            System.out.println(building);
+            }
+
         return buildingList;
     }
 }

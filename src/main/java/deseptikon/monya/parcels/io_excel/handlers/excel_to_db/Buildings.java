@@ -1,7 +1,7 @@
 package deseptikon.monya.parcels.io_excel.handlers.excel_to_db;
 
 import deseptikon.monya.parcels.io_excel.transfer.IOExcelDB;
-import deseptikon.monya.parcels.io_excel.transfer.BuildingIOExcel;
+import deseptikon.monya.parcels.io_excel.transfer.BuildingsIOExcel;
 import deseptikon.monya.parcels.spring_jdbc.jdbc.QueryBuilding;
 import deseptikon.monya.parcels.spring_jdbc.models.Building;
 import org.apache.commons.lang3.time.StopWatch;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ParcelsInnerCN {
+public class Buildings {
 
 
     public static void main(String[] args) throws SQLException, IOException {
@@ -22,10 +22,13 @@ public class ParcelsInnerCN {
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
         QueryBuilding queryBuilding = (QueryBuilding) context.getBean("dataSourceForJdbcTemplateInnerCN");
 
-        String innerCNTableName = "INNER_CN_04";
+        String innerCNTableName = "PARCEL_INNER_CN";
 
-        BuildingIOExcel buildingIOExcel = new IOExcelDB();
-        List<Building> buildingList = buildingIOExcel.excelToInnerCNTable("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Объекты из группы 04 из предперечня ОКС 2027.xlsx", 0);
+        BuildingsIOExcel buildingsIOExcel = new IOExcelDB();
+        List<Building> buildingList = buildingsIOExcel.excelBuildingsDirectoryToInnerCNTable("\\\\Server20032\\каталог оценщиков\\ОЦЕНКА 2026\\Предварительный перечень\\Предварительный перечень ОКС\\Исходные\\1С_исходный\\Здания", 0);
+        buildingList.addAll(buildingsIOExcel.excelConstructionsFileToInnerCNTable("\\\\Server20032\\каталог оценщиков\\ОЦЕНКА 2026\\Предварительный перечень\\Предварительный перечень ОКС\\Исходные\\1С_исходный\\Общий_ОКС_Сооружения_06.07.25143339.xlsx", 0));
+//        for (Building b : buildingList) System.out.println(b);
+        
         queryBuilding.insertInnerCN(buildingList, innerCNTableName);
 
         stopWatch.stop();

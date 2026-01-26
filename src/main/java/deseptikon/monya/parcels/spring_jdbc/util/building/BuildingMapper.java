@@ -14,7 +14,7 @@ public class BuildingMapper implements RowMapper {
 
         building.setId(rs.getInt("id"));
         building.setCadastral_number(rs.getString("cadastral_number"));
-        building.setBuilding_name(rs.getString("building_name"));
+        building.setObject_name(rs.getString("object_name"));
         building.setArea(rs.getFloat("area"));
         building.setNote(rs.getString("note"));
         building.setUsage_code(rs.getString("usage_code"));
@@ -24,3 +24,4 @@ public class BuildingMapper implements RowMapper {
     }
 
 }
+
