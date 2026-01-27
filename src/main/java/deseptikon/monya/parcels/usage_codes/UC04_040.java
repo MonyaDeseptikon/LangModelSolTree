@@ -19,12 +19,10 @@ public class UC04_040 extends UC implements UCBuilder {
     public void assignmentCode(QueryParcel queryTemplate) throws SQLException {
         Set<Parcel> parcelList = new HashSet<>();
 
+        parcelList.addAll(queryTemplate.getListParcelsByTags(queryTagForCode(codeOnlyCondition().getTags()), queryExcludeTags(codeOnlyCondition().getExcludeTags()),
+                codeOnlyCondition().getMoreThisArea(), codeOnlyCondition().getLessThisArea()));
 
-
-        parcelList.addAll(queryTemplate.getListParcelsByTags(queryTagForCode(setCodeOnly().getTags()), queryExcludeTags(setCodeOnly().getExcludeTags()),
-                setCodeOnly().getMoreThisArea(), setCodeOnly().getLessThisArea()));
-
-        for (Conditions condition : setConditionsList()) {
+        for (Conditions condition : conditionsList()) {
             StringBuilder tags;
             tags = queryTags(condition.getTags());
 
@@ -32,12 +30,12 @@ public class UC04_040 extends UC implements UCBuilder {
             excludeTags = queryExcludeTags(condition.getExcludeTags());
 
             parcelList.addAll(queryTemplate.getListParcelsByTagsWithoutICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea()));
-            parcelList.addAll(queryTemplate.getListParcelsByTagsJoinICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea(), setInnerCNTableName()));
+            parcelList.addAll(queryTemplate.getListParcelsByTagsJoinICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea(), innerCNTableName()));
         }
 
         Set<Integer> idList = new HashSet<>();
         parcelList.forEach(p -> idList.add(p.getId()));
-        queryTemplate.concatParcelsPredictedUsageCode(idList, setUsageCode());
+        queryTemplate.concatParcelsPredictedUsageCode(idList, usageCode());
 
         System.out.println(parcelList.size());
     }
@@ -47,19 +45,19 @@ public class UC04_040 extends UC implements UCBuilder {
 
 
     @Override
-    public List<String> setExcludeTagsTemplate() {
+    public List<String> excludeTagsTemplate() {
         return List.of();
     }
 
     @Override
-    public Conditions setCodeOnly() {
+    public Conditions codeOnlyCondition() {
         return new Conditions(List.of("[^\\d\\.]" + "4\\s*\\.\\s*4" + "[^\\.\\d]"),
-                setExcludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F);
+                excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F);
     }
 
 
     @Override
-    public List<Conditions> setConditionsList() {
+    public List<Conditions> conditionsList() {
        return  List.of(
 //            new Conditions(List.of("магазин"),
 //                    excludeTagsTemplate, 0F, Float.POSITIVE_INFINITY, 0F),
@@ -85,44 +83,44 @@ public class UC04_040 extends UC implements UCBuilder {
 //                    excludeTagsTemplate, 0F, Float.POSITIVE_INFINITY, 0F)
 
                 new Conditions(List.of("магазин"),
-                        setExcludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
+                        excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
                 new Conditions(List.of("продажа"),
-                        setExcludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
+                        excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
                 new Conditions(List.of("киоска"),
-                        setExcludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
+                        excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
                 new Conditions(List.of("палатка"),
-                        setExcludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
+                        excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
                 new Conditions(List.of("коммерческая"),
-                        setExcludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
+                        excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
                 new Conditions(List.of("торговый"),
-                        setExcludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
+                        excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
                 new Conditions(List.of("автосалон"),
-                        setExcludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
+                        excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
                 new Conditions(List.of("аптека"),
-                        setExcludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
+                        excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
                 new Conditions(List.of("остановочный", "комплекс"),
-                        setExcludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
+                        excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
                 new Conditions(List.of("оптика"),
-                        setExcludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
+                        excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
                 new Conditions(List.of("рекламная", "конструкция"),
-                        setExcludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
+                        excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F),
                 new Conditions(List.of("павильон"),
-                        setExcludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F)
+                        excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0F)
         );
     }
 
     @Override
-    public String setUsageCode() {
+    public String usageCode() {
         return "04:040";
     }
 
     @Override
-    public boolean setIsEmptyInnerCN() {
+    public boolean isEmptyInnerCN() {
         return false;
     }
 
     @Override
-    public String setInnerCNTableName() {
-        return "PARCELS.INNER_CN_04";
+    public String innerCNTableName() {
+        return "BUILDINGS.PARCEL_INNER_CN";
     }
 }

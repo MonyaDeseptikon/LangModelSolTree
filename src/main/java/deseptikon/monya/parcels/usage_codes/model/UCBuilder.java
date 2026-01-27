@@ -3,15 +3,15 @@ package deseptikon.monya.parcels.usage_codes.model;
 import java.util.List;
 
 public interface UCBuilder {
-     List <String> setExcludeTagsTemplate ();
+     List <String> excludeTagsTemplate();
 
-    Conditions setCodeOnly();
+    Conditions codeOnlyCondition();
 
-    List<Conditions> setConditionsList();
+    List<Conditions> conditionsList();
 
-    String setUsageCode();
+    String usageCode();
 
-    boolean setIsEmptyInnerCN();
+    boolean isEmptyInnerCN();
 
-    String setInnerCNTableName();
+    String innerCNTableName();
 }

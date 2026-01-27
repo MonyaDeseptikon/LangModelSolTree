@@ -86,8 +86,8 @@ public class QueryParcel implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMa
     public List<Parcel> getListParcelsByTagsJoinICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, String innerCNTableName) {
         Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
         String SQLQuery = "SELECT * FROM PARCELS.PRIVISIONAL_2026 PP INNER JOIN " +
-                innerCNTableName + " PI " +
-                "ON PP.inner_cadastral_numbers REGEXP PI.CADASTRAL_NUMBER " +
+                innerCNTableName + " BI " +
+                "ON PP.inner_cadastral_numbers REGEXP BI.CADASTRAL_NUMBER " +
                 "WHERE LOWER(PP.utilization_by_doc) REGEXP ? AND " +
                 // Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
                 "LOWER(PP.utilization_by_doc) NOT REGEXP ? AND " +
