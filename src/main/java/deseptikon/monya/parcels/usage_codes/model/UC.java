@@ -27,5 +27,8 @@ public abstract class UC implements PrepareTags {
     //Имя таблицы с внутренними кадастровыми номерами. Возможно нужно будет добавить список с таблицами
     String innerCNTableName;
 
+    //Список кодов расчета вида использования ОКСов (привязанных r земельному участку), наличие которых обязательно для подтверждения предсказанного кода расчета вида использования земельного участка
+    private List<String> usageCodeBuildingsMustBe;
+
     protected abstract void assignmentCode(QueryParcel queryTemplate) throws SQLException;
 }

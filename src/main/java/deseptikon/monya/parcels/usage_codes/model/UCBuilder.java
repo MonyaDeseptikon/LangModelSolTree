@@ -14,4 +14,6 @@ public interface UCBuilder {
     boolean isEmptyInnerCN();
 
     String innerCNTableName();
+
+    List<String> usageCodeBuildingsMustBe();
 }

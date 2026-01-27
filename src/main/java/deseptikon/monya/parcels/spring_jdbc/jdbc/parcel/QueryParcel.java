@@ -86,8 +86,8 @@ public class QueryParcel implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMa
     public List<Parcel> getListParcelsByTagsJoinICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, String innerCNTableName) {
         Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
         String SQLQuery = "SELECT * FROM PARCELS.PRIVISIONAL_2026 PP INNER JOIN " +
-                innerCNTableName + " BI " +
-                "ON PP.inner_cadastral_numbers REGEXP BI.CADASTRAL_NUMBER " +
+                innerCNTableName + " PI " +
+                "ON PP.inner_cadastral_numbers REGEXP PI.CADASTRAL_NUMBER " +
                 "WHERE LOWER(PP.utilization_by_doc) REGEXP ? AND " +
                 // Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
                 "LOWER(PP.utilization_by_doc) NOT REGEXP ? AND " +
@@ -95,6 +95,37 @@ public class QueryParcel implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMa
                 "PP.area <= ?";
         return jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted(), arg);
     }
+
+
+    public List<Parcel> getListParcelsByTagsJoinListICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, String innerCNTableName, List <String> usageCodeBuildings){
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("tags", tags);
+        parameters.addValue("excludeTags", excludeTags);
+        parameters.addValue("moreArea", moreArea);
+        parameters.addValue("lessArea", lessArea);
+        parameters.addValue("usageCodeBuildings", usageCodeBuildings);
+
+//        Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
+        String SQLQuery = "SELECT * FROM PARCELS.PRIVISIONAL_2026 PP INNER JOIN " +
+                "(SELECT * FROM " +
+                innerCNTableName + " " +
+                "WHERE USAGE_CODE IN(:usageCodeBuildings)) " +
+                 "BI " +
+                "ON PP.inner_cadastral_numbers REGEXP BI.CADASTRAL_NUMBER " +
+                "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
+                // Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
+                "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags AND " +
+                "PP.area >= :moreArea AND " +
+                "PP.area <= :lessArea";
+        return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
+
+//                jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted(), arg);
+
+//        SELECT * FROM PARCELS.PRIVISIONAL_2026 PP INNER JOIN (SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN('0401', '0403')) BI
+//        ON  PP.inner_cadastral_numbers  regexp BI.CADASTRAL_NUMBER
+//        WHERE LOWER(PP.utilization_by_doc) REGEXP '.*магаз.*' AND LOWER(PP.utilization_by_doc) NOT REGEXP '.*сельско.*' AND p.area >= 0 AND p.area <= 10000000
+    }
+
 
     @Override
     public void updatePredictedUC(Set<Integer> idList, String predictedUsageCode) {

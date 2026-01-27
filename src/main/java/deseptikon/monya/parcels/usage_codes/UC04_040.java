@@ -1,10 +1,14 @@
 package deseptikon.monya.parcels.usage_codes;
 
+import deseptikon.monya.parcels.db.create_tables.ParcelCreateProvisionalList;
 import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import deseptikon.monya.parcels.usage_codes.model.Conditions;
 import deseptikon.monya.parcels.usage_codes.model.UC;
 import deseptikon.monya.parcels.usage_codes.model.UCBuilder;
+import org.apache.commons.lang3.time.StopWatch;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 import java.sql.SQLException;
@@ -14,6 +18,22 @@ import java.util.Set;
 
 public class UC04_040 extends UC implements UCBuilder {
 
+    public static void main(String[] args) throws SQLException {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
+        QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
+
+        ParcelCreateProvisionalList.erasePredictedUC();
+
+        new UC04_040().assignmentCode(queryTemplate);
+
+        stopWatch.stop();
+        long timeTaken = stopWatch.getTime();
+        System.out.println(timeTaken / 1000 + " секунд");
+
+    }
 
     @Override
     public void assignmentCode(QueryParcel queryTemplate) throws SQLException {
@@ -30,7 +50,10 @@ public class UC04_040 extends UC implements UCBuilder {
             excludeTags = queryExcludeTags(condition.getExcludeTags());
 
             parcelList.addAll(queryTemplate.getListParcelsByTagsWithoutICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea()));
-            parcelList.addAll(queryTemplate.getListParcelsByTagsJoinICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea(), innerCNTableName()));
+
+            parcelList.addAll(queryTemplate.getListParcelsByTagsJoinListICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea(), innerCNTableName(), usageCodeBuildingsMustBe()));
+
+//            parcelList.addAll(queryTemplate.getListParcelsByTagsJoinICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea(), innerCNTableName()));
         }
 
         Set<Integer> idList = new HashSet<>();
@@ -122,5 +145,10 @@ public class UC04_040 extends UC implements UCBuilder {
     @Override
     public String innerCNTableName() {
         return "BUILDINGS.PARCEL_INNER_CN";
+    }
+
+    @Override
+    public List<String> usageCodeBuildingsMustBe() {
+        return List.of("0401","0402","0403","0404","0405","0406","0407","0408","0409","0410","0411","0412");
     }
 }

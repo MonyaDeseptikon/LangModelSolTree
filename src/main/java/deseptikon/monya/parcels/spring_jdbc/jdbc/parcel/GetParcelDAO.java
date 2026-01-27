@@ -21,4 +21,6 @@ public interface GetParcelDAO {
 
     List<Parcel> getListParcelsByTagsJoinICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, String innerCNTableName);
 
+    List<Parcel> getListParcelsByTagsJoinListICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, String innerCNTableName, List <String> usageCodeBuildings);
+
 }

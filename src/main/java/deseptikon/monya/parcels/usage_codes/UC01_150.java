@@ -1,98 +1,137 @@
 package deseptikon.monya.parcels.usage_codes;
 
+import deseptikon.monya.parcels.db.create_tables.ParcelCreateProvisionalList;
 import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import deseptikon.monya.parcels.usage_codes.model.Conditions;
 import deseptikon.monya.parcels.usage_codes.model.UC;
+import deseptikon.monya.parcels.usage_codes.model.UCBuilder;
+import org.apache.commons.lang3.time.StopWatch;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class UC01_150 extends UC {
+public class UC01_150 extends UC implements UCBuilder {
 
-    //Исключаемые тэги. Два нижнего подчеркивания после 1.7 - это костыль, чтобы не обрезалось значений шифра
-    List<String> excludeTagsTemplate = List.of("индивидуальный", "1.7__", "обеспечение", "пашня", "обслуживание", "отдых",
-            "жилой", "дачный", "личный");
-    //Поиск кода вида использования и условий
-    //Точку внутри кода обязательно экранировать, - иначе воспринимает как любой символ
-    Conditions codeOnly = new Conditions(List.of("[^\\d\\.]" + "1\\s*\\.\\s*15" + "[^\\.\\d]"),
-            excludeTagsTemplate, 0F, Float.POSITIVE_INFINITY, 0.1F);
+    public static void main(String[] args) throws SQLException {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
 
-    //Поиск тэгов и условий
-    List<Conditions> conditionsList = List.of(
-            new Conditions(List.of("сельскохозяйственное", "производство"),
-                    excludeTagsTemplate, 0F, 1000000F, 0.1F),
-            new Conditions(List.of("зерноток"),
-                    excludeTagsTemplate, 0F, 1000000F, 0.1F),
-            new Conditions(List.of("зернохранилище"),
-                    excludeTagsTemplate, 0F, 1000000F, 0.1F),
+        ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
+        QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
 
-            new Conditions(List.of("крестьянское", "хозяйство"),
-                    excludeTagsTemplate, 0F, 100000F, 0.1F),
+        ParcelCreateProvisionalList.erasePredictedUC();
 
-            new Conditions(List.of("хранение", "переработка", "сельскохозяйственной"),
-                    excludeTagsTemplate, 0F, 1000000F, 0.1F),
+        new UC01_150().assignmentCode(queryTemplate);
 
-            new Conditions(List.of("фермерское", "хозяйство"),
-                    excludeTagsTemplate, 0F, 100000F, 0.1F),
+        stopWatch.stop();
+        long timeTaken = stopWatch.getTime();
+        System.out.println(timeTaken / 1000 + " секунд");
 
-            new Conditions(List.of("производство", "сельскохозяйственной", "продукции"),
-                    excludeTagsTemplate, 0F, 1000000F, 0.1F),
+    }
 
-            new Conditions(List.of("зерноочистительный", "комплекс"),
-                    excludeTagsTemplate, 0F, 1000000F, 0.1F),
-            new Conditions(List.of("арочный", "фуражный"),
-                    excludeTagsTemplate, 0F, 1000000F, 0.1F),
-
-            new Conditions(List.of("зерносклад"),
-                    excludeTagsTemplate, 0F, 1000000F, 0.1F),
-            new Conditions(List.of("картофелехранилище"),
-                    excludeTagsTemplate, 0F, 1000000F, 0.1F),
-            new Conditions(List.of("мельничный", "комплекс"),
-                    excludeTagsTemplate, 0F, 1000000F, 0.1F),
-            new Conditions(List.of("овощехранилище"),
-                    excludeTagsTemplate, 0F, 1000000F, 0.1F),
-
-            new Conditions(List.of("сельхозпроизводство"),
-                    excludeTagsTemplate, 0F, 1000000F, 0.1F)
-    );
-
-    String usageCode = "01:150";
-
-    //Ячейка с внутренним кадастровым номером пуста?
-    Boolean isEmptyInnerCN = false;
-@Override
+    @Override
     public void assignmentCode(QueryParcel queryTemplate) throws SQLException {
         Set<Parcel> parcelList = new HashSet<>();
 
-        parcelList.addAll(queryTemplate.getListParcelsByTags(queryTagForCode(codeOnly.getTags()), queryExcludeTags(codeOnly.getExcludeTags()),
-                codeOnly.getMoreThisArea(), codeOnly.getLessThisArea()));
+        parcelList.addAll(queryTemplate.getListParcelsByTags(queryTagForCode(codeOnlyCondition().getTags()), queryExcludeTags(codeOnlyCondition().getExcludeTags()),
+                codeOnlyCondition().getMoreThisArea(), codeOnlyCondition().getLessThisArea()));
 
-        for (Conditions condition : conditionsList) {
+        for (Conditions condition : conditionsList()) {
             StringBuilder tags;
             tags = queryTags(condition.getTags());
 
             StringBuilder excludeTags;
             excludeTags = queryExcludeTags(condition.getExcludeTags());
 
-            parcelList.addAll(queryTemplate.getListParcelsByTagsInnerCNCondition(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea(), isEmptyInnerCN));
+            parcelList.addAll(queryTemplate.getListParcelsByTagsWithoutICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea()));
+
+            parcelList.addAll(queryTemplate.getListParcelsByTagsJoinListICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea(), innerCNTableName(), usageCodeBuildingsMustBe()));
         }
 
         Set<Integer> idList = new HashSet<>();
         parcelList.forEach(p -> idList.add(p.getId()));
-        queryTemplate.concatParcelsPredictedUsageCode(idList, usageCode);
-
-//        int codeCount = 0;
-//        for (Parcel parcel : parcelList) {
-//            System.out.println(parcel);
-//            codeCount++;
-//        }
-//        System.out.println(codeCount);
+        queryTemplate.concatParcelsPredictedUsageCode(idList, usageCode());
 
         System.out.println(parcelList.size());
     }
 
+    @Override
+    public List<String> excludeTagsTemplate() {
+        return List.of("индивидуальный", "1.7__", "обеспечение", "пашня", "обслуживание", "отдых",
+                "жилой", "дачный", "личный");
+    }
+
+    @Override
+    public Conditions codeOnlyCondition() {
+        return new Conditions(List.of("[^\\d\\.]" + "1\\s*\\.\\s*15" + "[^\\.\\d]"),
+                excludeTagsTemplate(), 0F, Float.POSITIVE_INFINITY, 0.1F);
+    }
+
+
+    @Override
+    public List<Conditions> conditionsList() {
+        return List.of(
+                new Conditions(List.of("сельскохозяйственное", "производство"),
+                        excludeTagsTemplate(), 0F, 1000000F, 0.1F),
+                new Conditions(List.of("зерноток"),
+                        excludeTagsTemplate(), 0F, 1000000F, 0.1F),
+                new Conditions(List.of("зернохранилище"),
+                        excludeTagsTemplate(), 0F, 1000000F, 0.1F),
+
+                new Conditions(List.of("крестьянское", "хозяйство"),
+                        excludeTagsTemplate(), 0F, 100000F, 0.1F),
+
+                new Conditions(List.of("хранение", "переработка", "сельскохозяйственной"),
+                        excludeTagsTemplate(), 0F, 1000000F, 0.1F),
+
+                new Conditions(List.of("фермерское", "хозяйство"),
+                        excludeTagsTemplate(), 0F, 100000F, 0.1F),
+
+                new Conditions(List.of("производство", "сельскохозяйственной", "продукции"),
+                        excludeTagsTemplate(), 0F, 1000000F, 0.1F),
+
+                new Conditions(List.of("зерноочистительный", "комплекс"),
+                        excludeTagsTemplate(), 0F, 1000000F, 0.1F),
+                new Conditions(List.of("арочный", "фуражный"),
+                        excludeTagsTemplate(), 0F, 1000000F, 0.1F),
+
+                new Conditions(List.of("зерносклад"),
+                        excludeTagsTemplate(), 0F, 1000000F, 0.1F),
+                new Conditions(List.of("картофелехранилище"),
+                        excludeTagsTemplate(), 0F, 1000000F, 0.1F),
+                new Conditions(List.of("мельничный", "комплекс"),
+                        excludeTagsTemplate(), 0F, 1000000F, 0.1F),
+                new Conditions(List.of("овощехранилище"),
+                        excludeTagsTemplate(), 0F, 1000000F, 0.1F),
+
+                new Conditions(List.of("сельхозпроизводство"),
+                        excludeTagsTemplate(), 0F, 1000000F, 0.1F)
+        );
+    }
+
+    @Override
+    public String usageCode() {
+        return "01:150";
+    }
+
+    @Override
+    public boolean isEmptyInnerCN() {
+        return false;
+    }
+
+    @Override
+    public String innerCNTableName() {
+        return "BUILDINGS.PARCEL_INNER_CN";
+    }
+
+    @Override
+    public List<String> usageCodeBuildingsMustBe() {
+        return List.of("0401", "0402", "0403", "0404", "0405", "0406", "0407", "0408", "0409", "0410", "0411", "0412");
+    }
 
 }
