@@ -1,6 +1,7 @@
 package deseptikon.monya.parcels;
 
 import deseptikon.monya.parcels.db.create_tables.ParcelCreateProvisionalList;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.QueryBuilding;
 import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel;
 import deseptikon.monya.parcels.usage_codes.UC01_010;
 import deseptikon.monya.parcels.usage_codes.UC01_150;
@@ -23,12 +24,13 @@ public class CodesHandler {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
         QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
+        QueryBuilding queryBuilding = (QueryBuilding) context.getBean("dataSourceForJdbcTemplateBuilding");
 
         ParcelCreateProvisionalList.erasePredictedUC();
-        new UC01_010().assignmentCode(queryTemplate);
-        new UC01_150().assignmentCode(queryTemplate);
-        new UC04_040().assignmentCode(queryTemplate);
-        new UC06_090().assignmentCode(queryTemplate);
+        new UC01_010().assignmentCode(queryTemplate, queryBuilding);
+        new UC01_150().assignmentCode(queryTemplate, queryBuilding);
+        new UC04_040().assignmentCode(queryTemplate, queryBuilding);
+        new UC06_090().assignmentCode(queryTemplate, queryBuilding);
 
         stopWatch.stop();
         long timeTaken = stopWatch.getTime();

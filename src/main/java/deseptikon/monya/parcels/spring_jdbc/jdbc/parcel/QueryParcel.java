@@ -105,7 +105,6 @@ public class QueryParcel implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMa
         parameters.addValue("lessArea", lessArea);
         parameters.addValue("usageCodeBuildings", usageCodeBuildings);
 
-//        Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
         String SQLQuery = "SELECT * FROM PARCELS.PRIVISIONAL_2026 PP INNER JOIN " +
                 "(SELECT * FROM " +
                 innerCNTableName + " " +
@@ -126,6 +125,27 @@ public class QueryParcel implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMa
 //        WHERE LOWER(PP.utilization_by_doc) REGEXP '.*магаз.*' AND LOWER(PP.utilization_by_doc) NOT REGEXP '.*сельско.*' AND p.area >= 0 AND p.area <= 10000000
     }
 
+    //Переопределение метода getListParcelsByTagsJoinListICN
+    @Override
+    public List<Parcel> getListParcelsByTagsJoinListICN(StringBuilder tags, StringBuilder excludeTags, String innerCNTableName, List <String> usageCodeBuildings){
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("tags", tags);
+        parameters.addValue("excludeTags", excludeTags);
+        parameters.addValue("usageCodeBuildings", usageCodeBuildings);
+
+        String SQLQuery = "SELECT * FROM " +
+                "(SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE inner_cadastral_numbers != '') PP " +
+                "INNER JOIN " +
+                "(SELECT * FROM " +
+                innerCNTableName + " " +
+                "WHERE USAGE_CODE IN(:usageCodeBuildings)) " +
+                "BI " +
+                "ON PP.inner_cadastral_numbers REGEXP BI.CADASTRAL_NUMBER " +
+                "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
+                // Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
+                "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags";
+        return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
+    }
 
     @Override
     public void updatePredictedUC(Set<Integer> idList, String predictedUsageCode) {

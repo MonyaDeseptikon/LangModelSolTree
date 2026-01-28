@@ -20,7 +20,7 @@ public class Buildings {
         stopWatch.start();
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
-        QueryBuilding queryBuilding = (QueryBuilding) context.getBean("dataSourceForJdbcTemplateInnerCN");
+        QueryBuilding queryBuilding = (QueryBuilding) context.getBean("dataSourceForJdbcTemplateBuilding");
 
         String innerCNTableName = "PARCEL_INNER_CN";
 

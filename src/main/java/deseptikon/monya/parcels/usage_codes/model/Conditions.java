@@ -8,7 +8,7 @@ public class Conditions {
     private Float lessThisArea;
     private List<String> excludeTags;
     private Float shareInnerCadastralNumbersArea;
-    private int utilizationByDocLen;
+
 
     public Conditions(List<String> tags, List<String> excludeTags, Float moreThisArea,
                       Float lessThisArea, Float shareInnerCadastralNumbersArea) {
@@ -17,7 +17,7 @@ public class Conditions {
         this.lessThisArea = lessThisArea;
         this.excludeTags = excludeTags;
         this.shareInnerCadastralNumbersArea = shareInnerCadastralNumbersArea;
-        this.utilizationByDocLen = tags.stream().mapToInt(tag->tag.length()).sum();
+
     }
 
     public Conditions() {
@@ -44,7 +44,4 @@ public class Conditions {
         return shareInnerCadastralNumbersArea;
     }
 
-    public int getUtilizationByDocLen() {
-        return utilizationByDocLen;
-    }
 }

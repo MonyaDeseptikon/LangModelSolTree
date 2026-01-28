@@ -16,4 +16,5 @@ public interface UCBuilder {
     String innerCNTableName();
 
     List<String> usageCodeBuildingsMustBe();
+
 }

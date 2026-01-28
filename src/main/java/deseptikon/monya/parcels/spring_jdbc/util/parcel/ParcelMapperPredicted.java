@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ParcelMapperPredicted implements RowMapper {
     @Override
@@ -17,7 +18,7 @@ public class ParcelMapperPredicted implements RowMapper {
         parcel.setNote(rs.getString("note"));
         parcel.setCategory(rs.getString("category"));
         parcel.setUtilizationByDoc(rs.getString("utilization_by_doc"));
-        parcel.setInnerCadastralNumbers(rs.getString("inner_cadastral_numbers"));
+        parcel.setInnerCadastralNumbers(List.of(rs.getString("inner_cadastral_numbers").split("_x000D_")));
         parcel.setUsageCode(rs.getString("usage_code"));
         parcel.setPredictedUsageCode(rs.getString("PREDICTED_USAGE_CODE"));
         parcel.setLocality(rs.getString("locality"));

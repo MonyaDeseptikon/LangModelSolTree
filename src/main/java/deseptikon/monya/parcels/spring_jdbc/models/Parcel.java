@@ -1,5 +1,7 @@
 package deseptikon.monya.parcels.spring_jdbc.models;
 
+import java.util.List;
+
 public class Parcel {
 
     private Integer id;
@@ -28,7 +30,7 @@ public class Parcel {
 
     private String utilizationPermittedUseText;
 
-    private String innerCadastralNumbers;
+    private List<String> innerCadastralNumbers;
 
     private String usageCode;
 
@@ -139,11 +141,11 @@ public class Parcel {
         this.utilizationPermittedUseText = utilizationPermittedUseText;
     }
 
-    public String getInnerCadastralNumbers() {
+    public List<String> getInnerCadastralNumbers() {
         return innerCadastralNumbers;
     }
 
-    public void setInnerCadastralNumbers(String innerCadastralNumbers) {
+    public void setInnerCadastralNumbers(List<String> innerCadastralNumbers) {
         this.innerCadastralNumbers = innerCadastralNumbers;
     }
 

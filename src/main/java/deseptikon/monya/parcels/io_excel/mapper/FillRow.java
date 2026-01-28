@@ -13,7 +13,7 @@ public interface FillRow {
         ws.value(row, 2, parcel.getCategory());
         ws.value(row, 3, parcel.getLocality());
         ws.value(row, 4, parcel.getNote());
-        ws.value(row, 5, parcel.getInnerCadastralNumbers());
+        ws.value(row, 5, parcel.getInnerCadastralNumbers().toString());
         ws.value(row, 6, parcel.getUsageCode());
         ws.value(row, 7, parcel.getPredictedUsageCode());
         ws.value(row, 8, parcel.getUtilizationByDoc());

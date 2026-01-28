@@ -1,5 +1,6 @@
 package deseptikon.monya.parcels.usage_codes;
 
+import deseptikon.monya.parcels.spring_jdbc.jdbc.QueryBuilding;
 import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import deseptikon.monya.parcels.usage_codes.model.Conditions;
@@ -52,7 +53,7 @@ public class UC01_010 extends UC {
     Boolean isEmptyInnerCN = true;
 
     @Override
-    public void assignmentCode(QueryParcel queryTemplate) throws SQLException {
+    public void assignmentCode(QueryParcel queryTemplate, QueryBuilding queryBuilding) {
         Set<Parcel> parcelList = new HashSet<>();
 
         parcelList.addAll(queryTemplate.getListParcelsByTags(queryTagForCode(codeOnly.getTags()), queryExcludeTags(codeOnly.getExcludeTags()),
