@@ -1,13 +1,13 @@
 package deseptikon.monya.parcels.usage_codes;
 
 import deseptikon.monya.parcels.db.create_tables.ParcelCreateProvisionalList;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.QueryBuilding;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.lmstQuery;
 import deseptikon.monya.parcels.spring_jdbc.models.Building;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import deseptikon.monya.parcels.usage_codes.model.Conditions;
-import deseptikon.monya.parcels.usage_codes.model.UC;
-import deseptikon.monya.parcels.usage_codes.model.UCBuilder;
+import deseptikon.monya.parcels.usage_codes.model.uc.UC;
+import deseptikon.monya.parcels.usage_codes.model.uc.UCBuilder;
+import deseptikon.monya.parcels.usage_codes.model.uc.checkAreaBuildings;
 import org.apache.commons.lang3.time.StopWatch;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -15,31 +15,30 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.sql.SQLException;
 import java.util.*;
 
-public class UC01_150 extends UC implements UCBuilder {
+public class UC01_150 extends UC implements UCBuilder, checkAreaBuildings {
 
     public static void main(String[] args) throws SQLException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
-        QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
-        QueryBuilding queryBuilding = (QueryBuilding) context.getBean("dataSourceForJdbcTemplateBuilding");
+        lmstQuery queryTemplate = (lmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
+
 
         ParcelCreateProvisionalList.erasePredictedUC();
 
-        new UC01_150().assignmentCode(queryTemplate, queryBuilding);
+        new UC01_150().assignmentCode(queryTemplate);
 
         stopWatch.stop();
         long timeTaken = stopWatch.getTime();
         System.out.println(timeTaken / 1000 + " секунд");
-
     }
 
+
     @Override
-    public void assignmentCode(QueryParcel queryTemplate, QueryBuilding queryBuilding) {
+    public void assignmentCode(lmstQuery queryTemplate) {
         Set<Parcel> parcelListAll = new HashSet<>();
         Set<Parcel> parcelListToCheckArea = new HashSet<>();
-        Set<Building> buildingListToCheckArea = new HashSet<>();
 
         parcelListAll.addAll(queryTemplate.getListParcelsByTags(queryTagForCode(codeOnlyCondition().getTags()), queryExcludeTags(codeOnlyCondition().getExcludeTags()),
                 codeOnlyCondition().getMoreThisArea(), codeOnlyCondition().getLessThisArea()));
@@ -55,31 +54,40 @@ public class UC01_150 extends UC implements UCBuilder {
 
             parcelListToCheckArea.addAll(queryTemplate.getListParcelsByTagsJoinListICN(tags, excludeTags, innerCNTableName(), usageCodeBuildingsMustBe()));
         }
-        //Формирования списка кадастровых номеров ОКС для запроса площади в БД
-        Set<String> innerCNListBuildings = new HashSet<>();
-        parcelListToCheckArea.forEach(p -> innerCNListBuildings.addAll(p.getInnerCadastralNumbers()));
-        buildingListToCheckArea.addAll(queryBuilding.getListAreaBuildings(innerCNListBuildings));
-        //Формирование Мапы для проверки кадастровых номеров ОКС, расположенных на ЗУ
-        Map<String, Float> buildingCNArea = new HashMap<>();
-        buildingListToCheckArea.forEach(b -> buildingCNArea.put(b.getCadastral_number(), b.getArea()));
-        //Исключение из списка Участков, участков у которых площадь ОКС менее 5% или 10%
-        Iterator<Parcel> iteratorParcel = parcelListToCheckArea.iterator();
-        while (iteratorParcel.hasNext()) {
-            Parcel parcelTemp = iteratorParcel.next();
-            float sumAreaBuildings = 0F;
-            for (String innerCN : parcelTemp.getInnerCadastralNumbers()) {
-                sumAreaBuildings = sumAreaBuildings + buildingCNArea.get(innerCN);
-            }
-            if (sumAreaBuildings / parcelTemp.getArea() < 0.05F) iteratorParcel.remove();
-        }
-
-        parcelListAll.addAll(parcelListToCheckArea);
+        //Добавление в общий список только участков с долей площади ОКС меньше установленной величины
+        parcelListAll.addAll(parcelListCheckedArea(parcelListToCheckArea, queryTemplate));
 
         Set<Integer> idList = new HashSet<>();
         parcelListAll.forEach(p -> idList.add(p.getId()));
         queryTemplate.concatParcelsPredictedUsageCode(idList, usageCode());
 
         System.out.println(parcelListAll.size());
+    }
+
+    @Override
+    public Set<Parcel> parcelListCheckedArea(Set<Parcel> parcelListToCheckArea, lmstQuery queryTemplate) {
+        Set<Building> buildingListToCheckArea = new HashSet<>();
+
+        //Формирования списка кадастровых номеров ОКС для запроса площади в БД
+        Set<String> innerCNListBuildings = new HashSet<>();
+        parcelListToCheckArea.forEach(p -> innerCNListBuildings.addAll(p.getInnerCadastralNumbers()));
+        buildingListToCheckArea.addAll(queryTemplate.getListAreaBuildings(innerCNListBuildings));
+
+        //Формирование Мапы для проверки кадастровых номеров ОКС, расположенных на ЗУ
+        Map<String, Float> buildingCNArea = new HashMap<>();
+        buildingListToCheckArea.forEach(b -> buildingCNArea.put(b.getCadastral_number(), b.getArea()));
+
+        //Исключение из списка Участков, участков у которых площадь ОКС менее 5% или 10%
+        Iterator<Parcel> iteratorParcel = parcelListToCheckArea.iterator();
+        while (iteratorParcel.hasNext()) {
+            Parcel parcelTemp = iteratorParcel.next();
+            float sumAreaBuildings = 0F;
+            for (String innerCN : parcelTemp.getInnerCadastralNumbers()) {
+                sumAreaBuildings = sumAreaBuildings + Optional.ofNullable(buildingCNArea.get(innerCN)).orElse(0F);
+            }
+            if (sumAreaBuildings / parcelTemp.getArea() < shareAreaBuildings()) iteratorParcel.remove();
+        }
+        return parcelListToCheckArea;
     }
 
     @Override
@@ -164,4 +172,8 @@ public class UC01_150 extends UC implements UCBuilder {
                 "1009");
     }
 
+    @Override
+    public Float shareAreaBuildings() {
+        return 0.05F;
+    }
 }

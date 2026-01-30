@@ -1,13 +1,15 @@
-package deseptikon.monya.parcels.usage_codes.model;
+package deseptikon.monya.parcels.usage_codes.model.uc;
 
-import deseptikon.monya.parcels.spring_jdbc.jdbc.QueryBuilding;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.lmstQuery;
 import deseptikon.monya.parcels.usage_codes.auxiliary.PrepareTags;
+import deseptikon.monya.parcels.usage_codes.model.Conditions;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public abstract class UC implements PrepareTags {
+
+    lmstQuery queryTemplate;
     //Исключаемые тэги
     private List<String> excludeTagsTemplate;
 
@@ -31,5 +33,6 @@ public abstract class UC implements PrepareTags {
     //Список кодов расчета вида использования ОКСов (привязанных r земельному участку), наличие которых обязательно для подтверждения предсказанного кода расчета вида использования земельного участка
     private List<String> usageCodeBuildingsMustBe;
 
-    protected abstract void assignmentCode(QueryParcel queryTemplate, QueryBuilding queryBuilding) throws SQLException;
+    protected abstract void assignmentCode(lmstQuery queryTemplate) throws SQLException;
+
 }

@@ -18,7 +18,8 @@ public class ParcelMapperPredicted implements RowMapper {
         parcel.setNote(rs.getString("note"));
         parcel.setCategory(rs.getString("category"));
         parcel.setUtilizationByDoc(rs.getString("utilization_by_doc"));
-        parcel.setInnerCadastralNumbers(List.of(rs.getString("inner_cadastral_numbers").split("_x000D_")));
+        parcel.setInnerCadastralNumbers(List.of(rs.getString("inner_cadastral_numbers").split("_x000D_\\n")));
+//        parcel.setInnerCadastralNumbers(List.of(rs.getString("inner_cadastral_numbers").split(System.lineSeparator())));
         parcel.setUsageCode(rs.getString("usage_code"));
         parcel.setPredictedUsageCode(rs.getString("PREDICTED_USAGE_CODE"));
         parcel.setLocality(rs.getString("locality"));

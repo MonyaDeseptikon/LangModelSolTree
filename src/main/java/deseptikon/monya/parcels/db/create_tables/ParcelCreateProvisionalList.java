@@ -10,7 +10,7 @@ public class ParcelCreateProvisionalList {
 
     public static void main(String[] args) throws SQLException {
         ParcelCreateProvisionalList createTable = new ParcelCreateProvisionalList();
-
+        createTable.dropTableParcel();
 //        createTable.createScheme();
 //        createTable.createProvisionalList();
 //        erasePredictedUC();
@@ -29,7 +29,10 @@ public class ParcelCreateProvisionalList {
     private void dropTableParcel() throws SQLException {
         Connection con = getConnections();
         Statement statement = con.createStatement();
-        statement.execute("DROP TABLE IF EXISTS PARCELS.INNER_CN_04");
+//        statement.execute("DROP TABLE IF EXISTS PARCELS.INNER_CN_04");
+
+        //Удаление копии БД, созданной бином SpringJDBC при попытке одновременного обращения двух бинов к одной встроенной БД
+        statement.execute("DROP TABLE IF EXISTS PARCELS.PRIVISIONAL_2026_COPY_3_0");
     }
 
     private void createProvisionalList() throws SQLException {
@@ -51,7 +54,8 @@ public class ParcelCreateProvisionalList {
                 "utilization_by_doc VARCHAR(MAX) NULL, " +
                 "utilization_permitted_use_text VARCHAR(MAX) NULL, " +
                 "inner_cadastral_numbers VARCHAR(MAX) NULL, " +
-                "usage_code VARCHAR(15) NULL" +
+                "usage_code VARCHAR(15) NULL, " +
+                "PREDICTED_USAGE_CODE VARCHAR(MAX)"+
                 ");");
 
         closeCon(con);

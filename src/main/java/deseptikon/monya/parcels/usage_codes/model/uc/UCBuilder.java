@@ -1,4 +1,6 @@
-package deseptikon.monya.parcels.usage_codes.model;
+package deseptikon.monya.parcels.usage_codes.model.uc;
+
+import deseptikon.monya.parcels.usage_codes.model.Conditions;
 
 import java.util.List;
 

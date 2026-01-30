@@ -7,16 +7,16 @@ public class Conditions {
     private Float moreThisArea;
     private Float lessThisArea;
     private List<String> excludeTags;
-    private Float shareInnerCadastralNumbersArea;
+    private Float freeField;
 
 
     public Conditions(List<String> tags, List<String> excludeTags, Float moreThisArea,
-                      Float lessThisArea, Float shareInnerCadastralNumbersArea) {
+                      Float lessThisArea, Float freeField) {
         this.tags = tags;
         this.moreThisArea = moreThisArea;
         this.lessThisArea = lessThisArea;
         this.excludeTags = excludeTags;
-        this.shareInnerCadastralNumbersArea = shareInnerCadastralNumbersArea;
+        this.freeField = freeField;
 
     }
 
@@ -40,8 +40,8 @@ public class Conditions {
         return excludeTags;
     }
 
-    public Float getShareInnerCadastralNumbersArea() {
-        return shareInnerCadastralNumbersArea;
+    public Float getFreeField() {
+        return freeField;
     }
 
 }

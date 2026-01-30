@@ -13,15 +13,16 @@
         <property name="password" value=""/>
     </bean>
 
-    <!-- Here we're defining bean -->
-    <bean id="dataSourceForJdbcTemplateParcelDaoImpl"
-          class="deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel">
+    <!-- dataSourceForJdbcTemplateLMST -->
+    <bean id="dataSourceForJdbcTemplateLMST"
+          class="deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.lmstQuery">
         <property name="dataSource" ref="dataSourceConnection"/>
     </bean>
+<!-- Если два бина одновременно обращаются к одной БД, то Приложение падает при запуске и создает копию БД.-->
+<!--    <bean id="dataSourceForJdbcTemplateBuilding"-->
+<!--          class="deseptikon.monya.parcels.spring_jdbc.jdbc.QueryBuilding">-->
+<!--        <property name="dataSourceInnerCN" ref="dataSourceConnection"/>-->
+<!--    </bean>-->
 
-    <bean id="dataSourceForJdbcTemplateBuilding"
-          class="deseptikon.monya.parcels.spring_jdbc.jdbc.QueryBuilding">
-        <property name="dataSourceInnerCN" ref="dataSourceConnection"/>
-    </bean>
 
 </beans>

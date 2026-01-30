@@ -1,12 +1,11 @@
 package deseptikon.monya.parcels.usage_codes;
 
 import deseptikon.monya.parcels.db.create_tables.ParcelCreateProvisionalList;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.QueryBuilding;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.lmstQuery;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import deseptikon.monya.parcels.usage_codes.model.Conditions;
-import deseptikon.monya.parcels.usage_codes.model.UC;
-import deseptikon.monya.parcels.usage_codes.model.UCBuilder;
+import deseptikon.monya.parcels.usage_codes.model.uc.UC;
+import deseptikon.monya.parcels.usage_codes.model.uc.UCBuilder;
 import org.apache.commons.lang3.time.StopWatch;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,12 +23,12 @@ public class UC04_040 extends UC implements UCBuilder {
         stopWatch.start();
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
-        QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
-        QueryBuilding queryBuilding = (QueryBuilding) context.getBean("dataSourceForJdbcTemplateBuilding");
+        lmstQuery queryTemplate = (lmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
+
 
         ParcelCreateProvisionalList.erasePredictedUC();
 
-        new UC04_040().assignmentCode(queryTemplate, queryBuilding);
+        new UC04_040().assignmentCode(queryTemplate);
 
         stopWatch.stop();
         long timeTaken = stopWatch.getTime();
@@ -38,7 +37,7 @@ public class UC04_040 extends UC implements UCBuilder {
     }
 
     @Override
-    public void assignmentCode(QueryParcel queryTemplate, QueryBuilding queryBuilding) throws SQLException {
+    public void assignmentCode(lmstQuery queryTemplate) throws SQLException {
         Set<Parcel> parcelList = new HashSet<>();
 
         parcelList.addAll(queryTemplate.getListParcelsByTags(queryTagForCode(codeOnlyCondition().getTags()), queryExcludeTags(codeOnlyCondition().getExcludeTags()),

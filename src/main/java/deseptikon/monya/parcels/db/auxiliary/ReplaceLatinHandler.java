@@ -2,7 +2,7 @@ package deseptikon.monya.parcels.db.auxiliary;
 
 
 import deseptikon.monya.auxiliary.ReplaceLatin;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.QueryParcel;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.lmstQuery;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -19,7 +19,7 @@ public class ReplaceLatinHandler implements ReplaceLatin {
 
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
-        QueryParcel queryTemplate = (QueryParcel) context.getBean("dataSourceForJdbcTemplateParcelDaoImpl");
+        lmstQuery queryTemplate = (lmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
 
         List<Parcel> parcelList = queryTemplate.getListParcelsForReplaceLatin(List.of(
                 "id",

@@ -149,6 +149,20 @@ public class Parcel {
         this.innerCadastralNumbers = innerCadastralNumbers;
     }
 
+    public String getInnerCadastralNumbersString() {
+        StringBuilder sb = new StringBuilder();
+        for (String item : innerCadastralNumbers) {
+            if (sb.isEmpty()) {
+                sb.append(item);
+            } else {
+                sb.append("_x000D_").append(item);
+            }
+        }
+
+
+        return String.valueOf(sb);
+    }
+
     public String getUsageCode() {
         return usageCode;
     }
