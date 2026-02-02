@@ -34,8 +34,87 @@ public class Parcel {
 
     private String usageCode;
 
-    private String predicatedUsageCode;
+    private String predictedUsageCode;
+    private String DISTRICT;
+    private String TYPE_DISTRICT;
+    private String CITY;
+    private String TYPE_CITY;
+    private String SOVIET_VILLAGE;
+    private String STREET;
+    private String TYPE_STREET;
+    private String KLADR;
 
+    public String getPredictedUsageCode() {
+        return predictedUsageCode;
+    }
+
+    public void setPredictedUsageCode(String predictedUsageCode) {
+        this.predictedUsageCode = predictedUsageCode;
+    }
+
+    public String getDISTRICT() {
+        return DISTRICT;
+    }
+
+    public void setDISTRICT(String DISTRICT) {
+        this.DISTRICT = DISTRICT;
+    }
+
+    public String getTYPE_DISTRICT() {
+        return TYPE_DISTRICT;
+    }
+
+    public void setTYPE_DISTRICT(String TYPE_DISTRICT) {
+        this.TYPE_DISTRICT = TYPE_DISTRICT;
+    }
+
+    public String getCITY() {
+        return CITY;
+    }
+
+    public void setCITY(String CITY) {
+        this.CITY = CITY;
+    }
+
+    public String getTYPE_CITY() {
+        return TYPE_CITY;
+    }
+
+    public void setTYPE_CITY(String TYPE_CITY) {
+        this.TYPE_CITY = TYPE_CITY;
+    }
+
+    public String getSOVIET_VILLAGE() {
+        return SOVIET_VILLAGE;
+    }
+
+    public void setSOVIET_VILLAGE(String SOVIET_VILLAGE) {
+        this.SOVIET_VILLAGE = SOVIET_VILLAGE;
+    }
+
+    public String getSTREET() {
+        return STREET;
+    }
+
+    public void setSTREET(String STREET) {
+        this.STREET = STREET;
+    }
+
+    public String getTYPE_STREET() {
+        return TYPE_STREET;
+    }
+
+    public void setTYPE_STREET(String TYPE_STREET) {
+        this.TYPE_STREET = TYPE_STREET;
+    }
+
+    public String getKLADR() {
+        return KLADR;
+    }
+
+    public void setKLADR(String KLADR) {
+        this.KLADR = KLADR;
+    }
 
     public Integer getId() {
         return id;
@@ -171,13 +250,6 @@ public class Parcel {
         this.usageCode = usageCode;
     }
 
-    public String getPredictedUsageCode() {
-        return predicatedUsageCode;
-    }
-
-    public void setPredictedUsageCode(String predicatedUsageCode) {
-        this.predicatedUsageCode = predicatedUsageCode;
-    }
 
 
 }

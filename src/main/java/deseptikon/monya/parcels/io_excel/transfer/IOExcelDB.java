@@ -3,7 +3,8 @@ package deseptikon.monya.parcels.io_excel.transfer;
 
 import deseptikon.monya.parcels.db.FillDB;
 import deseptikon.monya.parcels.io_excel.auxiliary.ServiceForExcel;
-import deseptikon.monya.parcels.io_excel.mapper.FillRow;
+import deseptikon.monya.parcels.io_excel.mapper.ExcelRowMapper;
+import deseptikon.monya.parcels.io_excel.mapper.ExcelRowMapperOld;
 import deseptikon.monya.parcels.spring_jdbc.models.Building;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.dhatim.fastexcel.Worksheet;
@@ -16,14 +17,12 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
-
-public class IOExcelDB implements ServiceForExcel, FillRow, ParcelIOExcel, BuildingsIOExcel {
-
+public class IOExcelDB implements ServiceForExcel, ExcelRowMapperOld, ParcelIOExcel, BuildingsIOExcel {
+    ExcelRowMapper excelRowMapper = new ExcelRowMapper();
 
     public void readExcelFillDBParcelsProvisionalList(String filePath, int worksheetIndex) throws IOException, SQLException {
         FileInputStream is = new FileInputStream(filePath);
         FillDB fillDB = new FillDB();
-        int cellIndexFinished = 14;
 
         ReadableWorkbook wb = new ReadableWorkbook(is);
         Optional<Sheet> sheet = wb.getSheet(worksheetIndex);
@@ -45,6 +44,36 @@ public class IOExcelDB implements ServiceForExcel, FillRow, ParcelIOExcel, Build
 //                    }
 
         }
+    }
+
+    public List<Parcel> excelParcelsDirectoryToProvisionalList(String directoryPath, int worksheetIndex) throws IOException, SQLException {
+        File directory = new File(directoryPath);
+        if (!directory.isDirectory())
+            throw new RuntimeException("Переданный в метод excelBuildingsDirectoryToInnerCNTable путь, не является папкой");
+        List<Parcel> parcelList = new ArrayList<>();
+
+        for (File fileExcel : Objects.requireNonNull(directory.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File directory, String name) {
+
+                return name.toLowerCase().contains(".xls");
+
+            }
+        }))) {
+
+            FileInputStream is = new FileInputStream(fileExcel);
+            ReadableWorkbook wb = new ReadableWorkbook(is);
+            Optional<Sheet> sheet = wb.getSheet(worksheetIndex);
+            final List<Row> rowList = sheet.get().read();
+            //Удаление заголовка
+            rowList.removeFirst();
+
+            for (Row row : rowList) {
+                parcelList.add(excelRowMapper.parcelsRow(row));
+//            System.out.println(parcel);
+            }
+        }
+        return parcelList;
     }
 
 
@@ -72,7 +101,7 @@ public class IOExcelDB implements ServiceForExcel, FillRow, ParcelIOExcel, Build
             @Override
             public boolean accept(File directory, String name) {
 
-                    return name.toLowerCase().contains(".xls");
+                return name.toLowerCase().contains(".xls");
 
             }
         }))) {
@@ -111,29 +140,29 @@ public class IOExcelDB implements ServiceForExcel, FillRow, ParcelIOExcel, Build
             throw new RuntimeException("Переданный в метод excelConstructionsFileToInnerCNTable путь, не является файлом");
         List<Building> buildingList = new ArrayList<>();
 
-            FileInputStream is = new FileInputStream(fileExcel);
-            ReadableWorkbook wb = new ReadableWorkbook(is);
-            Optional<Sheet> sheet = wb.getSheet(worksheetIndex);
-            final List<Row> rowList = sheet.get().read();
-            //Удаление заголовка
-            rowList.removeFirst();
+        FileInputStream is = new FileInputStream(fileExcel);
+        ReadableWorkbook wb = new ReadableWorkbook(is);
+        Optional<Sheet> sheet = wb.getSheet(worksheetIndex);
+        final List<Row> rowList = sheet.get().read();
+        //Удаление заголовка
+        rowList.removeFirst();
 
-            for (Row row : rowList) {
-                Building building = new Building();
-                building.setCadastral_number(row.getCellText(2));
-                building.setObject_type(row.getCellText(6));
-                building.setObject_name(row.getCellText(5));
-                building.setObject_assignation(row.getCellText(7));
-                building.setObject_permitted_uses(row.getCellText(189));
-                building.setOKATO(row.getCellText(13));
-                building.setOKTMO(row.getCellText(14));
-                building.setArea(commaToDotCell(row.getCell(201)));
-                building.setNote(row.getCellText(41));
-                building.setUsage_code(row.getCellText(59));
-                building.setParcel_cadastral_numbers(row.getCellText(191));
-                buildingList.add(building);
+        for (Row row : rowList) {
+            Building building = new Building();
+            building.setCadastral_number(row.getCellText(2));
+            building.setObject_type(row.getCellText(6));
+            building.setObject_name(row.getCellText(5));
+            building.setObject_assignation(row.getCellText(7));
+            building.setObject_permitted_uses(row.getCellText(189));
+            building.setOKATO(row.getCellText(13));
+            building.setOKTMO(row.getCellText(14));
+            building.setArea(commaToDotCell(row.getCell(201)));
+            building.setNote(row.getCellText(41));
+            building.setUsage_code(row.getCellText(59));
+            building.setParcel_cadastral_numbers(row.getCellText(191));
+            buildingList.add(building);
 //            System.out.println(building);
-            }
+        }
 
         return buildingList;
     }

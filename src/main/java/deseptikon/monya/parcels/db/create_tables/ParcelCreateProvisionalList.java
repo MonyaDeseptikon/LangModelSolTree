@@ -10,10 +10,12 @@ public class ParcelCreateProvisionalList {
 
     public static void main(String[] args) throws SQLException {
         ParcelCreateProvisionalList createTable = new ParcelCreateProvisionalList();
-        createTable.dropTableParcel();
+        createTable.columnForKLADR();
+//        createTable.dropTableParcel();
 //        createTable.createScheme();
 //        createTable.createProvisionalList();
 //        erasePredictedUC();
+
     }
 
     private void createScheme() throws SQLException {
@@ -55,8 +57,33 @@ public class ParcelCreateProvisionalList {
                 "utilization_permitted_use_text VARCHAR(MAX) NULL, " +
                 "inner_cadastral_numbers VARCHAR(MAX) NULL, " +
                 "usage_code VARCHAR(15) NULL, " +
-                "PREDICTED_USAGE_CODE VARCHAR(MAX)"+
+                "PREDICTED_USAGE_CODE VARCHAR(MAX)" +
+                "DISTRICT VARCHAR(MAX)" +
+                "TYPE_DISTRICT VARCHAR(MAX)" +
+                "CITY VARCHAR(MAX)" +
+                "TYPE_CITY VARCHAR(MAX)" +
+                "SOVIET_VILLAGE VARCHAR(MAX)" +
+                "STREET VARCHAR(MAX)" +
+                "TYPE_STREET VARCHAR(MAX)" +
+                "KLADR VARCHAR(MAX)" +
                 ");");
+
+        closeCon(con);
+    }
+
+    //Добавлены столбцы, необходимые для определения КЛАДР
+    private void columnForKLADR() throws SQLException {
+        Connection con = getConnections();
+        Statement statement = con.createStatement();
+
+        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS DISTRICT VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS TYPE_DISTRICT VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS CITY VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS TYPE_CITY VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS SOVIET_VILLAGE VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS STREET VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS TYPE_STREET VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS KLADR VARCHAR(MAX) DEFAULT ('');");
 
         closeCon(con);
     }
