@@ -1,7 +1,7 @@
 package deseptikon.monya.parcels.usage_codes;
 
 import deseptikon.monya.parcels.db.create_tables.ParcelCreateProvisionalList;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.lmstQuery;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.LmstQuery;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import deseptikon.monya.parcels.usage_codes.model.Conditions;
 import deseptikon.monya.parcels.usage_codes.model.uc.UC;
@@ -21,7 +21,7 @@ public class UC06_090 extends UC implements UCBuilder {
         stopWatch.start();
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
-        lmstQuery queryTemplate = (lmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
+        LmstQuery queryTemplate = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
 
 
         ParcelCreateProvisionalList.erasePredictedUC();
@@ -34,7 +34,7 @@ public class UC06_090 extends UC implements UCBuilder {
     }
 
     @Override
-    public void assignmentCode(lmstQuery queryTemplate) throws SQLException {
+    public void assignmentCode(LmstQuery queryTemplate) throws SQLException {
         Set<Parcel> parcelList = new HashSet<>();
 
         parcelList.addAll(queryTemplate.getListParcelsByTags(queryTagForCode(codeOnlyCondition().getTags()), queryExcludeTags(codeOnlyCondition().getExcludeTags()),

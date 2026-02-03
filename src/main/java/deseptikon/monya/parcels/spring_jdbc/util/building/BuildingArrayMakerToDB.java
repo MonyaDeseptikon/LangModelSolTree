@@ -1,6 +1,7 @@
 package deseptikon.monya.parcels.spring_jdbc.util.building;
 
 import deseptikon.monya.parcels.spring_jdbc.models.Building;
+import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import java.util.List;
@@ -11,7 +12,6 @@ public interface BuildingArrayMakerToDB {
         int count = 0;
         for (Building building : buildingList) {
             MapSqlParameterSource parameter = new MapSqlParameterSource();
-            parameter.addValue("id", building.getId());
             parameter.addValue("cadastral_number", building.getCadastral_number());
             parameter.addValue("object_type", building.getObject_type());
             parameter.addValue("object_name", building.getObject_name());

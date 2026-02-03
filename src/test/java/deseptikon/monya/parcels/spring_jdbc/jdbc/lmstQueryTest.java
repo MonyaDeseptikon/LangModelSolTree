@@ -30,7 +30,7 @@ class lmstQueryTest {
         parameters.addValue("idList", idList);
         parameters.addValue("columns", columns);
 
-        String SQLUpdate = "UPDATE PARCELS.PRIVISIONAL_2026 SET PREDICTED_USAGE_CODE = " +
+        String SQLUpdate = "UPDATE PARCELS.PARCEL_LIST_2026 SET PREDICTED_USAGE_CODE = " +
                 "CASE " +
                 "WHEN PREDICTED_USAGE_CODE = '' " +
                 "THEN :predicatedUsageCode " +

@@ -5,35 +5,20 @@ import java.util.List;
 public class Parcel {
 
     private Integer id;
-
     private String cadastralNumber;
-
     private Float area;
-
     private String OKATO;
-
     private String OKTMO;
-
     private String locality;
-
     private String other;
-
     private String note;
-
     private String approvalDocumentName;
-
     private String category;
-
     private String utilizationLandUse;
-
     private String utilizationByDoc;
-
     private String utilizationPermittedUseText;
-
     private List<String> innerCadastralNumbers;
-
     private String usageCode;
-
     private String predictedUsageCode;
     private String DISTRICT;
     private String TYPE_DISTRICT;
@@ -43,6 +28,15 @@ public class Parcel {
     private String STREET;
     private String TYPE_STREET;
     private String KLADR;
+    private String TYPE_LOCALITY;
+
+    public String getTYPE_LOCALITY() {
+        return TYPE_LOCALITY;
+    }
+
+    public void setTYPE_LOCALITY(String TYPE_LOCALITY) {
+        this.TYPE_LOCALITY = TYPE_LOCALITY;
+    }
 
     public String getPredictedUsageCode() {
         return predictedUsageCode;

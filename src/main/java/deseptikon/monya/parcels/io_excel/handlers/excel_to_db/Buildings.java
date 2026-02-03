@@ -2,8 +2,7 @@ package deseptikon.monya.parcels.io_excel.handlers.excel_to_db;
 
 import deseptikon.monya.parcels.io_excel.transfer.IOExcelDB;
 import deseptikon.monya.parcels.io_excel.transfer.BuildingsIOExcel;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.QueryBuilding;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.lmstQuery;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.LmstQuery;
 import deseptikon.monya.parcels.spring_jdbc.models.Building;
 import org.apache.commons.lang3.time.StopWatch;
 import org.springframework.context.ApplicationContext;
@@ -21,7 +20,7 @@ public class Buildings {
         stopWatch.start();
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
-        lmstQuery queryTemplate = (lmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
+        LmstQuery queryTemplate = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
 
         String innerCNTableName = "PARCEL_INNER_CN";
 

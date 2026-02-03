@@ -16,7 +16,7 @@ public class RetrieveRow implements ServiceDB {
 
 
     public ResultSet retrieveRowRS(String columnsName) throws SQLException {
-        String retrieveRowSQL = "SELECT" + columnsName + "FROM PARCELS.PRIVISIONAL_2026";
+        String retrieveRowSQL = "SELECT" + columnsName + "FROM PARCELS.PARCEL_LIST_2026";
         statement = con.createStatement();
 
         ResultSet resultSet = statement.executeQuery(retrieveRowSQL);

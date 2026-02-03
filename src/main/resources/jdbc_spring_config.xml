@@ -15,7 +15,7 @@
 
     <!-- dataSourceForJdbcTemplateLMST -->
     <bean id="dataSourceForJdbcTemplateLMST"
-          class="deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.lmstQuery">
+          class="deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.LmstQuery">
         <property name="dataSource" ref="dataSourceConnection"/>
     </bean>
 <!-- Если два бина одновременно обращаются к одной БД, то Приложение падает при запуске и создает копию БД.-->

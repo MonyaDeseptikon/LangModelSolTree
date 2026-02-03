@@ -2,7 +2,7 @@ package deseptikon.monya.parcels.io_excel.handlers;
 
 import deseptikon.monya.parcels.io_excel.transfer.IOExcelDB;
 import deseptikon.monya.parcels.io_excel.transfer.ParcelIOExcel;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.lmstQuery;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.LmstQuery;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.apache.commons.lang3.time.StopWatch;
 import org.dhatim.fastexcel.Workbook;
@@ -24,7 +24,7 @@ public class DBtoExcel {
         stopWatch.start();
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
-        lmstQuery queryTemplate = (lmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
+        LmstQuery queryTemplate = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
         Set<Parcel> parcelList = new HashSet<>();
         ParcelIOExcel parcelIOExcel = new IOExcelDB();
 

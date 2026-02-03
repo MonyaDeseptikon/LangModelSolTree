@@ -1,7 +1,7 @@
 package deseptikon.monya.parcels.usage_codes;
 
 import deseptikon.monya.parcels.db.create_tables.ParcelCreateProvisionalList;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.lmstQuery;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.LmstQuery;
 import deseptikon.monya.parcels.spring_jdbc.models.Building;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import deseptikon.monya.parcels.usage_codes.model.Conditions;
@@ -22,7 +22,7 @@ public class UC01_010 extends UC implements UCBuilder, checkAreaBuildings {
         stopWatch.start();
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
-        lmstQuery queryTemplate = (lmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
+        LmstQuery queryTemplate = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
 
 
         ParcelCreateProvisionalList.erasePredictedUC();
@@ -36,7 +36,7 @@ public class UC01_010 extends UC implements UCBuilder, checkAreaBuildings {
 
 
     @Override
-    public void assignmentCode(lmstQuery queryTemplate) {
+    public void assignmentCode(LmstQuery queryTemplate) {
         Set<Parcel> parcelListAll = new HashSet<>();
         Set<Parcel> parcelListToCheckArea = new HashSet<>();
 
@@ -65,7 +65,7 @@ public class UC01_010 extends UC implements UCBuilder, checkAreaBuildings {
     }
 
     @Override
-    public Set<Parcel> parcelListCheckedArea(Set<Parcel> parcelListToCheckArea, lmstQuery queryTemplate) {
+    public Set<Parcel> parcelListCheckedArea(Set<Parcel> parcelListToCheckArea, LmstQuery queryTemplate) {
         Set<Building> buildingListToCheckArea = new HashSet<>();
 
         //Формирования списка кадастровых номеров ОКС для запроса площади в БД

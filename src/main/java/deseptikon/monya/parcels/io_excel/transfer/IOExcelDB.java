@@ -55,22 +55,21 @@ public class IOExcelDB implements ServiceForExcel, ExcelRowMapperOld, ParcelIOEx
         for (File fileExcel : Objects.requireNonNull(directory.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File directory, String name) {
-
                 return name.toLowerCase().contains(".xls");
-
             }
         }))) {
-
+            System.out.println(fileExcel.toString());
             FileInputStream is = new FileInputStream(fileExcel);
             ReadableWorkbook wb = new ReadableWorkbook(is);
             Optional<Sheet> sheet = wb.getSheet(worksheetIndex);
-            final List<Row> rowList = sheet.get().read();
-            //Удаление заголовка
-            rowList.removeFirst();
-
+            //Из списка удаляется заголовок и строки с пустым КН
+            int cadastralNumberCell = 2;
+            List<Row> rowListFull = sheet.get().read();
+            rowListFull.removeFirst();
+            List<Row> rowList = rowListFull.stream().filter(r -> r.hasCell(cadastralNumberCell)).toList();
             for (Row row : rowList) {
                 parcelList.add(excelRowMapper.parcelsRow(row));
-//            System.out.println(parcel);
+//                System.out.println(parcelList.toString());
             }
         }
         return parcelList;

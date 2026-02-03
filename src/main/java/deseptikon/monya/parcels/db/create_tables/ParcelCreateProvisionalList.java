@@ -10,10 +10,10 @@ public class ParcelCreateProvisionalList {
 
     public static void main(String[] args) throws SQLException {
         ParcelCreateProvisionalList createTable = new ParcelCreateProvisionalList();
-        createTable.columnForKLADR();
+//        createTable.columnForKLADR();
 //        createTable.dropTableParcel();
-//        createTable.createScheme();
-//        createTable.createProvisionalList();
+        createTable.createScheme();
+        createTable.createParcelList();
 //        erasePredictedUC();
 
     }
@@ -21,9 +21,7 @@ public class ParcelCreateProvisionalList {
     private void createScheme() throws SQLException {
         Connection con = getConnections();
         Statement statement = con.createStatement();
-//Не будет удаляться, пока не удалить все таблицы, либо удалять сразу пользователя
-        statement.execute("DROP SCHEMA PARCELS");
-//        statement.execute("DROP SCHEMA PARCELS CASCADE"); // ?????????????? Будет ли это работать неизвестно
+        statement.execute("DROP SCHEMA PARCELS CASCADE");
         statement.execute("CREATE SCHEMA IF NOT EXISTS PARCELS");
     }
 
@@ -34,20 +32,29 @@ public class ParcelCreateProvisionalList {
 //        statement.execute("DROP TABLE IF EXISTS PARCELS.INNER_CN_04");
 
         //Удаление копии БД, созданной бином SpringJDBC при попытке одновременного обращения двух бинов к одной встроенной БД
-        statement.execute("DROP TABLE IF EXISTS PARCELS.PRIVISIONAL_2026_COPY_3_0");
+        statement.execute("DROP TABLE IF EXISTS PARCELS.PARCEL_LIST_2026_COPY_3_0");
     }
 
-    private void createProvisionalList() throws SQLException {
+    private void createParcelList() throws SQLException {
         Connection con = getConnections();
         Statement statement = con.createStatement();
 
-        statement.execute("CREATE TABLE IF NOT EXISTS PARCELS.PRIVISIONAL_2026 " +
+        statement.execute("CREATE TABLE IF NOT EXISTS PARCELS.PARCEL_LIST_2026 " +
                 "(id INT AUTO_INCREMENT PRIMARY KEY, " +
                 "cadastral_number VARCHAR(20) NOT NULL, " +
                 "area FLOAT NULL, " +
                 "OKATO VARCHAR(20) NULL, " +
                 "OKTMO VARCHAR(20) NULL, " +
+                "KLADR VARCHAR(MAX) NULL, " +
+                "DISTRICT VARCHAR(MAX) NULL, " +
+                "TYPE_DISTRICT VARCHAR(MAX) NULL, " +
+                "CITY VARCHAR(MAX) NULL, " +
+                "TYPE_CITY VARCHAR(MAX) NULL, " +
                 "locality VARCHAR(MAX) NULL, " +
+                "TYPE_LOCALITY VARCHAR(MAX) NULL, " +
+                "SOVIET_VILLAGE VARCHAR(MAX) NULL, " +
+                "STREET VARCHAR(MAX) NULL, " +
+                "TYPE_STREET VARCHAR(MAX) NULL, " +
                 "other VARCHAR(MAX) NULL, " +
                 "note VARCHAR(MAX) NULL, " +
                 "approval_document_name VARCHAR(MAX) NULL, " +
@@ -57,15 +64,8 @@ public class ParcelCreateProvisionalList {
                 "utilization_permitted_use_text VARCHAR(MAX) NULL, " +
                 "inner_cadastral_numbers VARCHAR(MAX) NULL, " +
                 "usage_code VARCHAR(15) NULL, " +
-                "PREDICTED_USAGE_CODE VARCHAR(MAX)" +
-                "DISTRICT VARCHAR(MAX)" +
-                "TYPE_DISTRICT VARCHAR(MAX)" +
-                "CITY VARCHAR(MAX)" +
-                "TYPE_CITY VARCHAR(MAX)" +
-                "SOVIET_VILLAGE VARCHAR(MAX)" +
-                "STREET VARCHAR(MAX)" +
-                "TYPE_STREET VARCHAR(MAX)" +
-                "KLADR VARCHAR(MAX)" +
+                "PREDICTED_USAGE_CODE VARCHAR(MAX) NULL" +
+
                 ");");
 
         closeCon(con);
@@ -76,14 +76,15 @@ public class ParcelCreateProvisionalList {
         Connection con = getConnections();
         Statement statement = con.createStatement();
 
-        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS DISTRICT VARCHAR(MAX) DEFAULT ('');");
-        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS TYPE_DISTRICT VARCHAR(MAX) DEFAULT ('');");
-        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS CITY VARCHAR(MAX) DEFAULT ('');");
-        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS TYPE_CITY VARCHAR(MAX) DEFAULT ('');");
-        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS SOVIET_VILLAGE VARCHAR(MAX) DEFAULT ('');");
-        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS STREET VARCHAR(MAX) DEFAULT ('');");
-        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS TYPE_STREET VARCHAR(MAX) DEFAULT ('');");
-        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS KLADR VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS DISTRICT VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS TYPE_DISTRICT VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS CITY VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS TYPE_CITY VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS SOVIET_VILLAGE VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS STREET VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS TYPE_STREET VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS KLADR VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS TYPE_LOCALITY VARCHAR(MAX) DEFAULT ('');");
 
         closeCon(con);
     }
@@ -93,10 +94,10 @@ public class ParcelCreateProvisionalList {
         Statement statement = con.createStatement();
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 DROP COLUMN IF EXISTS PREDICTED_USAGE_CODE;");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 DROP COLUMN IF EXISTS PREDICTED_USAGE_CODE;");
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS PREDICTED_USAGE_CODE VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS PREDICTED_USAGE_CODE VARCHAR(MAX) DEFAULT ('');");
 
         closeCon(con);
     }

@@ -1,12 +1,7 @@
-package deseptikon.monya.parcels;
+package deseptikon.monya.parcels.usage_codes;
 
 import deseptikon.monya.parcels.db.create_tables.ParcelCreateProvisionalList;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.QueryBuilding;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.lmstQuery;
-import deseptikon.monya.parcels.usage_codes.UC01_010;
-import deseptikon.monya.parcels.usage_codes.UC01_150;
-import deseptikon.monya.parcels.usage_codes.UC04_040;
-import deseptikon.monya.parcels.usage_codes.UC06_090;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.LmstQuery;
 import org.apache.commons.lang3.time.StopWatch;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -23,7 +18,7 @@ public class CodesHandler {
         stopWatch.start();
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
-        lmstQuery queryTemplate = (lmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
+        LmstQuery queryTemplate = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
 
 
         ParcelCreateProvisionalList.erasePredictedUC();

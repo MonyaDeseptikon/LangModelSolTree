@@ -1,6 +1,6 @@
 package deseptikon.monya.parcels.usage_codes;
 
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.lmstQuery;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.LmstQuery;
 import deseptikon.monya.parcels.spring_jdbc.models.Building;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import deseptikon.monya.parcels.usage_codes.auxiliary.PrepareTags;
@@ -16,7 +16,7 @@ class UC01_150Test  implements PrepareTags {
     //    JdbcTemplate jdbcTemplate = new JdbcTemplate((DataSource) context.getBean("dataSourceConnection"));
 //    NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
     ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
-    lmstQuery queryTemplate = (lmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
+    LmstQuery queryTemplate = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
 
     @Test
     void assignmentCode() {

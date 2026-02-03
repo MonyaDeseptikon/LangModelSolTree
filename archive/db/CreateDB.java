@@ -16,12 +16,12 @@ public class CreateDB {
         Statement statement = con.createStatement();
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//        statement.execute("DROP TABLE PARCELS.PRIVISIONAL_2026");
+//        statement.execute("DROP TABLE PARCELS.PARCEL_LIST_2026");
 //        statement.execute("DROP SCHEMA PARCELS");
 //        statement.execute("CREATE SCHEMA IF NOT EXISTS PARCELS");
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        statement.execute("CREATE TABLE IF NOT EXISTS PARCELS.PRIVISIONAL_2026 " +
+        statement.execute("CREATE TABLE IF NOT EXISTS PARCELS.PARCEL_LIST_2026 " +
                 "(id INT AUTO_INCREMENT PRIMARY KEY, " +
                 "cadastral_number VARCHAR(20) NOT NULL, " +
                 "area FLOAT NULL, " +
@@ -43,8 +43,8 @@ public class CreateDB {
 //        -- Posted by Evgenij Ryazanov
 //                -- Retrieved 2025-12-21, License - CC BY-SA 4.0
 
-        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 DROP COLUMN IF EXISTS PREDICTED_01_010;");
-        statement.execute("ALTER TABLE PARCELS.PRIVISIONAL_2026 ADD COLUMN IF NOT EXISTS PREDICTED_USAGE_CODE VARCHAR(15) NULL;");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 DROP COLUMN IF EXISTS PREDICTED_01_010;");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS PREDICTED_USAGE_CODE VARCHAR(15) NULL;");
 
         closeCon(con);
     }

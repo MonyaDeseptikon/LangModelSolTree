@@ -1,7 +1,7 @@
 package deseptikon.monya.auxiliary;
 
 public interface ReplaceLatin {
-     default String replaceLatinChar(String checkString) {
+     default String replaceLatinAndYoChar(String checkString) {
         String resultString;
 
         resultString = checkString;
@@ -26,11 +26,13 @@ public interface ReplaceLatin {
         resultString = resultString.replace("M", "М");
         resultString = resultString.replace("y", "у");
         resultString = resultString.replace("Y", "У");
+        resultString = resultString.replace("Ё", "Е");
+        resultString = resultString.replace("ё", "е");
 
         return resultString;
     }
 
      default boolean checkingLatin(String checkString) {
-        return checkString.matches(".*[CcEeTOopPAaHKkXxBMYy].*");
+        return checkString.matches(".*[CcEeTOopPAaHKkXxBMYyЁё].*");
     }
 }

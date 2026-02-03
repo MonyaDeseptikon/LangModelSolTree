@@ -2,7 +2,7 @@ package deseptikon.monya.parcels.db.auxiliary;
 
 
 import deseptikon.monya.auxiliary.ReplaceLatin;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.lmstQuery;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.LmstQuery;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -19,14 +19,26 @@ public class ReplaceLatinHandler implements ReplaceLatin {
 
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
-        lmstQuery queryTemplate = (lmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
+        LmstQuery queryTemplate = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
 
         List<Parcel> parcelList = queryTemplate.getListParcelsForReplaceLatin(List.of(
                 "id",
                 "utilization_by_doc",
                 "category",
                 "note",
-                "locality"));
+                "locality",
+                "utilization_permitted_use_text",
+                "utilization_land_use",
+                "other",
+                "TYPE_STREET",
+                "STREET",
+                "TYPE_LOCALITY",
+                "locality",
+                "TYPE_CITY",
+                "CITY",
+                "TYPE_DISTRICT",
+                "DISTRICT"));
+
 
 //        int codeCount = 0;
 //        for (Parcel parcel : parcelList) {
@@ -34,10 +46,10 @@ public class ReplaceLatinHandler implements ReplaceLatin {
 //            codeCount++;
 //        }
 //        System.out.println(codeCount);
-        List <Parcel> parcelWithLatin = new ReplaceLatinHandler().replaceLatinRow(parcelList);
-                int codeCount = 0;
+        List<Parcel> parcelWithLatin = new ReplaceLatinHandler().replaceLatinRow(parcelList);
+        int codeCount = 0;
         for (Parcel parcel : parcelWithLatin) {
-            System.out.printf("%s, %s, %s, %s, %s\n",parcel.getId(), parcel.getCategory(), parcel.getUtilizationByDoc(), parcel.getNote(), parcel.getLocality());
+            System.out.printf("%s, %s, %s, %s, %s\n", parcel.getId(), parcel.getCategory(), parcel.getUtilizationByDoc(), parcel.getNote(), parcel.getLocality());
             codeCount++;
         }
         System.out.println(codeCount);
@@ -50,17 +62,31 @@ public class ReplaceLatinHandler implements ReplaceLatin {
         List<Parcel> parcelListChanged = new ArrayList<>();
         int count = 0;
         for (Parcel parcel : parcelList) {
-            if (checkingLatin(parcel.getCategory()) || checkingLatin(parcel.getNote()) || checkingLatin(parcel.getLocality()) || checkingLatin(parcel.getUtilizationByDoc())) {
-                parcel.setCategory(replaceLatinChar(parcel.getCategory()));
-                parcel.setNote(replaceLatinChar(parcel.getNote()));
-                parcel.setLocality(replaceLatinChar(parcel.getLocality()));
-                parcel.setUtilizationByDoc(replaceLatinChar(parcel.getUtilizationByDoc()));
+            if (checkingLatin(parcel.getCategory()) || checkingLatin(parcel.getNote()) || checkingLatin(parcel.getLocality()) || checkingLatin(parcel.getUtilizationByDoc())
+                    || checkingLatin(parcel.getUtilizationPermittedUseText()) || checkingLatin(parcel.getUtilizationLandUse()) || checkingLatin(parcel.getOther()) || checkingLatin(parcel.getTYPE_STREET())
+                    || checkingLatin(parcel.getSTREET()) || checkingLatin(parcel.getTYPE_LOCALITY()) || checkingLatin(parcel.getTYPE_CITY()) || checkingLatin(parcel.getCITY())
+                    || checkingLatin(parcel.getTYPE_DISTRICT()) || checkingLatin(parcel.getDISTRICT())) {
+
+                parcel.setCategory(replaceLatinAndYoChar(parcel.getCategory()));
+                parcel.setNote(replaceLatinAndYoChar(parcel.getNote()));
+                parcel.setLocality(replaceLatinAndYoChar(parcel.getLocality()));
+                parcel.setUtilizationByDoc(replaceLatinAndYoChar(parcel.getUtilizationByDoc()));
+                parcel.setUtilizationPermittedUseText(replaceLatinAndYoChar(parcel.getUtilizationPermittedUseText()));
+                parcel.setUtilizationLandUse(replaceLatinAndYoChar(parcel.getUtilizationLandUse()));
+                parcel.setOther(replaceLatinAndYoChar(parcel.getOther()));
+                parcel.setTYPE_STREET(replaceLatinAndYoChar(parcel.getTYPE_STREET()));
+                parcel.setSTREET(replaceLatinAndYoChar(parcel.getSTREET()));
+                parcel.setTYPE_LOCALITY(replaceLatinAndYoChar(parcel.getTYPE_LOCALITY()));
+                parcel.setTYPE_CITY(replaceLatinAndYoChar(parcel.getTYPE_CITY()));
+                parcel.setCITY(replaceLatinAndYoChar(parcel.getCITY()));
+                parcel.setTYPE_DISTRICT(replaceLatinAndYoChar(parcel.getTYPE_DISTRICT()));
+                parcel.setDISTRICT(replaceLatinAndYoChar(parcel.getDISTRICT()));
+
                 parcelListChanged.add(parcel);
-                System.out.println(parcel.getId());
                 count++;
             }
         }
-        System.out.println(count);
+
         return parcelListChanged;
     }
 

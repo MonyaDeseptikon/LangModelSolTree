@@ -15,7 +15,7 @@ public class UpdateRow implements ServiceDB {
 
 
     public void updateRowRS(String updateRow) throws SQLException {
-        String updateRowSQL = "UPDATE PARCELS.PRIVISIONAL_2026 SET" + updateRow;
+        String updateRowSQL = "UPDATE PARCELS.PARCEL_LIST_2026 SET" + updateRow;
         statement = con.createStatement();
         statement.executeUpdate(updateRowSQL);
     }

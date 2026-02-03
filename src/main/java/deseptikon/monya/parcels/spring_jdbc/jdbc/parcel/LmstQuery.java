@@ -4,7 +4,7 @@ import deseptikon.monya.parcels.spring_jdbc.models.Building;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import deseptikon.monya.parcels.spring_jdbc.util.building.BuildingArrayMakerToDB;
 import deseptikon.monya.parcels.spring_jdbc.util.building.BuildingMapper;
-import deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelArrayMakerToDBForReplaceLatinInterFace;
+import deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelArrayMakerToDB;
 import deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelMapperPredicted;
 import deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelMapperPredictedColName;
 import deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelMapperReplaceLatin;
@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import java.util.List;
 import java.util.Set;
 
-public class lmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMakerToDBForReplaceLatinInterFace, BuildingArrayMakerToDB, CombineMethodsParcel, BuildingsQuery {
+public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMakerToDB, BuildingArrayMakerToDB, CombineMethodsParcel, BuildingsQuery {
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate template;
@@ -28,13 +28,13 @@ public class lmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
 
     @Override
     public List<String> getListColumnName() {
-        String SQLQuery = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'PRIVISIONAL_2026'";
+        String SQLQuery = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'PARCEL_LIST_2026'";
         return jdbcTemplate.query(SQLQuery, new ParcelMapperPredictedColName());
     }
 
     @Override
     public List<Parcel> getListParcels() {
-        String SQLQuery = "SELECT * FROM PARCELS.PRIVISIONAL_2026";
+        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026";
         return jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted());
     }
 
@@ -54,7 +54,7 @@ public class lmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     public List<Parcel> getListParcelsByTags(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea) {
 
         Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
-        String SQLQuery = "SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND " +
+        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND " +
                 // Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
                 "LOWER(utilization_by_doc) NOT REGEXP ? AND " +
                 "area >= ? AND " +
@@ -65,7 +65,7 @@ public class lmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     @Override
     public List<Parcel> getListParcelsByTagsWithoutICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea) {
         Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
-        String SQLQuery = "SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND " +
+        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND " +
                 // Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
                 "LOWER(utilization_by_doc) NOT REGEXP ? AND " +
                 "inner_cadastral_numbers = '' AND " +
@@ -77,7 +77,7 @@ public class lmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     @Override
     public List<Parcel> getListParcelsByTagsWithICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea) {
         Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
-        String SQLQuery = "SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND " +
+        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND " +
                 // Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
                 "LOWER(utilization_by_doc) NOT REGEXP ? AND " +
                 "inner_cadastral_numbers != '' AND " +
@@ -88,7 +88,7 @@ public class lmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
 
     public List<Parcel> getListParcelsByTagsJoinICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, String innerCNTableName) {
         Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
-        String SQLQuery = "SELECT * FROM PARCELS.PRIVISIONAL_2026 PP INNER JOIN " +
+        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
                 innerCNTableName + " PI " +
                 "ON PP.inner_cadastral_numbers REGEXP PI.CADASTRAL_NUMBER " +
                 "WHERE LOWER(PP.utilization_by_doc) REGEXP ? AND " +
@@ -108,7 +108,7 @@ public class lmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
         parameters.addValue("lessArea", lessArea);
         parameters.addValue("usageCodeBuildings", usageCodeBuildings);
 
-        String SQLQuery = "SELECT * FROM PARCELS.PRIVISIONAL_2026 PP INNER JOIN " +
+        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
                 "(SELECT * FROM " +
                 innerCNTableName + " " +
                 "WHERE USAGE_CODE IN(:usageCodeBuildings)) " +
@@ -123,7 +123,7 @@ public class lmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
 
 //                jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted(), arg);
 
-//        SELECT * FROM PARCELS.PRIVISIONAL_2026 PP INNER JOIN (SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN('0401', '0403')) BI
+//        SELECT * FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN (SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN('0401', '0403')) BI
 //        ON  PP.inner_cadastral_numbers  regexp BI.CADASTRAL_NUMBER
 //        WHERE LOWER(PP.utilization_by_doc) REGEXP '.*магаз.*' AND LOWER(PP.utilization_by_doc) NOT REGEXP '.*сельско.*' AND p.area >= 0 AND p.area <= 10000000
     }
@@ -137,7 +137,7 @@ public class lmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
         parameters.addValue("usageCodeBuildings", usageCodeBuildings);
 
         String SQLQuery = "SELECT * FROM " +
-                "(SELECT * FROM PARCELS.PRIVISIONAL_2026 WHERE inner_cadastral_numbers != '') PP " +
+                "(SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE inner_cadastral_numbers != '') PP " +
                 "INNER JOIN " +
                 "(SELECT * FROM " +
                 innerCNTableName + " " +
@@ -156,7 +156,7 @@ public class lmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("predictedUsageCode", predictedUsageCode);
         parameters.addValue("idList", idList);
-        String SQLUpdate = "UPDATE PARCELS.PRIVISIONAL_2026 SET PREDICTED_USAGE_CODE = :predictedUsageCode WHERE id IN (:idList)";
+        String SQLUpdate = "UPDATE PARCELS.PARCEL_LIST_2026 SET PREDICTED_USAGE_CODE = :predictedUsageCode WHERE id IN (:idList)";
         template.update(SQLUpdate, parameters);
     }
 
@@ -165,7 +165,7 @@ public class lmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("predicatedUsageCode", predicatedUsageCode);
         parameters.addValue("idList", idList);
-        String SQLUpdate = "UPDATE PARCELS.PRIVISIONAL_2026 SET PREDICTED_USAGE_CODE = " +
+        String SQLUpdate = "UPDATE PARCELS.PARCEL_LIST_2026 SET PREDICTED_USAGE_CODE = " +
                 "CASE " +
                 "WHEN PREDICTED_USAGE_CODE = '' " +
                 "THEN :predicatedUsageCode " +
@@ -181,14 +181,14 @@ public class lmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
 
         String SQLQuery = "SELECT " +
                 colNameString + " " +
-                "FROM PARCELS.PRIVISIONAL_2026";
+                "FROM PARCELS.PARCEL_LIST_2026";
         return jdbcTemplate.query(SQLQuery, new ParcelMapperReplaceLatin());
     }
 
     @Override
-    public void updateParcelsForReplaceLatin(final List<Parcel> parcels) {
+    public void updateParcelsForReplaceLatin(List<Parcel> parcels) {
 
-        String SQLUpdate = "UPDATE PARCELS.PRIVISIONAL_2026 SET " +
+        String SQLUpdate = "UPDATE PARCELS.PARCEL_LIST_2026 SET " +
                 "utilization_by_doc = :utilization_by_docList, " +
                 "category = :categoryList, " +
                 "note = :noteList, " +
@@ -221,6 +221,14 @@ public class lmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
                 "VALUES (:cadastral_number, :object_type, :object_name, :object_assignation, :object_permitted_uses, :OKATO, :OKTMO, :area, :note, :usage_code, :parcel_cadastral_numbers)";
 
         template.batchUpdate(insertRowSQL, insertInnerCNArrayMakerToDB(buildingList));
+    }
+@Override
+    public void insertParcelList(List<Parcel> parcelList) {
+        String insertRowSQL = "INSERT INTO PARCELS.PARCEL_LIST_2026" +
+                "(CADASTRAL_NUMBER, AREA, OKATO, OKTMO, KLADR, DISTRICT, TYPE_DISTRICT, CITY, TYPE_CITY, LOCALITY, TYPE_LOCALITY, SOVIET_VILLAGE, STREET, TYPE_STREET, OTHER, NOTE, APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, USAGE_CODE) " +
+                "VALUES (:CADASTRAL_NUMBER, :AREA, :OKATO, :OKTMO, :KLADR, :DISTRICT, :TYPE_DISTRICT, :CITY, :TYPE_CITY, :LOCALITY, :TYPE_LOCALITY, :SOVIET_VILLAGE, :STREET, :TYPE_STREET, :OTHER, :NOTE, :APPROVAL_DOCUMENT_NAME, :CATEGORY, :UTILIZATION_LAND_USE, :UTILIZATION_BY_DOC, :UTILIZATION_PERMITTED_USE_TEXT, :INNER_CADASTRAL_NUMBERS, :USAGE_CODE\n)";
+
+        template.batchUpdate(insertRowSQL, excelParcelToDB(parcelList));
     }
 
 }

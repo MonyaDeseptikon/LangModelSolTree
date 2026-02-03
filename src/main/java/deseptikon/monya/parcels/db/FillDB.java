@@ -26,7 +26,7 @@ public class FillDB {
                                     String utilization_permitted_use_text,
                                     String inner_cadastral_numbers,
                                     String usage_code) throws SQLException {
-        String fillRowSQL = "INSERT INTO PARCELS.PRIVISIONAL_2026 (cadastral_number, area, OKATO, KLADR, locality, other, note, approval_document_name, category, " +
+        String fillRowSQL = "INSERT INTO PARCELS.PARCEL_LIST_2026 (cadastral_number, area, OKATO, KLADR, locality, other, note, approval_document_name, category, " +
                 "utilization_land_use, utilization_by_doc, utilization_permitted_use_text, inner_cadastral_numbers,  usage_code) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         statement = con.prepareStatement(fillRowSQL);

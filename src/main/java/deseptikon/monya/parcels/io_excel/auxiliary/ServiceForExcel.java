@@ -7,22 +7,25 @@ import java.math.BigDecimal;
 
 public interface ServiceForExcel {
 
-    default Float commaToDotCell(Cell cell){
+    default Float commaToDotCell(Cell cell) {
         Float areaCheck;
-        if( cell.getType().equals(CellType.NUMBER)){
+        if(cell == null){
+            System.out.println("My message CELL is null");
+        }
+        if (cell.getType().equals(CellType.NUMBER)) {
             areaCheck = cell.asNumber().floatValue();
         } else {
-            String cellNorm =  cell.getText();
-            if (cellNorm.contains(",")){
-                cellNorm= cellNorm.replace(',', '.');
+            String cellNorm = cell.getText();
+            if (cellNorm.contains(",")) {
+                cellNorm = cellNorm.replace(',', '.');
             }
-            if (cellNorm.isEmpty()) cellNorm="0";
+            if (cellNorm.isEmpty()) cellNorm = "0";
             areaCheck = Float.valueOf(cellNorm);
         }
         return areaCheck;
     }
 
-     default String replaceChar(String checkString) {
+    default String replaceChar(String checkString) {
         String resultString;
 
         if (checkString.matches(".*['].*")) {
