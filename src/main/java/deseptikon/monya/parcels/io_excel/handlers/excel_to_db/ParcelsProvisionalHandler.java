@@ -2,7 +2,7 @@ package deseptikon.monya.parcels.io_excel.handlers.excel_to_db;
 
 import deseptikon.monya.parcels.io_excel.transfer.IOExcelDB;
 import deseptikon.monya.parcels.io_excel.transfer.ParcelIOExcel;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.LmstQuery;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.LmstQuery;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.apache.commons.lang3.time.StopWatch;
 import org.springframework.context.ApplicationContext;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ParcelsProvisionalList {
+public class ParcelsProvisionalHandler {
 
     public static void main(String[] args) throws IOException, SQLException {
         StopWatch stopWatch = new StopWatch();

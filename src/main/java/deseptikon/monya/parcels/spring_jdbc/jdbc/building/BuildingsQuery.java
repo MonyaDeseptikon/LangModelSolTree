@@ -1,8 +1,6 @@
-package deseptikon.monya.parcels.spring_jdbc.jdbc.parcel;
+package deseptikon.monya.parcels.spring_jdbc.jdbc.building;
 
 import deseptikon.monya.parcels.spring_jdbc.models.Building;
-import deseptikon.monya.parcels.spring_jdbc.util.building.BuildingMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import java.util.List;
 import java.util.Set;

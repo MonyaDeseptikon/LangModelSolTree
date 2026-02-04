@@ -12,14 +12,14 @@ import javax.sql.DataSource;
 import java.util.List;
 import java.util.Set;
 
-public class QueryBuilding implements BuildingArrayMakerToDB {
-    private JdbcTemplate jdbcTemplate;
-    private NamedParameterJdbcTemplate template;
-
-    public void setDataSourceInnerCN(DataSource dataSourceInnerCN) {
-        this.jdbcTemplate = new JdbcTemplate(dataSourceInnerCN);
-        this.template = new NamedParameterJdbcTemplate(jdbcTemplate);
-
-    }
-
-}
+//public class QueryBuilding implements BuildingArrayMakerToDB {
+//    private JdbcTemplate jdbcTemplate;
+//    private NamedParameterJdbcTemplate template;
+//
+//    public void setDataSourceInnerCN(DataSource dataSourceInnerCN) {
+//        this.jdbcTemplate = new JdbcTemplate(dataSourceInnerCN);
+//        this.template = new NamedParameterJdbcTemplate(jdbcTemplate);
+//
+//    }
+//
+//}

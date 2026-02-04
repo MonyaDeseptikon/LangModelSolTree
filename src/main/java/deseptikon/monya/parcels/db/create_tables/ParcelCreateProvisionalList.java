@@ -12,9 +12,9 @@ public class ParcelCreateProvisionalList {
         ParcelCreateProvisionalList createTable = new ParcelCreateProvisionalList();
 //        createTable.columnForKLADR();
 //        createTable.dropTableParcel();
-        createTable.createScheme();
-        createTable.createParcelList();
-//        erasePredictedUC();
+//        createTable.createScheme();
+//        createTable.createParcelList();
+        erasePredictedUC();
 
     }
 
@@ -85,6 +85,7 @@ public class ParcelCreateProvisionalList {
         statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS TYPE_STREET VARCHAR(MAX) DEFAULT ('');");
         statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS KLADR VARCHAR(MAX) DEFAULT ('');");
         statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS TYPE_LOCALITY VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS EXP_KLADR VARCHAR(MAX) DEFAULT ('');");
 
         closeCon(con);
     }

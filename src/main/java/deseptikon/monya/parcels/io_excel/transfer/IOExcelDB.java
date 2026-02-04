@@ -1,11 +1,11 @@
 
 package deseptikon.monya.parcels.io_excel.transfer;
 
-import deseptikon.monya.parcels.db.FillDB;
 import deseptikon.monya.parcels.io_excel.auxiliary.ServiceForExcel;
 import deseptikon.monya.parcels.io_excel.mapper.ExcelRowMapper;
 import deseptikon.monya.parcels.io_excel.mapper.ExcelRowMapperOld;
 import deseptikon.monya.parcels.spring_jdbc.models.Building;
+import deseptikon.monya.parcels.spring_jdbc.models.CodeKLADR;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.dhatim.fastexcel.Worksheet;
 import org.dhatim.fastexcel.reader.*;
@@ -17,35 +17,32 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
-public class IOExcelDB implements ServiceForExcel, ExcelRowMapperOld, ParcelIOExcel, BuildingsIOExcel {
+public class IOExcelDB implements ServiceForExcel, ExcelRowMapperOld, ParcelIOExcel, BuildingsIOExcel, CodeKLADRIOExcel {
     ExcelRowMapper excelRowMapper = new ExcelRowMapper();
 
-    public void readExcelFillDBParcelsProvisionalList(String filePath, int worksheetIndex) throws IOException, SQLException {
-        FileInputStream is = new FileInputStream(filePath);
-        FillDB fillDB = new FillDB();
 
+    public List<CodeKLADR> excelCodeKLADRToKLADR(String filePath, int worksheetIndex) throws IOException {
+        File fileExcel = new File(filePath);
+        if (!fileExcel.isFile())
+            throw new RuntimeException("Переданный в метод excelConstructionsFileToInnerCNTable путь, не является файлом");
+        List<CodeKLADR> codeKLADRList = new ArrayList<>();
+
+        FileInputStream is = new FileInputStream(fileExcel);
         ReadableWorkbook wb = new ReadableWorkbook(is);
         Optional<Sheet> sheet = wb.getSheet(worksheetIndex);
-        List<Row> rowList = sheet.get().read();
+        final List<Row> rowList = sheet.get().read();
+        //Удаление заголовка
+        rowList.removeFirst();
 
-        AtomicInteger i = new AtomicInteger();
-        for (Row r : rowList) {
-            i.getAndIncrement();
-            if (i.get() > 1 && !Objects.equals(r.getCellText(0), "")) {
-
-                fillDB.fillProvisionalList(r.getCellText(0), commaToDotCell(r.getCell(1)), r.getCellText(2), r.getCellText(3),
-                        r.getCellText(4), r.getCellText(5), r.getCellText(6),
-                        r.getCellText(7), r.getCellText(8), r.getCellText(9), r.getCellText(10),
-                        r.getCellText(11), r.getCellText(12), r.getCellText(13));
-                System.out.println(i.get() + " " + r.getCell(0));
-            }
-//                    if (i.get() == 65000) {
-//                        throw new RuntimeException("Достигнута предельная строка");
-//                    }
-
+        for (Row row : rowList) {
+            codeKLADRList.add(excelRowMapper.codeKLADRRow(row));
         }
+
+        return codeKLADRList;
     }
 
+
+    @Override
     public List<Parcel> excelParcelsDirectoryToProvisionalList(String directoryPath, int worksheetIndex) throws IOException, SQLException {
         File directory = new File(directoryPath);
         if (!directory.isDirectory())
@@ -76,7 +73,7 @@ public class IOExcelDB implements ServiceForExcel, ExcelRowMapperOld, ParcelIOEx
     }
 
 
-    public void readDBFillExcel(Worksheet ws, Set<Parcel> parcelList, List<String> colHeads) throws FileNotFoundException, SQLException {
+    public void readDBFillExcel(Worksheet ws, Set<Parcel> parcelList, List<String> colHeads) {
         int row = 0;
         parcelsHeads(ws, row, colHeads);
         row++;
@@ -160,9 +157,7 @@ public class IOExcelDB implements ServiceForExcel, ExcelRowMapperOld, ParcelIOEx
             building.setUsage_code(row.getCellText(59));
             building.setParcel_cadastral_numbers(row.getCellText(191));
             buildingList.add(building);
-//            System.out.println(building);
         }
-
         return buildingList;
     }
 }

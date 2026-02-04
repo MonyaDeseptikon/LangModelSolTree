@@ -1,6 +1,6 @@
 package deseptikon.monya.parcels.usage_codes.model.uc;
 
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.LmstQuery;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.LmstQuery;
 import deseptikon.monya.parcels.usage_codes.auxiliary.PrepareTags;
 import deseptikon.monya.parcels.usage_codes.model.Conditions;
 

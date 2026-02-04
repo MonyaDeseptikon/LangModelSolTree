@@ -57,6 +57,7 @@ public class AuxiliaryTables {
                 "TYPE_LOCALITY VARCHAR(MAX) NULL, " +
                 "STREET VARCHAR(MAX) NULL, " +
                 "TYPE_STREET VARCHAR(MAX) NULL" +
+                "CODE_OKATO VARCHAR(30) NOT NULL, " +
                 ");");
         closeCon(con);
     }

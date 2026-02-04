@@ -2,7 +2,7 @@ package deseptikon.monya.parcels.db.auxiliary;
 
 
 import deseptikon.monya.auxiliary.ReplaceLatin;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.LmstQuery;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.LmstQuery;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

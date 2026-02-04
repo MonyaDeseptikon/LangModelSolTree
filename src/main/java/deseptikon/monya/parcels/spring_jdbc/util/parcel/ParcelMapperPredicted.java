@@ -23,6 +23,17 @@ public class ParcelMapperPredicted implements RowMapper {
         parcel.setUsageCode(rs.getString("usage_code"));
         parcel.setPredictedUsageCode(rs.getString("PREDICTED_USAGE_CODE"));
         parcel.setLocality(rs.getString("locality"));
+
+        parcel.setTYPE_LOCALITY(rs.getString("TYPE_LOCALITY"));
+        parcel.setTYPE_STREET(rs.getString("TYPE_STREET"));
+        parcel.setSTREET(rs.getString("STREET"));
+        parcel.setTYPE_CITY(rs.getString("TYPE_CITY"));
+        parcel.setCITY(rs.getString("CITY"));
+        parcel.setTYPE_DISTRICT(rs.getString("TYPE_DISTRICT"));
+        parcel.setDISTRICT(rs.getString("DISTRICT"));
+        parcel.setKLADR(rs.getString("KLADR"));
+        parcel.setExpKLADR(rs.getString("EXP_KLADR"));
+
         return parcel;
     }
 }

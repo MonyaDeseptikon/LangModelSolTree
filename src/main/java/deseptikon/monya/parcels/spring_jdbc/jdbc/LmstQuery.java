@@ -1,7 +1,14 @@
-package deseptikon.monya.parcels.spring_jdbc.jdbc.parcel;
+package deseptikon.monya.parcels.spring_jdbc.jdbc;
 
+import deseptikon.monya.parcels.spring_jdbc.jdbc.auxiliary_jdbc.AuxiliaryTableQuery;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.building.BuildingsQuery;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.CombineMethodsParcel;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.GetParcelDAO;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.UpdateParcelDAO;
 import deseptikon.monya.parcels.spring_jdbc.models.Building;
+import deseptikon.monya.parcels.spring_jdbc.models.CodeKLADR;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
+import deseptikon.monya.parcels.spring_jdbc.util.auxiliary_util.AuxiliaryArrayMakerToDB;
 import deseptikon.monya.parcels.spring_jdbc.util.building.BuildingArrayMakerToDB;
 import deseptikon.monya.parcels.spring_jdbc.util.building.BuildingMapper;
 import deseptikon.monya.parcels.spring_jdbc.util.parcel.ParcelArrayMakerToDB;
@@ -16,7 +23,7 @@ import javax.sql.DataSource;
 import java.util.List;
 import java.util.Set;
 
-public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMakerToDB, BuildingArrayMakerToDB, CombineMethodsParcel, BuildingsQuery {
+public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMakerToDB, BuildingArrayMakerToDB, CombineMethodsParcel, BuildingsQuery, AuxiliaryTableQuery, AuxiliaryArrayMakerToDB {
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate template;
@@ -24,6 +31,15 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.template = new NamedParameterJdbcTemplate(jdbcTemplate);
+    }
+
+    @Override
+    public void insertCodeKLADRList(List<CodeKLADR> codeKLADRList) {
+        String insertRowSQL = "INSERT INTO PARCELS.PARCEL_LIST_2026" +
+                "(CODE_KLADR, TYPE_DISTRICT, DISTRICT, CITY, TYPE_CITY, LOCALITY, TYPE_LOCALITY, STREET, TYPE_STREET, CODE_OKATO) " +
+                "VALUES (:CODE_KLADR, :TYPE_DISTRICT, :DISTRICT, :CITY, :TYPE_CITY, :LOCALITY, :TYPE_LOCALITY, :STREET, :TYPE_STREET, :CODE_OKATO)";
+
+        template.batchUpdate(insertRowSQL, codeKLADRArrayMakerToDB(codeKLADRList));
     }
 
     @Override
@@ -188,14 +204,51 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     @Override
     public void updateParcelsForReplaceLatin(List<Parcel> parcels) {
 
+
+
+
+                "utilization_permitted_use_text",
+                "utilization_land_use",
+                "other",
+                "TYPE_STREET",
+                "STREET",
+                "TYPE_LOCALITY",
+                "locality",
+                "TYPE_CITY",
+                "CITY",
+                "TYPE_DISTRICT",
+                "DISTRICT"
+
+
+
+
+
+
+        parameter.addValue("DISTRICT", parcel.getDISTRICT());
+        parameter.addValue("TYPE_DISTRICT", parcel.getTYPE_DISTRICT());
+        parameter.addValue("CITY", parcel.getCITY());
+        parameter.addValue("TYPE_CITY", parcel.getTYPE_CITY());
+        parameter.addValue("TYPE_LOCALITY", parcel.getTYPE_LOCALITY());
+        parameter.addValue("STREET", parcel.getSTREET());
+        parameter.addValue("TYPE_STREET", parcel.getTYPE_STREET());
+        parameter.addValue("OTHER", parcel.getOther());
+        parameter.addValue("UTILIZATION_LAND_USE", parcel.getUtilizationLandUse());
+        parameter.addValue("UTILIZATION_PERMITTED_USE_TEXT"
+
+
         String SQLUpdate = "UPDATE PARCELS.PARCEL_LIST_2026 SET " +
                 "utilization_by_doc = :utilization_by_docList, " +
                 "category = :categoryList, " +
                 "note = :noteList, " +
                 "locality = :localityList " +
+
+
+
+
+
                 "WHERE id = :idList";
 
-        template.batchUpdate(SQLUpdate, ParcelArrayMakerToDBForReplaceLatin(parcels));
+        template.batchUpdate(SQLUpdate, parcelArrayMakerToDBForReplaceLatin(parcels));
     }
 
     /// Здесь размещены запросы к таблице Buildings
@@ -226,9 +279,10 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     public void insertParcelList(List<Parcel> parcelList) {
         String insertRowSQL = "INSERT INTO PARCELS.PARCEL_LIST_2026" +
                 "(CADASTRAL_NUMBER, AREA, OKATO, OKTMO, KLADR, DISTRICT, TYPE_DISTRICT, CITY, TYPE_CITY, LOCALITY, TYPE_LOCALITY, SOVIET_VILLAGE, STREET, TYPE_STREET, OTHER, NOTE, APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, USAGE_CODE) " +
-                "VALUES (:CADASTRAL_NUMBER, :AREA, :OKATO, :OKTMO, :KLADR, :DISTRICT, :TYPE_DISTRICT, :CITY, :TYPE_CITY, :LOCALITY, :TYPE_LOCALITY, :SOVIET_VILLAGE, :STREET, :TYPE_STREET, :OTHER, :NOTE, :APPROVAL_DOCUMENT_NAME, :CATEGORY, :UTILIZATION_LAND_USE, :UTILIZATION_BY_DOC, :UTILIZATION_PERMITTED_USE_TEXT, :INNER_CADASTRAL_NUMBERS, :USAGE_CODE\n)";
+                "VALUES (:CADASTRAL_NUMBER, :AREA, :OKATO, :OKTMO, :KLADR, :DISTRICT, :TYPE_DISTRICT, :CITY, :TYPE_CITY, :LOCALITY, :TYPE_LOCALITY, :SOVIET_VILLAGE, :STREET, :TYPE_STREET, :OTHER, :NOTE, :APPROVAL_DOCUMENT_NAME, :CATEGORY, :UTILIZATION_LAND_USE, :UTILIZATION_BY_DOC, :UTILIZATION_PERMITTED_USE_TEXT, :INNER_CADASTRAL_NUMBERS, :USAGE_CODE)";
 
         template.batchUpdate(insertRowSQL, excelParcelToDB(parcelList));
     }
+
 
 }

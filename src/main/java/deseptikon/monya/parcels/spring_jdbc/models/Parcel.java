@@ -29,6 +29,15 @@ public class Parcel {
     private String TYPE_STREET;
     private String KLADR;
     private String TYPE_LOCALITY;
+    private String expKLADR;
+
+    public String getExpKLADR() {
+        return expKLADR;
+    }
+
+    public void setExpKLADR(String expKLADR) {
+        this.expKLADR = expKLADR;
+    }
 
     public String getTYPE_LOCALITY() {
         return TYPE_LOCALITY;

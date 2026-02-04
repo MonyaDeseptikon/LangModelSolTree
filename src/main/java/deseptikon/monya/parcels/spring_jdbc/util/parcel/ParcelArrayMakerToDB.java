@@ -1,5 +1,6 @@
 package deseptikon.monya.parcels.spring_jdbc.util.parcel;
 
+import deseptikon.monya.parcels.spring_jdbc.models.CodeKLADR;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
@@ -9,7 +10,8 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ParcelArrayMakerToDB {
-    default MapSqlParameterSource[] ParcelArrayMakerToDBForReplaceLatin(List<Parcel> parcels) {
+
+    default MapSqlParameterSource[] parcelArrayMakerToDBForReplaceLatin(List<Parcel> parcels) {
         MapSqlParameterSource[] parameters = new MapSqlParameterSource[parcels.size()];
         int count = 0;
         for (Parcel parcel : parcels) {
@@ -81,4 +83,5 @@ public interface ParcelArrayMakerToDB {
         }
         return parameters;
     }
+
 }

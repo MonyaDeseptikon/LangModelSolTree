@@ -1,6 +1,7 @@
 package deseptikon.monya.parcels.io_excel.mapper;
 
 import deseptikon.monya.parcels.io_excel.auxiliary.ServiceForExcel;
+import deseptikon.monya.parcels.spring_jdbc.models.CodeKLADR;
 import deseptikon.monya.parcels.spring_jdbc.models.Parcel;
 import org.dhatim.fastexcel.reader.Row;
 
@@ -35,5 +36,19 @@ public class ExcelRowMapper implements ServiceForExcel {
         parcel.setInnerCadastralNumbers(List.of(row.getCellText(208).split("_x000D_\\n")));
 
         return parcel;
+    }
+
+    public CodeKLADR codeKLADRRow(Row row) {
+        CodeKLADR codeKLADR = new CodeKLADR();
+        codeKLADR.setCity(row.getCellText(0));
+        codeKLADR.setDistrict(row.getCellText(1));
+        codeKLADR.setTypeLocality(row.getCellText(2));
+        codeKLADR.setLocality(row.getCellText(3));
+        codeKLADR.setTypeStreet(row.getCellText(5));
+        codeKLADR.setStreet(row.getCellText(4));
+        codeKLADR.setCodeKLADR(row.getCellText(6));
+        codeKLADR.setCodeOKATO(row.getCellText(10));
+
+        return codeKLADR;
     }
 }

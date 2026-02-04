@@ -1,10 +1,9 @@
 package deseptikon.monya.parcels.spring_jdbc.models;
 
-import java.util.List;
-
-public class KLADR {
+public class CodeKLADR {
     private Integer id;
-    private String KLADR;
+    private String codeKLADR;
+    private String codeOKATO;
     private String typeDistrict;
     private String district;
     private String typeCity;
@@ -22,12 +21,12 @@ public class KLADR {
         this.id = id;
     }
 
-    public String getKLADR() {
-        return KLADR;
+    public String getCodeKLADR() {
+        return codeKLADR;
     }
 
-    public void setKLADR(String KLADR) {
-        this.KLADR = KLADR;
+    public void setCodeKLADR(String codeKLADR) {
+        this.codeKLADR = codeKLADR;
     }
 
     public String getTypeDistrict() {
@@ -92,5 +91,13 @@ public class KLADR {
 
     public void setStreet(String street) {
         Street = street;
+    }
+
+    public String getCodeOKATO() {
+        return codeOKATO;
+    }
+
+    public void setCodeOKATO(String codeOKATO) {
+        this.codeOKATO = codeOKATO;
     }
 }

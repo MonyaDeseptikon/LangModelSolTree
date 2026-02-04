@@ -2,7 +2,7 @@ package deseptikon.monya.parcels.io_excel.handlers.excel_to_db;
 
 import deseptikon.monya.parcels.io_excel.transfer.IOExcelDB;
 import deseptikon.monya.parcels.io_excel.transfer.BuildingsIOExcel;
-import deseptikon.monya.parcels.spring_jdbc.jdbc.parcel.LmstQuery;
+import deseptikon.monya.parcels.spring_jdbc.jdbc.LmstQuery;
 import deseptikon.monya.parcels.spring_jdbc.models.Building;
 import org.apache.commons.lang3.time.StopWatch;
 import org.springframework.context.ApplicationContext;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class Buildings {
+public class BuildingHandler {
 
 
     public static void main(String[] args) throws SQLException, IOException {
