@@ -1,4 +1,4 @@
-package deseptikon.monya.parcels.db;
+package deseptikon.monya.configuration.db;
 
 import java.sql.*;
 

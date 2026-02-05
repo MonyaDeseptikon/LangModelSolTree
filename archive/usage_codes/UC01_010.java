@@ -1,4 +1,4 @@
-package deseptikon.monya.parcels.usage_codes;
+package deseptikon.monya.configuration.usage_codes;
 
 import deseptikon.monya.db.RetrieveRow;
 import deseptikon.monya.db.UpdateRow;
