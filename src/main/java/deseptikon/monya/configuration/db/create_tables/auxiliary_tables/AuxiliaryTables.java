@@ -12,10 +12,11 @@ public class AuxiliaryTables {
 
     public static void main(String[] args) throws SQLException {
         AuxiliaryTables auxiliaryTables = new AuxiliaryTables();
-        auxiliaryTables.createScheme();
+//        auxiliaryTables.createScheme();
 //        auxiliaryTables.createOKTMO();
-        auxiliaryTables.createKLADR();
-
+//        auxiliaryTables.createKLADR();
+//        auxiliaryTables.columnNew();
+        auxiliaryTables.eraseRegexp();
     }
 
     private void createScheme() throws SQLException {
@@ -58,8 +59,29 @@ public class AuxiliaryTables {
                 "TYPE_LOCALITY VARCHAR(MAX) NULL, " +
                 "STREET VARCHAR(MAX) NULL, " +
                 "TYPE_STREET VARCHAR(MAX) NULL, " +
-                "CODE_OKATO VARCHAR(30) NOT NULL" +
+                "CODE_OKATO VARCHAR(30) NULL" +
+                "REGEXP VARCHAR(MAX) NULL" +
                 ");");
+        closeCon(con);
+    }
+
+    //Добавление столбцов
+    private void columnNew() throws SQLException {
+        Connection con = getConnections();
+        Statement statement = con.createStatement();
+
+
+        statement.execute("ALTER TABLE AUXILIARY.KLADR ADD COLUMN IF NOT EXISTS REGEXP VARCHAR(MAX) DEFAULT ('');");
+
+        closeCon(con);
+    }
+
+    public void eraseRegexp() throws SQLException {
+        Connection con = getConnections();
+        Statement statement = con.createStatement();
+        statement.execute("UPDATE AUXILIARY.KLADR SET " +
+                "REGEXP = '';");
+
         closeCon(con);
     }
 

@@ -33,6 +33,7 @@ public class ParcelMapperPredicted implements RowMapper {
         parcel.setDISTRICT(rs.getString("DISTRICT"));
         parcel.setKLADR(rs.getString("KLADR"));
         parcel.setExpKLADR(rs.getString("EXP_KLADR"));
+        parcel.setREGEXP(rs.getString("REGEXP"));
 
         return parcel;
     }

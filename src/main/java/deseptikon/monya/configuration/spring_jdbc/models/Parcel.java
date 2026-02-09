@@ -30,6 +30,15 @@ public class Parcel {
     private String KLADR;
     private String TYPE_LOCALITY;
     private String expKLADR;
+    private String REGEXP;
+
+    public String getREGEXP() {
+        return REGEXP;
+    }
+
+    public void setREGEXP(String REGEXP) {
+        this.REGEXP = REGEXP;
+    }
 
     public String getExpKLADR() {
         return expKLADR;
@@ -253,6 +262,21 @@ public class Parcel {
         this.usageCode = usageCode;
     }
 
-
-
+    //Для просмотра процесса определения КЛАДР
+    @Override
+    public String toString() {
+        return "Parcel{" +
+                "id=" + id +
+                ", КН='" + cadastralNumber + '\'' +
+                ", DISTRICT='" + DISTRICT + '\'' +
+                ", CITY='" + CITY + '\'' +
+                ", TYPE_LOCALITY='" + TYPE_LOCALITY + '\'' +
+                ", locality='" + locality + '\'' +
+                ", TYPE_STREET='" + TYPE_STREET + '\'' +
+                ", STREET='" + STREET + '\'' +
+                ", note='" + note + '\'' +
+                ", KLADR='" + KLADR + '\'' +
+                ", expKLADR='" + expKLADR + '\'' +
+                '}';
+    }
 }

@@ -9,6 +9,7 @@ import deseptikon.monya.configuration.spring_jdbc.models.Building;
 import deseptikon.monya.configuration.spring_jdbc.models.CodeKLADR;
 import deseptikon.monya.configuration.spring_jdbc.models.Parcel;
 import deseptikon.monya.configuration.spring_jdbc.util.auxiliary_util.AuxiliaryArrayMakerToDB;
+import deseptikon.monya.configuration.spring_jdbc.util.auxiliary_util.CodeKLADRMapper;
 import deseptikon.monya.configuration.spring_jdbc.util.building.BuildingArrayMakerToDB;
 import deseptikon.monya.configuration.spring_jdbc.util.building.BuildingMapper;
 import deseptikon.monya.configuration.spring_jdbc.util.parcel.ParcelArrayMakerToDB;
@@ -34,9 +35,69 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     }
 
     @Override
+    public void fillRegexpKLADRList(List<CodeKLADR> codeKLADRList) {
+        String SQLUpdate = "UPDATE AUXILIARY.KLADR SET " +
+                "REGEXP = :REGEXP " +
+                "WHERE ID = :ID";
+        template.batchUpdate(SQLUpdate, codeKLADRArrayMakerToDB(codeKLADRList));
+
+    }
+
+    @Override
+    public void concatParcelsKLADRTags(List<Parcel> parcels) {
+        String SQLUpdate = "UPDATE PARCELS.PARCEL_LIST_2026 SET " +
+
+                "REGEXP = " +
+                "CASE " +
+                "WHEN REGEXP = '' " +
+                "THEN :REGEXP " +
+                "ELSE CONCAT(REGEXP, '; ', :REGEXP) " +
+                "END, " +
+
+                "EXP_KLADR = " +
+                "CASE " +
+                "WHEN EXP_KLADR = '' " +
+                "THEN :EXP_KLADR " +
+                "ELSE CONCAT(EXP_KLADR, '; ', :EXP_KLADR) " +
+                "END " +
+
+                "WHERE ID = :ID";
+
+        template.batchUpdate(SQLUpdate, forKLADR(parcels));
+    }
+
+    //Думал так будет быстрее , чем перебор всех значений, но что БД висит.
+    //Запрос : SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP
+    //Добавление в запрос ограничения по количеству строк результата не дал
+//    @Override
+//    public List<Parcel> getListParcelsByTagsKLADRInnerJoin(StringBuilder district, StringBuilder city, StringBuilder typeLocality, StringBuilder locality, StringBuilder typeStreet, StringBuilder street) {
+//
+//        String SQLQuery = "SELECT * FROM PARCELS.VIEW_KLADR PVK " +
+//                "INNER JOIN " +
+//                "AUXILIARY.KLADR AK WHERE ROWNUM <10 " +
+//                "ON PVK.NOTE REGEXP AK.REGEXP";
+//
+//        return template.query(SQLQuery, ?, new ParcelMapperPredicted());
+//
+//
+//    }
+
+    @Override
+    public List<Parcel> getListParcelsByTagsKLADRNote(StringBuilder district, StringBuilder city, StringBuilder typeLocality, StringBuilder locality, StringBuilder typeStreet, StringBuilder street) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("tags", district.append(city).append(typeLocality).append(locality).append(typeStreet).append(street));
+        System.out.println(parameters);
+        String SQLQuery = "SELECT * FROM PARCELS.VIEW_KLADR PVK " +
+                "WHERE LOWER(PVK.NOTE) REGEXP :tags";
+        System.out.println(SQLQuery);
+        return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
+    }
+
+
+    @Override
     public List<CodeKLADR> getListCodeKLADR() {
         String SQLQuery = "SELECT * FROM AUXILIARY.KLADR";
-        return jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted());
+        return jdbcTemplate.query(SQLQuery, new CodeKLADRMapper());
     }
 
     @Override
@@ -77,7 +138,7 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
 
         Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
         String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND " +
-                // Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
+                // Это было ошибкой, - осуществляется поиск фразы Optional.Empty : Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
                 "LOWER(utilization_by_doc) NOT REGEXP ? AND " +
                 "area >= ? AND " +
                 "area <= ?";
@@ -100,7 +161,7 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     public List<Parcel> getListParcelsByTagsWithICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea) {
         Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
         String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND " +
-                // Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
+                // Это было ошибкой, - осуществляется поиск фразы Optional.Empty : Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
                 "LOWER(utilization_by_doc) NOT REGEXP ? AND " +
                 "inner_cadastral_numbers != '' AND " +
                 "area >= ? AND " +
@@ -114,7 +175,7 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
                 innerCNTableName + " PI " +
                 "ON PP.inner_cadastral_numbers REGEXP PI.CADASTRAL_NUMBER " +
                 "WHERE LOWER(PP.utilization_by_doc) REGEXP ? AND " +
-                // Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
+                // Это было ошибкой, - осуществляется поиск фразы Optional.Empty : Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
                 "LOWER(PP.utilization_by_doc) NOT REGEXP ? AND " +
                 "PP.area >= ? AND " +
                 "PP.area <= ?";
@@ -137,17 +198,12 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
                 "BI " +
                 "ON PP.inner_cadastral_numbers REGEXP BI.CADASTRAL_NUMBER " +
                 "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
-                // Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
+                // Это было ошибкой, - осуществляется поиск фразы Optional.Empty : Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
                 "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags AND " +
                 "PP.area >= :moreArea AND " +
                 "PP.area <= :lessArea";
         return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
 
-//                jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted(), arg);
-
-//        SELECT * FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN (SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN('0401', '0403')) BI
-//        ON  PP.inner_cadastral_numbers  regexp BI.CADASTRAL_NUMBER
-//        WHERE LOWER(PP.utilization_by_doc) REGEXP '.*магаз.*' AND LOWER(PP.utilization_by_doc) NOT REGEXP '.*сельско.*' AND p.area >= 0 AND p.area <= 10000000
     }
 
     //Переопределение метода getListParcelsByTagsJoinListICN
@@ -167,7 +223,7 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
                 "BI " +
                 "ON PP.inner_cadastral_numbers REGEXP BI.CADASTRAL_NUMBER " +
                 "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
-                // Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
+                // Это было ошибкой, - осуществляется поиск фразы Optional.Empty : Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
                 "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags";
         return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
     }

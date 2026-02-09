@@ -7,4 +7,5 @@ import java.util.List;
 public interface AuxiliaryTableQuery {
     void insertCodeKLADRList(List<CodeKLADR> codeKLADRList);
     List<CodeKLADR> getListCodeKLADR();
+    void fillRegexpKLADRList(List<CodeKLADR> codeKLADRList);
 }

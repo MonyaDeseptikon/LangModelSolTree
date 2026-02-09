@@ -4281,3 +4281,935 @@ Column "PARCELS.PARCEL_LIST_2026.PREDICTED_USAGE_CODE" not found [42122-240]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 24 more
+2026-02-06 11:26:39.872331+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVKWHERE [*]LOWER(PVK.NOTE) REGEXP ?"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVKWHERE [*]LOWER(PVK.NOTE) REGEXP ?"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVKWHERE LOWER(PVK.NOTE) REGEXP ? [42000-240]
+2026-02-06 11:32:05.141311+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:751)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:803)
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.query(NamedParameterJdbcTemplate.java:224)
+	at deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery.getListParcelsByTagsKLADRNote(LmstQuery.java:58)
+	at deseptikon.monya.kladr.ExposeKLADR.iterateKLADRList(ExposeKLADR.java:49)
+	at deseptikon.monya.kladr.ExposeKLADR.main(ExposeKLADR.java:30)
+2026-02-06 12:04:14.334251+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:751)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:803)
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.query(NamedParameterJdbcTemplate.java:224)
+	at deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery.getListParcelsByTagsKLADRNote(LmstQuery.java:58)
+	at deseptikon.monya.kladr.ExposeKLADR.iterateKLADRList(ExposeKLADR.java:56)
+	at deseptikon.monya.kladr.ExposeKLADR.main(ExposeKLADR.java:30)
+2026-02-06 13:04:57.693778+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:751)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:803)
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.query(NamedParameterJdbcTemplate.java:224)
+	at deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery.getListParcelsByTagsKLADRNote(LmstQuery.java:58)
+	at deseptikon.monya.kladr.ExposeKLADR.iterateKLADRList(ExposeKLADR.java:56)
+	at deseptikon.monya.kladr.ExposeKLADRTest.main(ExposeKLADRTest.java:33)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701)
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:528)
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:139)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:139)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:139)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:67)
+	at com.intellij.junit6.JUnit6IdeaTestRunner.startRunnerWithArgs(JUnit6IdeaTestRunner.java:67)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:237)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+2026-02-06 13:07:59.469740+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:751)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:803)
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.query(NamedParameterJdbcTemplate.java:224)
+	at deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery.getListParcelsByTagsKLADRNote(LmstQuery.java:58)
+	at deseptikon.monya.kladr.ExposeKLADR.iterateKLADRList(ExposeKLADR.java:56)
+	at deseptikon.monya.kladr.ExposeKLADR.main(ExposeKLADR.java:30)
+2026-02-06 13:17:04.114910+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Запрос был отменен или закончилось время ожидания сессии
+Statement was canceled or the session timed out; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP '.*ижевск[^а-яА-Я].*.*ул.*.*авангардная.*' [57014-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:572)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Command.checkCanceled(Command.java:154)
+	at org.h2.command.Prepared.checkCanceled(Prepared.java:344)
+	at org.h2.command.Prepared.setCurrentRowNumber(Prepared.java:407)
+	at org.h2.command.query.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1866)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:78)
+	at org.h2.result.FetchedResult.next(FetchedResult.java:34)
+	at org.h2.command.query.Select.readWithLimit(Select.java:760)
+	at org.h2.command.query.Select.queryFlat(Select.java:753)
+	at org.h2.command.query.Select.queryWithoutCache(Select.java:873)
+	at org.h2.command.query.Query.queryWithoutCacheLazyCheck(Query.java:214)
+	at org.h2.command.query.Query.query(Query.java:548)
+	at org.h2.command.query.Query.query(Query.java:510)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:222)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:257)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-06 13:25:34.552016+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:751)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:803)
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.query(NamedParameterJdbcTemplate.java:224)
+	at deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery.getListParcelsByTagsKLADRNote(LmstQuery.java:59)
+	at deseptikon.monya.kladr.ExposeKLADR.iterateKLADRList(ExposeKLADR.java:56)
+	at deseptikon.monya.kladr.ExposeKLADR.main(ExposeKLADR.java:30)
+2026-02-06 13:26:53.875680+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Запрос был отменен или закончилось время ожидания сессии
+Statement was canceled or the session timed out; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP '.*ижевск[^а-яА-Я].*.*ул.*.*авангардная.' [57014-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:572)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Command.checkCanceled(Command.java:154)
+	at org.h2.command.Prepared.checkCanceled(Prepared.java:344)
+	at org.h2.command.Prepared.setCurrentRowNumber(Prepared.java:407)
+	at org.h2.command.query.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1866)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:78)
+	at org.h2.result.FetchedResult.next(FetchedResult.java:34)
+	at org.h2.command.query.Select.readWithLimit(Select.java:760)
+	at org.h2.command.query.Select.queryFlat(Select.java:753)
+	at org.h2.command.query.Select.queryWithoutCache(Select.java:873)
+	at org.h2.command.query.Query.queryWithoutCacheLazyCheck(Query.java:214)
+	at org.h2.command.query.Query.query(Query.java:548)
+	at org.h2.command.query.Query.query(Query.java:510)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:222)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:257)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-06 13:27:27.445389+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Запрос был отменен или закончилось время ожидания сессии
+Statement was canceled or the session timed out; SQL statement:
+SELECT * FROM PARCELS.PARCEL_LIST_2026  WHERE LOWER(NOTE) REGEXP '.*ижевск[^а-яА-Я].*.*ул.*.*авангардная.' [57014-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:572)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Command.checkCanceled(Command.java:154)
+	at org.h2.command.Prepared.checkCanceled(Prepared.java:344)
+	at org.h2.command.Prepared.setCurrentRowNumber(Prepared.java:407)
+	at org.h2.command.query.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1866)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:78)
+	at org.h2.result.FetchedResult.next(FetchedResult.java:34)
+	at org.h2.command.query.Select.readWithLimit(Select.java:760)
+	at org.h2.command.query.Select.queryFlat(Select.java:753)
+	at org.h2.command.query.Select.queryWithoutCache(Select.java:873)
+	at org.h2.command.query.Query.queryWithoutCacheLazyCheck(Query.java:214)
+	at org.h2.command.query.Query.query(Query.java:548)
+	at org.h2.command.query.Query.query(Query.java:510)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:222)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:257)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-06 13:28:09.061185+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Запрос был отменен или закончилось время ожидания сессии
+Statement was canceled or the session timed out; SQL statement:
+SELECT * FROM PARCELS.PARCEL_LIST_2026  WHERE LOWER(NOTE) REGEXP '.*ижевск.*.*ул.*.*авангардная.' [57014-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:572)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Command.checkCanceled(Command.java:154)
+	at org.h2.command.Prepared.checkCanceled(Prepared.java:344)
+	at org.h2.command.Prepared.setCurrentRowNumber(Prepared.java:407)
+	at org.h2.command.query.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1866)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:78)
+	at org.h2.result.FetchedResult.next(FetchedResult.java:34)
+	at org.h2.command.query.Select.readWithLimit(Select.java:760)
+	at org.h2.command.query.Select.queryFlat(Select.java:753)
+	at org.h2.command.query.Select.queryWithoutCache(Select.java:873)
+	at org.h2.command.query.Query.queryWithoutCacheLazyCheck(Query.java:214)
+	at org.h2.command.query.Query.query(Query.java:548)
+	at org.h2.command.query.Query.query(Query.java:510)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:222)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:257)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-06 13:32:29.296701+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Запрос был отменен или закончилось время ожидания сессии
+Statement was canceled or the session timed out; SQL statement:
+SELECT * FROM PARCELS.PARCEL_LIST_2026  WHERE LOWER(NOTE) REGEXP '.*ижевск.*.*ул.*.*авангардная.*' [57014-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:572)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Command.checkCanceled(Command.java:154)
+	at org.h2.command.Prepared.checkCanceled(Prepared.java:344)
+	at org.h2.command.Prepared.setCurrentRowNumber(Prepared.java:407)
+	at org.h2.command.query.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1866)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:78)
+	at org.h2.result.FetchedResult.next(FetchedResult.java:34)
+	at org.h2.command.query.Select.readWithLimit(Select.java:760)
+	at org.h2.command.query.Select.queryFlat(Select.java:753)
+	at org.h2.command.query.Select.queryWithoutCache(Select.java:873)
+	at org.h2.command.query.Query.queryWithoutCacheLazyCheck(Query.java:214)
+	at org.h2.command.query.Query.query(Query.java:548)
+	at org.h2.command.query.Query.query(Query.java:510)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:222)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:257)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-06 13:53:15.523596+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Запрос был отменен или закончилось время ожидания сессии
+Statement was canceled or the session timed out; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR   WHERE LOWER(NOTE) REGEXP '.*ижевск.*ул.*авангардная.*' [57014-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:572)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Command.checkCanceled(Command.java:154)
+	at org.h2.command.Prepared.checkCanceled(Prepared.java:344)
+	at org.h2.command.Prepared.setCurrentRowNumber(Prepared.java:407)
+	at org.h2.command.query.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1866)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:78)
+	at org.h2.result.FetchedResult.next(FetchedResult.java:34)
+	at org.h2.command.query.Select.readWithLimit(Select.java:760)
+	at org.h2.command.query.Select.queryFlat(Select.java:753)
+	at org.h2.command.query.Select.queryWithoutCache(Select.java:873)
+	at org.h2.command.query.Query.queryWithoutCacheLazyCheck(Query.java:214)
+	at org.h2.command.query.Query.query(Query.java:548)
+	at org.h2.command.query.Query.query(Query.java:510)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:222)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:257)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-06 13:56:05.036085+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Запрос был отменен или закончилось время ожидания сессии
+Statement was canceled or the session timed out; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR   WHERE LOWER(NOTE) REGEXP '.*ижевск[^а-яА-Я].*ул.*авангардная.*' [57014-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:572)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Command.checkCanceled(Command.java:154)
+	at org.h2.command.Prepared.checkCanceled(Prepared.java:344)
+	at org.h2.command.Prepared.setCurrentRowNumber(Prepared.java:407)
+	at org.h2.command.query.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1866)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:78)
+	at org.h2.result.FetchedResult.next(FetchedResult.java:34)
+	at org.h2.command.query.Select.readWithLimit(Select.java:760)
+	at org.h2.command.query.Select.queryFlat(Select.java:753)
+	at org.h2.command.query.Select.queryWithoutCache(Select.java:873)
+	at org.h2.command.query.Query.queryWithoutCacheLazyCheck(Query.java:214)
+	at org.h2.command.query.Query.query(Query.java:548)
+	at org.h2.command.query.Query.query(Query.java:510)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:222)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:257)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-06 16:16:11.271704+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:751)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:803)
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.query(NamedParameterJdbcTemplate.java:224)
+	at deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery.getListParcelsByTagsKLADRNote(LmstQuery.java:59)
+	at deseptikon.monya.kladr.ExposeKLADR.iterateKLADRList(ExposeKLADR.java:56)
+	at deseptikon.monya.kladr.ExposeKLADR.main(ExposeKLADR.java:30)
+2026-02-06 17:15:56.932294+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:751)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:803)
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.query(NamedParameterJdbcTemplate.java:224)
+	at deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery.getListParcelsByTagsKLADRNote(LmstQuery.java:59)
+	at deseptikon.monya.kladr.ExposeKLADR.iterateKLADRList(ExposeKLADR.java:51)
+	at deseptikon.monya.kladr.ExposeKLADR.main(ExposeKLADR.java:30)
+2026-02-09 09:07:52.202333+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:751)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:803)
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.query(NamedParameterJdbcTemplate.java:224)
+	at deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery.getListParcelsByTagsKLADRNote(LmstQuery.java:59)
+	at deseptikon.monya.kladr.ExposeKLADR.iterateKLADRList(ExposeKLADR.java:50)
+	at deseptikon.monya.kladr.ExposeKLADR.main(ExposeKLADR.java:30)
+2026-02-09 09:08:19.762712+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP in ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*', ижевск[[*]^а-яА-Я].*ул.*[^а-яА-Я]армейская.*)"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP in ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*', ижевск[[*]^а-яА-Я].*ул.*[^а-яА-Я]армейская.*)"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP in ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*', ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*) [42000-240]
+2026-02-09 09:08:40.059866+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP [*]in ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*', 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*')"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP [*]in ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*', 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*')"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP in ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*', 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*') [42000-240]
+2026-02-09 09:09:24.546157+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'[*]|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*')"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'[*]|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*')"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*') [42000-240]
+2026-02-09 09:10:48.876265+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'[*]|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'[*]|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*' [42000-240]
+2026-02-09 09:10:50.537708+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'[*]|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'[*]|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*' [42000-240]
+2026-02-09 09:10:50.940364+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'[*]|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'[*]|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*' [42000-240]
+2026-02-09 09:10:51.111790+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'[*]|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'[*]|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*' [42000-240]
+2026-02-09 09:10:51.564278+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'[*]|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'[*]|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'|'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*' [42000-240]
+2026-02-09 09:11:02.610352+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*' [*]| 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*')"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*' [*]| 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*')"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*' | 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*') [42000-240]
+2026-02-09 09:11:16.872678+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*' [*]| 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*' [*]| 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*' | 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*' [42000-240]
+2026-02-09 09:11:17.828482+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*' [*]| 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*' [*]| 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*' | 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*' [42000-240]
+2026-02-09 09:12:35.842551+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'  [*]| 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'  [*]| 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'  | 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*' [42000-240]
+2026-02-09 09:12:46.992281+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'  [*], 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'  [*], 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*'"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'  , 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*' [42000-240]
+2026-02-09 09:13:11.114645+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'  [*]| 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*')"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'  [*]| 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*')"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP ('ижевск[^а-яА-Я].*ул.*[^а-яА-Я]авангардная.*'  | 'ижевск[^а-яА-Я].*ул.*[^а-яА-Я]армейская.*') [42000-240]
+2026-02-09 10:36:43.692765+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:751)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:803)
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.query(NamedParameterJdbcTemplate.java:224)
+	at deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery.getListParcelsByTagsKLADRNote(LmstQuery.java:59)
+	at deseptikon.monya.kladr.ExposeKLADR.iterateKLADRList(ExposeKLADR.java:50)
+	at deseptikon.monya.kladr.ExposeKLADR.main(ExposeKLADR.java:30)
+2026-02-09 12:02:19.173181+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:751)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:803)
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.query(NamedParameterJdbcTemplate.java:224)
+	at deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery.getListParcelsByTagsKLADRNote(LmstQuery.java:94)
+	at deseptikon.monya.kladr.ExposeKLADR.iterateKLADRList(ExposeKLADR.java:50)
+	at deseptikon.monya.kladr.ExposeKLADR.main(ExposeKLADR.java:30)
+2026-02-09 12:04:23.609221+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "UPDATE PARCELS.PARCEL_LIST_2026 SET REGEXP = ?, [*]CASE WHEN REGEXP = '' THEN ? ELSE CONCAT(REGEXP, '; ', ?) END EXP_KLADR = ? CASE WHEN EXP_KLADR = '' THEN ? ELSE CONCAT(EXP_KLADR, '; ', ?) END WHERE ID = ?"; ожидалось "identifier"
+Syntax error in SQL statement "UPDATE PARCELS.PARCEL_LIST_2026 SET REGEXP = ?, [*]CASE WHEN REGEXP = '' THEN ? ELSE CONCAT(REGEXP, '; ', ?) END EXP_KLADR = ? CASE WHEN EXP_KLADR = '' THEN ? ELSE CONCAT(EXP_KLADR, '; ', ?) END WHERE ID = ?"; expected "identifier"; SQL statement:
+UPDATE PARCELS.PARCEL_LIST_2026 SET REGEXP = ?, CASE WHEN REGEXP = '' THEN ? ELSE CONCAT(REGEXP, '; ', ?) END EXP_KLADR = ? CASE WHEN EXP_KLADR = '' THEN ? ELSE CONCAT(EXP_KLADR, '; ', ?) END WHERE ID = ? [42001-240]
+2026-02-09 13:30:11.054580+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:751)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:803)
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.query(NamedParameterJdbcTemplate.java:224)
+	at deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery.getListParcelsByTagsKLADRNote(LmstQuery.java:82)
+	at deseptikon.monya.kladr.ExposeKLADR.iterateKLADRList(ExposeKLADR.java:53)
+	at deseptikon.monya.kladr.ExposeKLADR.main(ExposeKLADR.java:32)
+2026-02-09 13:57:36.279991+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:130)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:737)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:669)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:731)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:751)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:803)
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.query(NamedParameterJdbcTemplate.java:224)
+	at deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery.getListParcelsByTagsKLADRNote(LmstQuery.java:82)
+	at deseptikon.monya.kladr.ExposeKLADR.iterateKLADRList(ExposeKLADR.java:56)
+	at deseptikon.monya.kladr.ExposeKLADR.main(ExposeKLADR.java:35)
+2026-02-09 15:52:13.166744+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK \000d\000a                INNER JOIN \000d\000a                AUXILIARY.KLADR AK WHERE ROWNUM <10 \000d\000a                [*]ON PVK.NOTE REGEXP AK.REGEXP"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK \000d\000a                INNER JOIN \000d\000a                AUXILIARY.KLADR AK WHERE ROWNUM <10 \000d\000a                [*]ON PVK.NOTE REGEXP AK.REGEXP"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK 
+                INNER JOIN 
+                AUXILIARY.KLADR AK WHERE ROWNUM <10 
+                ON PVK.NOTE REGEXP AK.REGEXP [42000-240]
+2026-02-09 15:52:44.446185+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK WHERE ROWNUM <10 [*]ON PVK.NOTE REGEXP AK.REGEXP"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK WHERE ROWNUM <10 [*]ON PVK.NOTE REGEXP AK.REGEXP"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK WHERE ROWNUM <10 ON PVK.NOTE REGEXP AK.REGEXP [42000-240]
+2026-02-09 15:53:09.195456+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR  WHERE ROWNUM <10 [*]AK ON PVK.NOTE REGEXP AK.REGEXP"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR  WHERE ROWNUM <10 [*]AK ON PVK.NOTE REGEXP AK.REGEXP"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR  WHERE ROWNUM <10 AK ON PVK.NOTE REGEXP AK.REGEXP [42000-240]
+2026-02-09 15:57:54.635299+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Запрос был отменен или закончилось время ожидания сессии
+Statement was canceled or the session timed out; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP  WHERE ROWNUM <10 [57014-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:572)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Command.checkCanceled(Command.java:154)
+	at org.h2.command.Prepared.checkCanceled(Prepared.java:344)
+	at org.h2.command.Prepared.setCurrentRowNumber(Prepared.java:407)
+	at org.h2.command.query.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1866)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:78)
+	at org.h2.result.FetchedResult.next(FetchedResult.java:34)
+	at org.h2.command.query.Select.readWithLimit(Select.java:760)
+	at org.h2.command.query.Select.queryFlat(Select.java:753)
+	at org.h2.command.query.Select.queryWithoutCache(Select.java:873)
+	at org.h2.command.query.Query.queryWithoutCacheLazyCheck(Query.java:214)
+	at org.h2.command.query.Query.query(Query.java:529)
+	at org.h2.command.query.Query.query(Query.java:510)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:222)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:257)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-09 15:58:29.545601+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP  WHERE PVK.[*]ROWNUM < 2"; ожидалось "identifier"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP  WHERE PVK.[*]ROWNUM < 2"; expected "identifier"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP  WHERE PVK.ROWNUM < 2 [42001-240]
+2026-02-09 15:58:51.613835+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP  WHERE ROWNUM ([*]PVK)< 2"; ожидалось ")"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP  WHERE ROWNUM ([*]PVK)< 2"; expected ")"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP  WHERE ROWNUM (PVK)< 2 [42001-240]
+2026-02-09 16:00:34.786950+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Запрос был отменен или закончилось время ожидания сессии
+Statement was canceled or the session timed out; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP  WHERE ROWNUM < 2 [57014-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:572)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Command.checkCanceled(Command.java:154)
+	at org.h2.command.Prepared.checkCanceled(Prepared.java:344)
+	at org.h2.command.Prepared.setCurrentRowNumber(Prepared.java:407)
+	at org.h2.command.query.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1866)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:78)
+	at org.h2.result.FetchedResult.next(FetchedResult.java:34)
+	at org.h2.command.query.Select.readWithLimit(Select.java:760)
+	at org.h2.command.query.Select.queryFlat(Select.java:753)
+	at org.h2.command.query.Select.queryWithoutCache(Select.java:873)
+	at org.h2.command.query.Query.queryWithoutCacheLazyCheck(Query.java:214)
+	at org.h2.command.query.Query.query(Query.java:529)
+	at org.h2.command.query.Query.query(Query.java:510)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:222)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:257)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-09 16:12:19.738983+04:00 database: flush
+org.h2.message.DbException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: D:/Applications/AssignСode/lmst.mv.db [2.4.240/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: D:/Applications/AssignСode/lmst.mv.db [2.4.240/7]" [50000-240]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.message.DbException.convert(DbException.java:407)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:1675)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:502)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:296)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2164)
+	at org.h2.mvstore.db.Store.<init>(Store.java:133)
+	at org.h2.engine.Database.<init>(Database.java:328)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:350)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:124)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
+	at deseptikon.monya.auxiliary.ConnectionDB.getConnections(ConnectionDB.java:23)
+	at deseptikon.monya.configuration.db.create_tables.parcel_tables.ParcelCreateProvisionalList.eraseKLADR(ParcelCreateProvisionalList.java:110)
+	at deseptikon.monya.kladr.ExposeKLADR.main(ExposeKLADR.java:34)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: D:/Applications/AssignСode/lmst.mv.db [2.4.240/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: D:/Applications/AssignСode/lmst.mv.db [2.4.240/7]" [50000-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 20 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: D:/Applications/AssignСode/lmst.mv.db [2.4.240/7]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
+	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
+	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:291)
+	... 14 more
+2026-02-09 16:12:29.157499+04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Запрос был отменен или закончилось время ожидания сессии
+Statement was canceled or the session timed out; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP [57014-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:572)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Command.checkCanceled(Command.java:154)
+	at org.h2.command.Prepared.checkCanceled(Prepared.java:344)
+	at org.h2.command.Prepared.setCurrentRowNumber(Prepared.java:407)
+	at org.h2.command.query.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1866)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:78)
+	at org.h2.result.FetchedResult.next(FetchedResult.java:34)
+	at org.h2.command.query.Select.readWithLimit(Select.java:760)
+	at org.h2.command.query.Select.queryFlat(Select.java:753)
+	at org.h2.command.query.Select.queryWithoutCache(Select.java:873)
+	at org.h2.command.query.Query.queryWithoutCacheLazyCheck(Query.java:214)
+	at org.h2.command.query.Query.query(Query.java:548)
+	at org.h2.command.query.Query.query(Query.java:510)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:222)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:257)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-09 16:12:35.619897+04:00 database: flush
+org.h2.message.DbException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: D:/Applications/AssignСode/lmst.mv.db [2.4.240/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: D:/Applications/AssignСode/lmst.mv.db [2.4.240/7]" [50000-240]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.message.DbException.convert(DbException.java:407)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:1675)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:502)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:296)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2164)
+	at org.h2.mvstore.db.Store.<init>(Store.java:133)
+	at org.h2.engine.Database.<init>(Database.java:328)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:350)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:124)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
+	at deseptikon.monya.auxiliary.ConnectionDB.getConnections(ConnectionDB.java:23)
+	at deseptikon.monya.configuration.db.create_tables.parcel_tables.ParcelCreateProvisionalList.eraseKLADR(ParcelCreateProvisionalList.java:110)
+	at deseptikon.monya.kladr.ExposeKLADR.main(ExposeKLADR.java:34)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: D:/Applications/AssignСode/lmst.mv.db [2.4.240/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: D:/Applications/AssignСode/lmst.mv.db [2.4.240/7]" [50000-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 20 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: D:/Applications/AssignСode/lmst.mv.db [2.4.240/7]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
+	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
+	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:291)
+	... 14 more
+2026-02-09 16:28:35.508224+04:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP where ak [*]rownum < 10"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP where ak [*]rownum < 10"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP where ak rownum < 10 [42000-240]
+2026-02-09 16:29:01.237218+04:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP where ak.regexp [*]rownum < 10"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP where ak.regexp [*]rownum < 10"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP where ak.regexp rownum < 10 [42000-240]
+2026-02-09 16:29:49.270653+04:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Запрос был отменен или закончилось время ожидания сессии
+Statement was canceled or the session timed out; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP FETCH FIRST 10 ROWS ONLY [57014-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:572)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Command.checkCanceled(Command.java:154)
+	at org.h2.command.Prepared.checkCanceled(Prepared.java:344)
+	at org.h2.command.Prepared.setCurrentRowNumber(Prepared.java:407)
+	at org.h2.command.query.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1866)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:78)
+	at org.h2.result.FetchedResult.next(FetchedResult.java:34)
+	at org.h2.command.query.Select.readWithLimit(Select.java:760)
+	at org.h2.command.query.Select.queryFlat(Select.java:753)
+	at org.h2.command.query.Select.queryWithoutCache(Select.java:873)
+	at org.h2.command.query.Query.queryWithoutCacheLazyCheck(Query.java:214)
+	at org.h2.command.query.Query.query(Query.java:548)
+	at org.h2.command.query.Query.query(Query.java:510)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:222)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:257)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-09 16:30:41.353553+04:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLTimeoutException: Запрос был отменен или закончилось время ожидания сессии
+Statement was canceled or the session timed out; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP FETCH FIRST 2 ROWS ONLY [57014-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:572)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Command.checkCanceled(Command.java:154)
+	at org.h2.command.Prepared.checkCanceled(Prepared.java:344)
+	at org.h2.command.Prepared.setCurrentRowNumber(Prepared.java:407)
+	at org.h2.command.query.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1866)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:78)
+	at org.h2.result.FetchedResult.next(FetchedResult.java:34)
+	at org.h2.command.query.Select.readWithLimit(Select.java:760)
+	at org.h2.command.query.Select.queryFlat(Select.java:753)
+	at org.h2.command.query.Select.queryWithoutCache(Select.java:873)
+	at org.h2.command.query.Query.queryWithoutCacheLazyCheck(Query.java:214)
+	at org.h2.command.query.Query.query(Query.java:548)
+	at org.h2.command.query.Query.query(Query.java:510)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:222)
+	at org.h2.command.Command.executeQuery(Command.java:198)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:257)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-02-09 16:30:42.706032+04:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE FETCH FIRST 2 ROWS ONLY [*]REGEXP AK.REGEXP"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE FETCH FIRST 2 ROWS ONLY [*]REGEXP AK.REGEXP"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE FETCH FIRST 2 ROWS ONLY REGEXP AK.REGEXP [42000-240]
+2026-02-09 16:31:09.330035+04:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PARCELS.VIEW_KLADR FETCH FIRST 2 ROWS ONLY [*]PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP"
+Syntax error in SQL statement "SELECT * FROM PARCELS.VIEW_KLADR FETCH FIRST 2 ROWS ONLY [*]PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP"; SQL statement:
+SELECT * FROM PARCELS.VIEW_KLADR FETCH FIRST 2 ROWS ONLY PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP [42000-240]
+2026-02-09 16:34:49.514013+04:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: База данных открыта в эксклюзивном режиме, открыть дополнительные соединения невозможно
+The database is open in exclusive mode; can not open additional connections [90135-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1281)
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1273)
+	at org.h2.engine.SessionLocal.setCurrentCommand(SessionLocal.java:1251)
+	at org.h2.engine.SessionLocal.endStatement(SessionLocal.java:1731)
+	at org.h2.command.Command.executeQuery(Command.java:235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:257)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)

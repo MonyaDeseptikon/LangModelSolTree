@@ -1,5 +1,7 @@
 package deseptikon.monya.configuration.spring_jdbc.jdbc;
 
+import deseptikon.monya.configuration.spring_jdbc.models.Parcel;
+import deseptikon.monya.configuration.spring_jdbc.util.parcel.ParcelMapperPredicted;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -10,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import javax.sql.DataSource;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,5 +49,17 @@ class lmstQueryTest {
             String colNameString = String.join(", ", columnsName);
         assertEquals( "a, b, c", colNameString);
 
+    }
+
+    @Test
+    public void getListParcelsByTagsKLADRNote() {
+        StringBuilder district = new StringBuilder("*Завьяловский*");
+        StringBuilder city = new StringBuilder();
+        StringBuilder typeLocality = new StringBuilder("*п*");
+        StringBuilder locality = new StringBuilder("*Вараксино*");
+
+       String test = String.valueOf(district.append(city).append(typeLocality).append(locality));
+
+        assertEquals( "*Завьяловский**п**Вараксино*", test);
     }
 }

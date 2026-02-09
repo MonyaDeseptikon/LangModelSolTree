@@ -12,6 +12,15 @@ public class CodeKLADR {
     private String locality;
     private String typeStreet;
     private String Street;
+    private String REGEXP;
+
+    public String getREGEXP() {
+        return REGEXP;
+    }
+
+    public void setREGEXP(String REGEXP) {
+        this.REGEXP = REGEXP;
+    }
 
     public Integer getId() {
         return id;

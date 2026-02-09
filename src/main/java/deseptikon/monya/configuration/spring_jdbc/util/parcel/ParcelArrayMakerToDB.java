@@ -10,6 +10,20 @@ import java.util.List;
 
 public interface ParcelArrayMakerToDB {
 
+    default MapSqlParameterSource[] forKLADR(List<Parcel> parcels) {
+        MapSqlParameterSource[] parameters = new MapSqlParameterSource[parcels.size()];
+        int count = 0;
+        for (Parcel parcel : parcels) {
+            MapSqlParameterSource parameter = new MapSqlParameterSource();
+            parameter.addValue("ID", parcel.getId());
+            parameter.addValue("EXP_KLADR", parcel.getExpKLADR());
+            parameter.addValue("REGEXP", parcel.getREGEXP());
+
+            parameters[count++] = parameter;
+        }
+        return parameters;
+    }
+
     default MapSqlParameterSource[] parcelArrayMakerToDBForReplaceLatin(List<Parcel> parcels) {
         MapSqlParameterSource[] parameters = new MapSqlParameterSource[parcels.size()];
         int count = 0;

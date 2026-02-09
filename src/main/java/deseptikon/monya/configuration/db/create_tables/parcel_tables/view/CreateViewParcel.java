@@ -20,10 +20,13 @@ public class CreateViewParcel {
     private void viewKLADR() throws SQLException {
         Connection con = getConnections();
         Statement statement = con.createStatement();
-
+        statement.execute("DROP VIEW IF EXISTS PARCELS.VIEW_KLADR" +
+                ";");
         statement.execute("CREATE VIEW IF NOT EXISTS PARCELS.VIEW_KLADR " +
                 "AS SELECT * FROM PARCELS.PARCEL_LIST_2026 " +
-                "WHERE LENGTH(KLADR) < 17" +
+                "WHERE LENGTH(KLADR) < 17 " +
+                "AND "+
+                "NOTE !=''" +
                 ";");
         closeCon(con);
     }

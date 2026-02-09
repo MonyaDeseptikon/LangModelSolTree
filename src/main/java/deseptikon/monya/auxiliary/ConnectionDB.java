@@ -11,10 +11,6 @@ public class ConnectionDB {
     private static final String user = "";
     private static final String password = "";
 
-    public static void main(String[] args) throws SQLException {
-        ConnectionDB connectionDB = new ConnectionDB();
-    }
-
     Server webServer = Server.createWebServer().start(); // http://localhost:8082
     //        Server server = Server.createTcpServer().start(); //jdbc:h2:tcp://localhost:не знаю номер порта
 
@@ -32,5 +28,7 @@ public class ConnectionDB {
         con.close();
     }
 
-
+    public static void main(String[] args) throws SQLException {
+        ConnectionDB connectionDB = new ConnectionDB();
+    }
 }

@@ -23,6 +23,8 @@ public interface AuxiliaryArrayMakerToDB {
             parameter.addValue("TYPE_STREET", codeKLADR.getTypeStreet());
             parameter.addValue("STREET", codeKLADR.getStreet());
             parameter.addValue("CODE_OKATO", codeKLADR.getCodeOKATO());
+            parameter.addValue("REGEXP", codeKLADR.getREGEXP());
+
             parameters[count++] = parameter;
         }
         return parameters;

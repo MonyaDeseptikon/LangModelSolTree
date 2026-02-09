@@ -10,7 +10,7 @@ public class ParcelCreateProvisionalList {
 
     public static void main(String[] args) throws SQLException {
         ParcelCreateProvisionalList createTable = new ParcelCreateProvisionalList();
-//        createTable.columnForKLADR();
+        createTable.columnForKLADR();
 //        createTable.dropTableParcel();
 //        createTable.createScheme();
 //        createTable.createParcelList();
@@ -64,8 +64,9 @@ public class ParcelCreateProvisionalList {
                 "utilization_permitted_use_text VARCHAR(MAX) NULL, " +
                 "inner_cadastral_numbers VARCHAR(MAX) NULL, " +
                 "usage_code VARCHAR(15) NULL, " +
-                "PREDICTED_USAGE_CODE VARCHAR(MAX) NULL" +
-
+                "PREDICTED_USAGE_CODE VARCHAR(MAX) NULL, " +
+                "EXP_KLADR VARCHAR(MAX) NULL, " +
+                "REGEXP VARCHAR(MAX) NULL" +
                 ");");
 
         closeCon(con);
@@ -86,6 +87,7 @@ public class ParcelCreateProvisionalList {
         statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS KLADR VARCHAR(MAX) DEFAULT ('');");
         statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS TYPE_LOCALITY VARCHAR(MAX) DEFAULT ('');");
         statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS EXP_KLADR VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS REGEXP VARCHAR(MAX) DEFAULT ('');");
 
         closeCon(con);
     }
@@ -100,6 +102,17 @@ public class ParcelCreateProvisionalList {
         statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS PREDICTED_USAGE_CODE VARCHAR(MAX) DEFAULT ('');");
 */
         statement.execute("UPDATE PARCELS.PARCEL_LIST_2026 SET PREDICTED_USAGE_CODE = '';");
+
+        closeCon(con);
+    }
+
+    public static void eraseKLADR() throws SQLException {
+        Connection con = getConnections();
+        Statement statement = con.createStatement();
+        statement.execute("UPDATE PARCELS.PARCEL_LIST_2026 SET " +
+                "EXP_KLADR = ''," +
+                "REGEXP = '';"
+                );
 
         closeCon(con);
     }
