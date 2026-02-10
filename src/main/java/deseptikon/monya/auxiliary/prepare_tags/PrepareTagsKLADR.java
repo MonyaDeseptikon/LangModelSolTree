@@ -45,11 +45,10 @@ public interface PrepareTagsKLADR {
 
         if (!tags.isBlank()) {
             for (String tag : tags.split(" ")) {
+                //Чтобы не нашлась ул в переулке
                 readyTags = (tag.equals("ул")) ? readyTags.append("[^а-яА-Я]").append(tag.trim().toLowerCase()).append(".*") : readyTags.append(tag.trim().toLowerCase()).append(".*");
-
             }
         }
         return readyTags;
     }
-
 }

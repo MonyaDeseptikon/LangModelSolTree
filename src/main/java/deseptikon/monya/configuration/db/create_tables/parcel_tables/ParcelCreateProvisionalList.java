@@ -110,7 +110,7 @@ public class ParcelCreateProvisionalList {
         Connection con = getConnections();
         Statement statement = con.createStatement();
         statement.execute("UPDATE PARCELS.PARCEL_LIST_2026 SET " +
-                "EXP_KLADR = ''," +
+                "EXP_KLADR = '', " +
                 "REGEXP = '';"
                 );
 

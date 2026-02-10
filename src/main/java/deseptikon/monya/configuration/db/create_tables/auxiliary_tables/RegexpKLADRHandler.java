@@ -26,7 +26,7 @@ public class RegexpKLADRHandler implements PrepareTagsKLADR {
 
     private List<CodeKLADR> fillingRegexp(List<CodeKLADR> codeKLADRList) {
         codeKLADRList.forEach(cK ->
-                cK.setREGEXP(String.valueOf(commonTag(cK.getDistrict()).append(cityTag(cK.getCity())).append(commonTag(cK.getTypeLocality()))
+                cK.setREGEXP(String.valueOf(commonTag(cK.getDistrict()).append(commonTag(cK.getTypeCity())).append(cityTag(cK.getCity())).append(commonTag(cK.getTypeLocality()))
                         .append(commonTag(cK.getLocality())).append(streetTypeTag(cK.getTypeStreet())).append(streetTag(cK.getStreet()))))
         );
         return codeKLADRList;

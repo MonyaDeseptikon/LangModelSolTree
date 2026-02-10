@@ -41,6 +41,7 @@ public class ExcelRowMapper implements ServiceForExcel {
     public CodeKLADR codeKLADRRow(Row row) {
         CodeKLADR codeKLADR = new CodeKLADR();
         codeKLADR.setCity(row.getCellText(0));
+        codeKLADR.setTypeCity(row.getCellText(11));
         codeKLADR.setDistrict(row.getCellText(1));
         codeKLADR.setTypeLocality(row.getCellText(2));
         codeKLADR.setLocality(row.getCellText(3));

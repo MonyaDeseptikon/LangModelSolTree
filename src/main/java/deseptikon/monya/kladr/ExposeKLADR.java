@@ -27,7 +27,6 @@ public class ExposeKLADR implements PrepareTagsKLADR {
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
 
         AuxiliaryTableQuery queryTemplate = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
-
         GetParcelDAO queryTemplateParcel = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
         UpdateParcelDAO updateParcel = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
         ExposeKLADR exposeKLADR = new ExposeKLADR();
@@ -55,10 +54,10 @@ public class ExposeKLADR implements PrepareTagsKLADR {
     public List<Parcel> iterateKLADRList(GetParcelDAO queryTemplate, List<CodeKLADR> codeKLADRList) {
         List<Parcel> parcelList = new ArrayList<>();
 
-        for (CodeKLADR code : codeKLADRList.subList(11,20)) {
+        for (CodeKLADR code : codeKLADRList) {
             List<Parcel> parcelListTemp = new ArrayList<>();
 
-            parcelListTemp.addAll(queryTemplate.getListParcelsByTagsKLADRNote(commonTag(code.getDistrict()), cityTag(code.getCity()), commonTag(code.getTypeLocality()),
+            parcelListTemp.addAll(queryTemplate.getListParcelsByTagsKLADRNote(commonTag(code.getDistrict()), commonTag(code.getTypeCity()), cityTag(code.getCity()), commonTag(code.getTypeLocality()),
                     commonTag(code.getLocality()), streetTypeTag(code.getTypeStreet()), streetTag(code.getStreet())));
 
             parcelListTemp.forEach(p -> {

@@ -14,9 +14,9 @@ public class AuxiliaryTables {
         AuxiliaryTables auxiliaryTables = new AuxiliaryTables();
 //        auxiliaryTables.createScheme();
 //        auxiliaryTables.createOKTMO();
-//        auxiliaryTables.createKLADR();
+        auxiliaryTables.createKLADR();
 //        auxiliaryTables.columnNew();
-        auxiliaryTables.eraseRegexp();
+//        auxiliaryTables.eraseRegexp();
     }
 
     private void createScheme() throws SQLException {
@@ -48,6 +48,8 @@ public class AuxiliaryTables {
         Connection con = getConnections();
         Statement statement = con.createStatement();
 
+        statement.execute("DROP TABLE IF EXISTS AUXILIARY.KLADR");
+
         statement.execute("CREATE TABLE IF NOT EXISTS AUXILIARY.KLADR " +
                 "(ID INT AUTO_INCREMENT PRIMARY KEY, " +
                 "CODE_KLADR VARCHAR(30) NOT NULL, " +
@@ -59,7 +61,7 @@ public class AuxiliaryTables {
                 "TYPE_LOCALITY VARCHAR(MAX) NULL, " +
                 "STREET VARCHAR(MAX) NULL, " +
                 "TYPE_STREET VARCHAR(MAX) NULL, " +
-                "CODE_OKATO VARCHAR(30) NULL" +
+                "CODE_OKATO VARCHAR(30) NULL, " +
                 "REGEXP VARCHAR(MAX) NULL" +
                 ");");
         closeCon(con);

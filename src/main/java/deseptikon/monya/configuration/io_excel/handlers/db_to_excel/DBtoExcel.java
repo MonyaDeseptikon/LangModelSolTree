@@ -1,4 +1,4 @@
-package deseptikon.monya.configuration.io_excel.handlers;
+package deseptikon.monya.configuration.io_excel.handlers.db_to_excel;
 
 import deseptikon.monya.configuration.io_excel.transfer.IOExcelDB;
 import deseptikon.monya.configuration.io_excel.transfer.ParcelIOExcel;
@@ -19,7 +19,7 @@ import java.util.Set;
 
 public class DBtoExcel {
 
-    public static void main(String[] args) throws IOException, SQLException {
+    public static void main(String[] args) throws IOException, SQLException, NoSuchFieldException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
 
@@ -32,10 +32,14 @@ public class DBtoExcel {
         //Данные
         parcelList.addAll(queryTemplate.getListParcels());
 
-        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Test.xlsx");
+//        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Test.xlsx");
+        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Присваивание КЛАДР\\Test.xlsx");
+
         FileOutputStream os = new FileOutputStream(file);
         Workbook wb = new Workbook(os, "MonyaDes", "1.0");
-        Worksheet ws = wb.newWorksheet("PrdtUC");
+
+//        Worksheet ws = wb.newWorksheet("PrdtUC");
+        Worksheet ws = wb.newWorksheet("expKLADR");
 
         parcelIOExcel.readDBFillExcel(ws, parcelList, queryTemplate.getListColumnName());
 

@@ -14,7 +14,7 @@ public class CreateViewParcel {
         CreateViewParcel createViewParcel = new CreateViewParcel();
 
         createViewParcel.viewKLADR();
-
+        createViewParcel.viewKLADRForTest();
     }
 
     private void viewKLADR() throws SQLException {
@@ -23,10 +23,25 @@ public class CreateViewParcel {
         statement.execute("DROP VIEW IF EXISTS PARCELS.VIEW_KLADR" +
                 ";");
         statement.execute("CREATE VIEW IF NOT EXISTS PARCELS.VIEW_KLADR " +
-                "AS SELECT * FROM PARCELS.PARCEL_LIST_2026 " +
-                "WHERE LENGTH(KLADR) < 17 " +
+                "AS SELECT ID, CADASTRAL_NUMBER, OKATO, OKTMO, DISTRICT, TYPE_DISTRICT, CITY, TYPE_CITY, LOCALITY, TYPE_LOCALITY, STREET, TYPE_STREET, NOTE, EXP_KLADR, REGEXP FROM PARCELS.PARCEL_LIST_2026 " +
+                "WHERE LENGTH(KLADR) < 16 " +
                 "AND "+
                 "NOTE !=''" +
+                ";");
+        closeCon(con);
+    }
+
+    private void viewKLADRForTest() throws SQLException {
+        Connection con = getConnections();
+        Statement statement = con.createStatement();
+        statement.execute("DROP VIEW IF EXISTS PARCELS.VIEW_KLADR_TEST" +
+                ";");
+        statement.execute("CREATE VIEW IF NOT EXISTS PARCELS.VIEW_KLADR_TEST " +
+                "AS SELECT ID, CADASTRAL_NUMBER, OKATO, OKTMO, DISTRICT, TYPE_DISTRICT, CITY, TYPE_CITY, LOCALITY, TYPE_LOCALITY, STREET, TYPE_STREET, NOTE, EXP_KLADR, REGEXP  FROM PARCELS.PARCEL_LIST_2026 " +
+                "WHERE LENGTH(KLADR) < 16 " +
+                "AND "+
+                "NOTE !='' " +
+                "AND ROWNUM < 6000" +
                 ";");
         closeCon(con);
     }

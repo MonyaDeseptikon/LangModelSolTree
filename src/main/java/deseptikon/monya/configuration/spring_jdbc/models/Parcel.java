@@ -17,7 +17,7 @@ public class Parcel {
     private String utilizationLandUse;
     private String utilizationByDoc;
     private String utilizationPermittedUseText;
-    private List<String> innerCadastralNumbers;
+    private List<String> innerCadastralNumbers = List.of();
     private String usageCode;
     private String predictedUsageCode;
     private String DISTRICT;

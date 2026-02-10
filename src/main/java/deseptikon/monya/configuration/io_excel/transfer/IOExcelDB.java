@@ -3,7 +3,7 @@ package deseptikon.monya.configuration.io_excel.transfer;
 
 import deseptikon.monya.configuration.io_excel.auxiliary.ServiceForExcel;
 import deseptikon.monya.configuration.io_excel.mapper.ExcelRowMapper;
-import deseptikon.monya.configuration.io_excel.mapper.ExcelRowMapperOld;
+import deseptikon.monya.configuration.io_excel.mapper.DBtoExcelRowMapper;
 import deseptikon.monya.configuration.spring_jdbc.models.Building;
 import deseptikon.monya.configuration.spring_jdbc.models.CodeKLADR;
 import deseptikon.monya.configuration.spring_jdbc.models.Parcel;
@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 
-public class IOExcelDB implements ServiceForExcel, ExcelRowMapperOld, ParcelIOExcel, BuildingsIOExcel, CodeKLADRIOExcel {
+public class IOExcelDB implements ServiceForExcel, DBtoExcelRowMapper, ParcelIOExcel, BuildingsIOExcel, CodeKLADRIOExcel {
     ExcelRowMapper excelRowMapper = new ExcelRowMapper();
 
 
@@ -72,14 +72,16 @@ public class IOExcelDB implements ServiceForExcel, ExcelRowMapperOld, ParcelIOEx
     }
 
 
-    public void readDBFillExcel(Worksheet ws, Set<Parcel> parcelList, List<String> colHeads) {
+    public void readDBFillExcel(Worksheet ws, Set<Parcel> parcelList, List<String> colHeads)  {
         int row = 0;
-        parcelsHeads(ws, row, colHeads);
+        parcelsHeads(ws, row);
         row++;
         Iterator<Parcel> parcelIterator = parcelList.iterator();
         while (parcelIterator.hasNext()) {
             Parcel parcel = parcelIterator.next();
-            parcelsFill(ws, row, parcel);
+
+                parcelsFill(ws, row, parcel);
+
             row++;
         }
 

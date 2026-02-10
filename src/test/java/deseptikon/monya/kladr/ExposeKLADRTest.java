@@ -56,7 +56,7 @@ class ExposeKLADRTest implements PrepareTagsKLADR {
             System.out.println(commonTag(code.getTypeStreet()));
             System.out.println(commonTag(code.getStreet()));
 
-            parcelListTemp.addAll(queryTemplate.getListParcelsByTagsKLADRNote(commonTag(code.getDistrict()), cityTag(code.getCity()), commonTag(code.getTypeLocality()),
+            parcelListTemp.addAll(queryTemplate.getListParcelsByTagsKLADRNote(commonTag(code.getDistrict()), commonTag(code.getTypeCity()), cityTag(code.getCity()), commonTag(code.getTypeLocality()),
                     commonTag(code.getLocality()), commonTag(code.getTypeStreet()), commonTag(code.getStreet())));
 
             parcelListTemp.forEach(p -> p.setExpKLADR(code.getCodeKLADR()));

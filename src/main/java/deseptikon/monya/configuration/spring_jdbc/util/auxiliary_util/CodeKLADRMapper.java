@@ -18,6 +18,7 @@ public class CodeKLADRMapper implements RowMapper {
         codeKLADR.setCodeOKATO(rs.getString("CODE_OKATO"));
         codeKLADR.setDistrict(rs.getString("DISTRICT"));
         codeKLADR.setCity(rs.getString("CITY"));
+        codeKLADR.setTypeCity(rs.getString("TYPE_CITY"));
         codeKLADR.setTypeLocality(rs.getString("TYPE_LOCALITY"));
         codeKLADR.setLocality(rs.getString("LOCALITY"));
         codeKLADR.setTypeStreet(rs.getString("TYPE_STREET"));

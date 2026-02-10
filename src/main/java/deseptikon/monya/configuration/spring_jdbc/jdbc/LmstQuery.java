@@ -12,10 +12,7 @@ import deseptikon.monya.configuration.spring_jdbc.util.auxiliary_util.AuxiliaryA
 import deseptikon.monya.configuration.spring_jdbc.util.auxiliary_util.CodeKLADRMapper;
 import deseptikon.monya.configuration.spring_jdbc.util.building.BuildingArrayMakerToDB;
 import deseptikon.monya.configuration.spring_jdbc.util.building.BuildingMapper;
-import deseptikon.monya.configuration.spring_jdbc.util.parcel.ParcelArrayMakerToDB;
-import deseptikon.monya.configuration.spring_jdbc.util.parcel.ParcelMapperPredicted;
-import deseptikon.monya.configuration.spring_jdbc.util.parcel.ParcelMapperPredictedColName;
-import deseptikon.monya.configuration.spring_jdbc.util.parcel.ParcelMapperReplaceLatin;
+import deseptikon.monya.configuration.spring_jdbc.util.parcel.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -66,26 +63,24 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
         template.batchUpdate(SQLUpdate, forKLADR(parcels));
     }
 
-    //Думал так будет быстрее , чем перебор всех значений, но что БД висит.
-    //Запрос : SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP
-    //Добавление в запрос ограничения по количеству строк результата не дал
-//    @Override
-//    public List<Parcel> getListParcelsByTagsKLADRInnerJoin(StringBuilder district, StringBuilder city, StringBuilder typeLocality, StringBuilder locality, StringBuilder typeStreet, StringBuilder street) {
-//
-//        String SQLQuery = "SELECT * FROM PARCELS.VIEW_KLADR PVK " +
-//                "INNER JOIN " +
-//                "AUXILIARY.KLADR AK WHERE ROWNUM <10 " +
-//                "ON PVK.NOTE REGEXP AK.REGEXP";
-//
-//        return template.query(SQLQuery, ?, new ParcelMapperPredicted());
-//
-//
-//    }
+    //    !!! Не работало, т.к. в запросе была ошибка - не указал нижний регистр. Выполнение 70сек для 1000строк, 490сек - 10000строк
+        //    Думал так будет быстрее , чем перебор всех значений, но что БД висит. Добавление в запрос ограничения по количеству строк результата не дал
+        //    Запрос : SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP
+    @Override
+    public List<Parcel> getListParcelsByTagsKLADRInnerJoin() {
+//        VIEW_KLADR_TEST
+//        VIEW_KLADR
+        String SQLQuery = "SELECT PVK.ID, PVK.CADASTRAL_NUMBER, AK.CODE_KLADR AS AUX_KLADR, AK.REGEXP AS AUX_REGEXP FROM PARCELS.VIEW_KLADR PVK " +
+                "INNER JOIN " +
+                "AUXILIARY.KLADR AK " +
+                "ON LOWER(PVK.NOTE) REGEXP AK.REGEXP";
+        return jdbcTemplate.query(SQLQuery, new ParcelMapperJoinKLADR());
+    }
 
     @Override
-    public List<Parcel> getListParcelsByTagsKLADRNote(StringBuilder district, StringBuilder city, StringBuilder typeLocality, StringBuilder locality, StringBuilder typeStreet, StringBuilder street) {
+    public List<Parcel> getListParcelsByTagsKLADRNote(StringBuilder district, StringBuilder typeCity, StringBuilder city, StringBuilder typeLocality, StringBuilder locality, StringBuilder typeStreet, StringBuilder street) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("tags", district.append(city).append(typeLocality).append(locality).append(typeStreet).append(street));
+        parameters.addValue("tags", district.append(typeCity).append(city).append(typeLocality).append(locality).append(typeStreet).append(street));
         System.out.println(parameters);
         String SQLQuery = "SELECT * FROM PARCELS.VIEW_KLADR PVK " +
                 "WHERE LOWER(PVK.NOTE) REGEXP :tags";

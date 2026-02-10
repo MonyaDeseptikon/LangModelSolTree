@@ -1,2 +1,0 @@
-MapSqlParameterSource {tags=ижевск[^а-яА-Я].*ул.*[^а-яА-Я]Авангардная.*}
-SELECT * FROM PARCELS.VIEW_KLADR PVK WHERE LOWER(PVK.NOTE) REGEXP :tags
