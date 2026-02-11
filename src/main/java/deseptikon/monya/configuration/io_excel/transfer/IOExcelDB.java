@@ -72,7 +72,7 @@ public class IOExcelDB implements ServiceForExcel, DBtoExcelRowMapper, ParcelIOE
     }
 
 
-    public void readDBFillExcel(Worksheet ws, Set<Parcel> parcelList, List<String> colHeads)  {
+    public void readDBFillExcel(Worksheet ws, Set<Parcel> parcelList)  {
         int row = 0;
         parcelsHeads(ws, row);
         row++;

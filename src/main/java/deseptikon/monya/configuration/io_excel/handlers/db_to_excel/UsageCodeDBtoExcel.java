@@ -17,7 +17,14 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DBtoExcel {
+public class UsageCodeDBtoExcel {
+
+
+//!!!! ПЕРЕДЕЛАН из КЛАДР не проверялся!!!!
+
+
+
+
 
     public static void main(String[] args) throws IOException, SQLException, NoSuchFieldException {
         StopWatch stopWatch = new StopWatch();
@@ -28,20 +35,21 @@ public class DBtoExcel {
         Set<Parcel> parcelList = new HashSet<>();
         ParcelIOExcel parcelIOExcel = new IOExcelDB();
 
-
         //Данные
+
         parcelList.addAll(queryTemplate.getListParcels());
 
-//        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Test.xlsx");
-        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Присваивание КЛАДР\\Test.xlsx");
+
+        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Test.xlsx");
+
 
         FileOutputStream os = new FileOutputStream(file);
         Workbook wb = new Workbook(os, "MonyaDes", "1.0");
 
-//        Worksheet ws = wb.newWorksheet("PrdtUC");
-        Worksheet ws = wb.newWorksheet("expKLADR");
+        Worksheet ws = wb.newWorksheet("PrdtUC");
 
-        parcelIOExcel.readDBFillExcel(ws, parcelList, queryTemplate.getListColumnName());
+
+        parcelIOExcel.readDBFillExcel(ws, parcelList);
 
         wb.finish();
 

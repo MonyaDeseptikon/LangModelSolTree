@@ -104,16 +104,18 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
         template.batchUpdate(insertRowSQL, codeKLADRArrayMakerToDB(codeKLADRList));
     }
 
-    @Override
-    public List<String> getListColumnName() {
-        String SQLQuery = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'PARCEL_LIST_2026'";
-        return jdbcTemplate.query(SQLQuery, new ParcelMapperPredictedColName());
-    }
 
     @Override
     public List<Parcel> getListParcels() {
         String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026";
         return jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted());
+    }
+
+    @Override
+    public List<Parcel> getListParcelsView(String viewName) {
+        String SQLQuery = "SELECT * FROM PARCELS." +
+                viewName;
+        return jdbcTemplate.query(SQLQuery, new ParcelMapperViewKLADR());
     }
 
 
