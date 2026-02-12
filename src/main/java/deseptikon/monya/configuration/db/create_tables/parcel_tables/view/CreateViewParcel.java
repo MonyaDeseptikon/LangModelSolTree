@@ -15,6 +15,10 @@ public class CreateViewParcel {
 
         createViewParcel.viewKLADR();
         createViewParcel.viewKLADRForTest();
+        createViewParcel.viewKLADRForTestCN();
+
+
+
     }
 
     private void viewKLADR() throws SQLException {
@@ -31,7 +35,21 @@ public class CreateViewParcel {
         closeCon(con);
     }
 
-    private void viewKLADRForTest() throws SQLException {
+
+    public void viewKLADRForTestCN() throws SQLException {
+        Connection con = getConnections();
+        Statement statement = con.createStatement();
+        statement.execute("DROP VIEW IF EXISTS PARCELS.VIEW_KLADR_TEST_CN" +
+                ";");
+        statement.execute("CREATE VIEW IF NOT EXISTS PARCELS.VIEW_KLADR_TEST_CN " +
+                "AS SELECT ID, CADASTRAL_NUMBER, OKATO, OKTMO, DISTRICT, TYPE_DISTRICT, CITY, TYPE_CITY, LOCALITY, TYPE_LOCALITY, STREET, TYPE_STREET, NOTE, EXP_KLADR, REGEXP, KLADR  FROM PARCELS.PARCEL_LIST_2026 " +
+                "WHERE CADASTRAL_NUMBER = '18:02:020176:297' " +
+                ";");
+        closeCon(con);
+    }
+
+
+    public void viewKLADRForTest() throws SQLException {
         Connection con = getConnections();
         Statement statement = con.createStatement();
         statement.execute("DROP VIEW IF EXISTS PARCELS.VIEW_KLADR_TEST" +

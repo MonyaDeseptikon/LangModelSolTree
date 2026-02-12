@@ -67,10 +67,10 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
         //    Думал так будет быстрее , чем перебор всех значений, но что БД висит. Добавление в запрос ограничения по количеству строк результата не дал
         //    Запрос : SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP
     @Override
-    public List<Parcel> getListParcelsByTagsKLADRInnerJoin() {
-//        VIEW_KLADR_TEST
-//        VIEW_KLADR
-        String SQLQuery = "SELECT PVK.ID, PVK.CADASTRAL_NUMBER, AK.CODE_KLADR AS AUX_KLADR, AK.REGEXP AS AUX_REGEXP FROM PARCELS.VIEW_KLADR PVK " +
+    public List<Parcel> getListParcelsByTagsKLADRInnerJoin(String parcelTableName) {
+
+        String SQLQuery = "SELECT PVK.ID, PVK.CADASTRAL_NUMBER, AK.CODE_KLADR AS AUX_KLADR, AK.REGEXP AS AUX_REGEXP FROM PARCELS." +
+                parcelTableName + " PVK "+
                 "INNER JOIN " +
                 "AUXILIARY.KLADR AK " +
                 "ON LOWER(PVK.NOTE) REGEXP AK.REGEXP";

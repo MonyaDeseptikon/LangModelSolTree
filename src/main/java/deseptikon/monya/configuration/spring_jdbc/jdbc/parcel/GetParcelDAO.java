@@ -21,7 +21,8 @@ public interface GetParcelDAO {
     List<Parcel> getListParcelsByTagsJoinListICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, String innerCNTableName, List<String> usageCodeBuildings);
 
     List<Parcel> getListParcelsByTagsJoinListICN(StringBuilder tags, StringBuilder excludeTags, String innerCNTableName, List<String> usageCodeBuildings);
-//    List<Parcel> getListParcelsByTagsKLADREachColumn(StringBuilder district, StringBuilder city, StringBuilder typeLocality, StringBuilder locality, StringBuilder typeStreet, StringBuilder street);
+
     List<Parcel> getListParcelsByTagsKLADRNote(StringBuilder district, StringBuilder typeCity, StringBuilder city, StringBuilder typeLocality, StringBuilder locality, StringBuilder typeStreet, StringBuilder street);
     List<Parcel> getListParcelsView(String viewName);
+
 }

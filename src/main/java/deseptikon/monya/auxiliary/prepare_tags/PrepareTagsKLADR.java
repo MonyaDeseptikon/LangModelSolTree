@@ -29,10 +29,10 @@ public interface PrepareTagsKLADR {
             for (String tag : tags.split(" ")) {
                 if (tag.length() < 5) {
                     //10-я Подлесная, 1-я Подлесная
-                    readyTags = tag.matches("[0-9]+") ? readyTags.append("[^0-9]").append(tag.trim()).append("($|[^0-9])").append(".*") : readyTags.append(tag.trim().toLowerCase()).append(".*");
+                    readyTags = tag.matches("[0-9]+") ? readyTags.append("\\b").append(tag.trim()).append("\\b").append(".*") : readyTags.append(tag.trim().toLowerCase()).append(".*");
 
                 } else {
-                    readyTags.append("[^а-яА-Я]").append(tag.toLowerCase().trim()).append(".*");
+                    readyTags.append("([^а-яА-Я]|\\b)").append(tag.toLowerCase().trim()).append(".*");
                 }
             }
         }

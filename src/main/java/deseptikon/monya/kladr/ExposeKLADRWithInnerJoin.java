@@ -29,16 +29,18 @@ public class ExposeKLADRWithInnerJoin implements PrepareTagsKLADR {
         CombineMethodsParcel combineQuery = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
 
 
-        eraseKLADR();
-
-        List<Parcel> parcelList = combineQuery.getListParcelsByTagsKLADRInnerJoin();
+//        eraseKLADR();
+//        VIEW_KLADR_TEST
+//        VIEW_KLADR
+//        VIEW_KLADR_TEST_CN
+        String parcelTableName = "VIEW_KLADR";
+        List<Parcel> parcelList = combineQuery.getListParcelsByTagsKLADRInnerJoin(parcelTableName);
         updateParcel.concatParcelsKLADRTags(parcelList);
 
         stopWatch.stop();
         long timeTaken = stopWatch.getTime();
         System.out.println(timeTaken / 1000 + " секунд");
     }
-
 
 
 }
