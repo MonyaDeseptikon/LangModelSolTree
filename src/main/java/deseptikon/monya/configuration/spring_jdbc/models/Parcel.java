@@ -6,6 +6,7 @@ public class Parcel {
 
     private Integer id;
     private String cadastralNumber;
+    private String cadastralBlock;
     private Float area;
     private String OKATO;
     private String OKTMO;
@@ -31,6 +32,14 @@ public class Parcel {
     private String TYPE_LOCALITY;
     private String expKLADR;
     private String REGEXP;
+
+    public String getCadastralBlock() {
+        return cadastralBlock;
+    }
+
+    public void setCadastralBlock(String cadastralBlock) {
+        this.cadastralBlock = cadastralBlock;
+    }
 
     public String getREGEXP() {
         return REGEXP;

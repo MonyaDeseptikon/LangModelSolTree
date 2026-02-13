@@ -20,28 +20,17 @@ import java.util.Set;
 public class UsageCodeDBtoExcel {
 
 
-//!!!! ПЕРЕДЕЛАН из КЛАДР не проверялся!!!!
-
-
-
-
-
     public static void main(String[] args) throws IOException, SQLException, NoSuchFieldException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
         LmstQuery queryTemplate = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
-        Set<Parcel> parcelList = new HashSet<>();
         ParcelIOExcel parcelIOExcel = new IOExcelDB();
 
-        //Данные
+        Set<Parcel> parcelList = new HashSet<>(queryTemplate.getListParcels());
 
-        parcelList.addAll(queryTemplate.getListParcels());
-
-
-        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Test.xlsx");
-
+        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Тесты JAVA\\01_010\\TestNew.xlsx");
 
         FileOutputStream os = new FileOutputStream(file);
         Workbook wb = new Workbook(os, "MonyaDes", "1.0");

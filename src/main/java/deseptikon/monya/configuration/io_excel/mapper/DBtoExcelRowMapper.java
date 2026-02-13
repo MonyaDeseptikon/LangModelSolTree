@@ -13,9 +13,8 @@ public interface DBtoExcelRowMapper {
         ws.value(row, 3, parcel.getUtilizationByDoc());
         ws.value(row, 4, parcel.getUsageCode());
         ws.value(row, 5, parcel.getPredictedUsageCode());
-        ws.value(row, 6, parcel.getInnerCadastralNumbersString());
-
-        ws.value(row, 7, parcel.getNote());
+        ws.value(row, 6, parcel.getNote());
+        ws.value(row, 7, parcel.getInnerCadastralNumbersString());
         ws.value(row, 8, parcel.getExpKLADR());
         ws.value(row, 9, parcel.getREGEXP());
         ws.value(row, 10, parcel.getKLADR());
@@ -39,9 +38,8 @@ public interface DBtoExcelRowMapper {
         ws.value(row, 3, "utilizationByDoc");
         ws.value(row, 4, "usageCode");
         ws.value(row, 5, "predictedUsageCode");
-        ws.value(row, 6, "innerCadastralNumbers");
-
-        ws.value(row, 7, "note");
+        ws.value(row, 6, "note");
+        ws.value(row, 7, "innerCadastralNumbers");
         ws.value(row, 8, "expKLADR");
         ws.value(row, 9, "REGEXP");
         ws.value(row, 10, "KLADR");

@@ -31,6 +31,28 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
         this.template = new NamedParameterJdbcTemplate(jdbcTemplate);
     }
 
+    //    @Override
+    public List<Parcel> getListParcelsByTagsNew(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, Boolean isSearchInDistrict, Boolean isSearchInCity) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("tags", tags);
+        parameters.addValue("excludeTags", excludeTags);
+        parameters.addValue("moreArea", moreArea);
+        parameters.addValue("lessArea", lessArea);
+        String city = isSearchInCity ? "18:26:|18:27:|18:28:|18:29:|18:30:" : "В ГОРОДАХ НЕ ИЩЕМ";
+        String district = isSearchInDistrict ? "18:01:|18:02:|18:03:|18:04:|18:05:|18:06:|18:07:|18:08:|18:09:|18:10:|18:11:|18:12:|18:13:|18:14:|18:15:|18:16:|18:17:|18:18:|18:19:|18:20:|18:21:|18:22:|18:23:|18:24:|18:25:" : "В РАЙОНАХ НЕ ИЩЕМ";
+        parameters.addValue("district", district);
+        parameters.addValue("city", city);
+
+        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP :tags AND " +
+                "LOWER(utilization_by_doc) NOT REGEXP :excludeTags AND " +
+                "area >= :moreArea AND " +
+                "area <= :lessArea AND " +
+                "(CADASTRAL_NUMBER REGEXP :district OR " +
+                "CADASTRAL_NUMBER REGEXP :city)";
+        System.out.println(SQLQuery);
+        return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
+    }
+
     @Override
     public void fillRegexpKLADRList(List<CodeKLADR> codeKLADRList) {
         String SQLUpdate = "UPDATE AUXILIARY.KLADR SET " +
@@ -64,13 +86,13 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     }
 
     //    !!! Не работало, т.к. в запросе была ошибка - не указал нижний регистр. Выполнение 70сек для 1000строк, 490сек - 10000строк
-        //    Думал так будет быстрее , чем перебор всех значений, но что БД висит. Добавление в запрос ограничения по количеству строк результата не дал
-        //    Запрос : SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP
+    //    Думал так будет быстрее , чем перебор всех значений, но что БД висит. Добавление в запрос ограничения по количеству строк результата не дал
+    //    Запрос : SELECT * FROM PARCELS.VIEW_KLADR PVK INNER JOIN AUXILIARY.KLADR AK ON PVK.NOTE REGEXP AK.REGEXP
     @Override
     public List<Parcel> getListParcelsByTagsKLADRInnerJoin(String parcelTableName) {
 
         String SQLQuery = "SELECT PVK.ID, PVK.CADASTRAL_NUMBER, AK.CODE_KLADR AS AUX_KLADR, AK.REGEXP AS AUX_REGEXP FROM PARCELS." +
-                parcelTableName + " PVK "+
+                parcelTableName + " PVK " +
                 "INNER JOIN " +
                 "AUXILIARY.KLADR AK " +
                 "ON LOWER(PVK.NOTE) REGEXP AK.REGEXP";

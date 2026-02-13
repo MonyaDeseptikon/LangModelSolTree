@@ -5,6 +5,7 @@ target/
 .kotlin
 lmst.mv.db
 
+
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
