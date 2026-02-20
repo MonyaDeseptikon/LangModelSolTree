@@ -54,7 +54,7 @@ public class UC04_040 extends UC implements UCBuilder {
 
             parcelList.addAll(queryTemplate.getListParcelsByTagsJoinListICN(tags, excludeTags, innerCNTableName(), usageCodeBuildingsMustBe()));
 
-//            parcelList.addAll(queryTemplate.getListParcelsByTagsJoinICN(tags, excludeTags, condition.getMoreThisArea(), condition.getLessThisArea(), innerCNTableName()));
+
         }
         parcelList.forEach(p->p.setUsageCode(usageCode()));
         queryTemplate.concatParcelsPredictedUsageCode(parcelList.stream().toList());

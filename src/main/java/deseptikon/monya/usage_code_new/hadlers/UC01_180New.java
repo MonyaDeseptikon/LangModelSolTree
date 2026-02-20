@@ -41,7 +41,8 @@ public class UC01_180New {
                 "1009"));
         conditionsNew.setInnerCNTableName("BUILDINGS.PARCEL_INNER_CN");
         conditionsNew.setUsageCode("01:180");
-        conditionsNew.setExcludeTags(List.of("индивидуальный", "пашня_", "отдых__", "жилой", "дачный", "личный"));
+        conditionsNew.setExcludeTags(List.of());
+//        List.of("индивидуальный", "пашня_", "отдых__", "жилой", "дачный", "личный")
         conditionsNew.setConditionsNewList(List.of(
                 conditionsNew.new InternalConditions(List.of("1.18"),
                         List.of(), 0F, Float.POSITIVE_INFINITY, true, true),

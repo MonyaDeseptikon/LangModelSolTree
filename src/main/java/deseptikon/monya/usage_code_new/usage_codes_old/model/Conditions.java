@@ -10,6 +10,7 @@ public class Conditions {
     private Float freeField;
 
 
+
     public Conditions(List<String> tags, List<String> excludeTags, Float moreThisArea,
                       Float lessThisArea, Float freeField) {
         this.tags = tags;

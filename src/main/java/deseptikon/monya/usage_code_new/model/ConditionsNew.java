@@ -27,7 +27,7 @@ public class ConditionsNew implements PrepareTagsUCNew {
     public void assignmentCode(LmstQuery queryTemplate) {
         Set<Parcel> parcelListAll = new HashSet<>();
         for (ConditionsNew.InternalConditions condition : conditionsNewList) {
-            parcelListAll.addAll(queryTemplate.getListParcelsByTagsNew(queryTags(condition.getTags()), queryExcludeTags(condition.getExcludeTagsInternal()),
+            parcelListAll.addAll(queryTemplate.getListParcelsByTagsNew(queryTags(condition.getTags()), queryExcludeTags(this.getExcludeTags(), condition.getExcludeTagsInternal(), condition.getTags()),
                     condition.getMoreThisArea(), condition.getLessThisArea(), condition.isSearchInDistrict(), condition.isSearchInCity()));
         }
         parcelListAll.forEach(p->p.setPredictedUsageCode(usageCode));
@@ -35,14 +35,14 @@ public class ConditionsNew implements PrepareTagsUCNew {
 //        System.out.println(parcelListAll.size());
     }
 
-    //С проверкой ОКС, но без учета площади ОКС по отношению к площади ЗУ
+    //С проверкой ОКС и с учетом площади ОКС по отношению к площади ЗУ
     public void assignmentCodeInnerCNCheck(LmstQuery queryTemplate) {
 
         Set<Parcel> parcelListAll = new HashSet<>();
         for (ConditionsNew.InternalConditions condition : conditionsNewList) {
-            parcelListAll.addAll(queryTemplate.getListParcelsByTagsNewWhitoutCN(queryTags(condition.getTags()), queryExcludeTags(condition.getExcludeTagsInternal()),
+            parcelListAll.addAll(queryTemplate.getListParcelsByTagsNewWhitoutCN(queryTags(condition.getTags()), queryExcludeTags(this.getExcludeTags(), condition.getExcludeTagsInternal(), condition.getTags()),
                     condition.getMoreThisArea(), condition.getLessThisArea(), condition.isSearchInDistrict(), condition.isSearchInCity()));
-            parcelListAll.addAll(queryTemplate.getListParcelsByTagsNewWhitCNInnerJoin(queryTags(condition.getTags()), queryExcludeTags(condition.getExcludeTagsInternal()),
+            parcelListAll.addAll(queryTemplate.getListParcelsByTagsNewWhitCNInnerJoin(queryTags(condition.getTags()), queryExcludeTags(this.getExcludeTags(), condition.getExcludeTagsInternal(), condition.getTags()),
                     condition.getMoreThisArea(), condition.getLessThisArea(), condition.isSearchInDistrict(), condition.isSearchInCity(), usageCodeBuildingsMustBe, moreThisShareAreaBuildings, lessThisShareAreaBuildings));
         }
         parcelListAll.forEach(p->p.setPredictedUsageCode(usageCode));
@@ -57,10 +57,20 @@ public class ConditionsNew implements PrepareTagsUCNew {
         private Float lessThisArea;
         boolean searchInDistrict;
         boolean searchInCity;
+        String excludeOneTagInternal;
 
         public InternalConditions(List<String> tags, List<String> excludeTagsInternal, Float moreThisArea, Float lessThisArea, boolean searchInDistrict, boolean searchInCity) {
             this.tags = tags;
             this.excludeTagsInternal = excludeTagsInternal;
+            this.moreThisArea = moreThisArea;
+            this.lessThisArea = lessThisArea;
+            this.searchInDistrict = searchInDistrict;
+            this.searchInCity = searchInCity;
+        }
+
+        public InternalConditions(List<String> tags, String excludeOneTagInternal, Float moreThisArea, Float lessThisArea, boolean searchInDistrict, boolean searchInCity) {
+            this.tags = tags;
+            this.excludeOneTagInternal = excludeOneTagInternal;
             this.moreThisArea = moreThisArea;
             this.lessThisArea = lessThisArea;
             this.searchInDistrict = searchInDistrict;

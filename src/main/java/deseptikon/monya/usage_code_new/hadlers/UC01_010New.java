@@ -40,8 +40,11 @@ public class UC01_010New {
                 "1009"));
         conditionsNew.setInnerCNTableName("BUILDINGS.PARCEL_INNER_CN");
         conditionsNew.setUsageCode("01:010");
-        conditionsNew.setExcludeTags(List.of("животноводство", "скотоводство", "садоводство", "звероводство", "птицеводство", "пчеловодство", "свиноводство", "рыбоводство", "индивидуальный", "отдых",
-                "жилой", "дачный", "овощеводство", "личный", "строительство"));
+        conditionsNew.setExcludeTags(List.of());
+
+//        List.of("животноводство", "скотоводство", "садоводство", "звероводство", "птицеводство", "пчеловодство", "свиноводство", "рыбоводство", "индивидуальный", "отдых",
+//                "жилой", "дачный", "овощеводство", "личный", "строительство")
+
         conditionsNew.setConditionsNewList(List.of(
                 conditionsNew.new InternalConditions(List.of("1.1"),
                         List.of(), 0F, Float.POSITIVE_INFINITY, true, true),

@@ -23,7 +23,7 @@ public class UC04_040New {
 
         stopWatch.stop();
         long timeTaken = stopWatch.getTime();
-        System.out.println(timeTaken / 1000 + " секунд");
+        System.out.println(timeTaken / 1000 / 60 + " минут");
     }
 
     public void codeHandler(LmstQuery queryTemplate) {
@@ -31,7 +31,7 @@ public class UC04_040New {
         ConditionsNew conditionsNew = new ConditionsNew();
         conditionsNew.setMoreThisShareAreaBuildings(0F);
         conditionsNew.setLessThisShareAreaBuildings(1F);
-        conditionsNew.setUsageCodeBuildingsMustBe(List.of("0401","0402","0403","0404","0405","0406","0407","0408","0409","0410","0411","0412",
+        conditionsNew.setUsageCodeBuildingsMustBe(List.of("0401", "0402", "0403", "0404", "0405", "0406", "0407", "0408", "0409", "0410", "0411", "0412",
                 //линейные объекты
                 "1010", "1011", "1012", "1013", "1014", "1015", "1016", "1017", "1020", "1021", "1027", "1030", "1031"));
         conditionsNew.setInnerCNTableName("BUILDINGS.PARCEL_INNER_CN");
@@ -49,7 +49,7 @@ public class UC04_040New {
                 conditionsNew.new InternalConditions(List.of("палатка_"),
                         List.of(), 0F, Float.POSITIVE_INFINITY, true, true),
                 conditionsNew.new InternalConditions(List.of("коммерческая"),
-                        List.of(), 0F, Float.POSITIVE_INFINITY, true, true),
+                        List.of("зона_"), 0F, Float.POSITIVE_INFINITY, true, true),
                 conditionsNew.new InternalConditions(List.of("торговый"),
                         List.of(), 0F, Float.POSITIVE_INFINITY, true, true),
                 conditionsNew.new InternalConditions(List.of("автосалон"),

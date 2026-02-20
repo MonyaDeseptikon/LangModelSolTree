@@ -21,16 +21,15 @@ public interface PrepareTagsUCNew {
                 queryTags.append("(^|[^а-яА-Я])").append(tag).append(".*");
             }
         }
-        System.out.println(queryTags);
+
         return queryTags;
 
     }
 
-
-    default StringBuilder queryExcludeTags(List<String> tags) {
+    default StringBuilder queryExcludeTags(List<String> commonExcludeTags, List<String> internalExcludeTags, List<String> tags) {
         StringBuilder queryExcludeTags = new StringBuilder();
-        if (!tags.isEmpty()) {
-            for (String eTag : tags) {
+        if (!commonExcludeTags.isEmpty()) {
+            for (String eTag : commonExcludeTags) {
                 eTag = trimEnding(eTag);
                 if (queryExcludeTags.isEmpty()) {
                     queryExcludeTags.append("(^|[^а-яА-Я])").append(eTag).append(".*");
@@ -38,10 +37,33 @@ public interface PrepareTagsUCNew {
                     queryExcludeTags.append("|").append("(^|[^а-яА-Я])").append(eTag).append(".*");
                 }
             }
-        } else {
-            queryExcludeTags.append("ИСКЛЮЧАЮЩИХ ТЭГОВ НЕТ");
         }
-        System.out.println(queryExcludeTags);
+        if (!internalExcludeTags.isEmpty()) {
+            for (String eTag : internalExcludeTags) {
+                eTag = trimEnding(eTag);
+
+                for (String tag : tags) {
+                    StringBuilder queryTag = new StringBuilder();
+                    if (tag.matches(".*[0-9].*")) {
+                        tag = tag.replaceAll("\\.", "\\\\.");
+                        queryTag.append("[^0-9\\.]").append(tag.trim()).append("($|[^0-9\\.])").append(".*");
+                    } else {
+                        tag = trimEnding(tag);
+                        queryTag.append("[^а-яА-Я]").append(tag).append(".*");
+                    }
+
+                    if (queryExcludeTags.isEmpty()) {
+                        queryExcludeTags.append("(^|[^а-яА-Я])").append(eTag).append(".*").append(queryTag);
+                    } else {
+                        queryExcludeTags.append("|").append("(^|[^а-яА-Я])").append(eTag).append(".*").append(queryTag);
+                    }
+                }
+
+
+            }
+        }
+
+
         return queryExcludeTags;
     }
 }
