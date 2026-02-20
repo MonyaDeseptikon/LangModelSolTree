@@ -27,8 +27,6 @@ public class ExposeKLADRWithInnerJoin implements PrepareTagsKLADR {
 
         UpdateParcelDAO updateParcel = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
         CombineMethodsParcel combineQuery = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
-
-
 //        eraseKLADR();
 //        VIEW_KLADR_TEST
 //        VIEW_KLADR
@@ -39,8 +37,6 @@ public class ExposeKLADRWithInnerJoin implements PrepareTagsKLADR {
 
         stopWatch.stop();
         long timeTaken = stopWatch.getTime();
-        System.out.println(timeTaken / 1000 + " секунд");
+        System.out.println(timeTaken / 1000 /60 + " минут");
     }
-
-
 }

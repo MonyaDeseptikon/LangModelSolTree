@@ -10,11 +10,19 @@ public class ParcelCreateProvisionalList {
 
     public static void main(String[] args) throws SQLException {
         ParcelCreateProvisionalList createTable = new ParcelCreateProvisionalList();
-        createTable.columnForKLADR();
+        createTable.deleteDataTable();
+//        createTable.columnForKLADR();
 //        createTable.dropTableParcel();
 //        createTable.createScheme();
 //        createTable.createParcelList();
-        erasePredictedUC();
+//        erasePredictedUC();
+
+    }
+
+    private void deleteDataTable() throws SQLException {
+        Connection con = getConnections();
+        Statement statement = con.createStatement();
+        statement.execute("DELETE FROM PARCELS.PARCEL_LIST_2026");
 
     }
 
@@ -29,6 +37,8 @@ public class ParcelCreateProvisionalList {
     private void dropTableParcel() throws SQLException {
         Connection con = getConnections();
         Statement statement = con.createStatement();
+
+        statement.execute("DROP TABLE IF EXISTS PARCELS.PARCEL_LIST_2026");
 //        statement.execute("DROP TABLE IF EXISTS PARCELS.INNER_CN_04");
 
         //Удаление копии БД, созданной бином SpringJDBC при попытке одновременного обращения двух бинов к одной встроенной БД
@@ -42,6 +52,7 @@ public class ParcelCreateProvisionalList {
         statement.execute("CREATE TABLE IF NOT EXISTS PARCELS.PARCEL_LIST_2026 " +
                 "(id INT AUTO_INCREMENT PRIMARY KEY, " +
                 "cadastral_number VARCHAR(20) NOT NULL, " +
+                "CADASTRAL_BLOCK VARCHAR(20) NULL, " +
                 "area FLOAT NULL, " +
                 "OKATO VARCHAR(20) NULL, " +
                 "OKTMO VARCHAR(20) NULL, " +
@@ -88,6 +99,7 @@ public class ParcelCreateProvisionalList {
         statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS TYPE_LOCALITY VARCHAR(MAX) DEFAULT ('');");
         statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS EXP_KLADR VARCHAR(MAX) DEFAULT ('');");
         statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS REGEXP VARCHAR(MAX) DEFAULT ('');");
+        statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS CADASTRAL_BLOCK VARCHAR(20) DEFAULT ('');");
 
         closeCon(con);
     }
@@ -112,7 +124,7 @@ public class ParcelCreateProvisionalList {
         statement.execute("UPDATE PARCELS.PARCEL_LIST_2026 SET " +
                 "EXP_KLADR = '', " +
                 "REGEXP = '';"
-                );
+        );
 
         closeCon(con);
     }

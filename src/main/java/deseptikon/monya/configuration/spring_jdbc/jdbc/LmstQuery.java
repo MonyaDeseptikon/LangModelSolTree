@@ -31,8 +31,45 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
         this.template = new NamedParameterJdbcTemplate(jdbcTemplate);
     }
 
-    //    @Override
-    public List<Parcel> getListParcelsByTagsNew(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, Boolean isSearchInDistrict, Boolean isSearchInCity) {
+    @Override
+    public List<Parcel> getListParcelsByTagsNewWhitCNInnerJoin(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, Boolean isSearchInDistrict, Boolean isSearchInCity,
+                                                               List<String> usageCodeBuildingsMustBe, Float moreThisShareAreaBuildings, Float lessThisShareAreaBuildings) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("tags", tags);
+        parameters.addValue("excludeTags", excludeTags);
+        parameters.addValue("moreArea", moreArea);
+        parameters.addValue("lessArea", lessArea);
+        String city = isSearchInCity ? "18:26:|18:27:|18:28:|18:29:|18:30:" : "В ГОРОДАХ НЕ ИЩЕМ";
+        String district = isSearchInDistrict ? "18:01:|18:02:|18:03:|18:04:|18:05:|18:06:|18:07:|18:08:|18:09:|18:10:|18:11:|18:12:|18:13:|18:14:|18:15:|18:16:|18:17:|18:18:|18:19:|18:20:|18:21:|18:22:|18:23:|18:24:|18:25:" : "В РАЙОНАХ НЕ ИЩЕМ";
+        parameters.addValue("district", district);
+        parameters.addValue("city", city);
+        parameters.addValue("usageCodeBuildingsMustBe", usageCodeBuildingsMustBe);
+        parameters.addValue("moreThisShareAreaBuildings", moreThisShareAreaBuildings);
+        parameters.addValue("lessThisShareAreaBuildings", lessThisShareAreaBuildings);
+
+        String SQLQuery = "SELECT " +
+                "PP.ID, PP.CADASTRAL_NUMBER, CADASTRAL_BLOCK, PP.AREA, " +
+                "APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, " +
+                "SUM(BI.AREA) AS AREA_BUILDINGS " +
+                "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
+                "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
+                "ON PP.INNER_CADASTRAL_NUMBERS REGEXP BI.CADASTRAL_NUMBER " +
+                "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
+                "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags AND " +
+                "PP.area >= :moreArea AND " +
+                "PP.area <= :lessArea AND " +
+                "(PP.CADASTRAL_BLOCK REGEXP :district OR " +
+                "PP.CADASTRAL_BLOCK REGEXP :city) AND " +
+                "BI.AREA/PP.AREA > :moreThisShareAreaBuildings AND " +
+                "BI.AREA/PP.AREA < :lessThisShareAreaBuildings " +
+                "GROUP BY PP.CADASTRAL_NUMBER";
+
+        System.out.println(parameters);
+        return template.query(SQLQuery, parameters, new ParcelMapperJoinINC());
+    }
+
+    @Override
+    public List<Parcel> getListParcelsByTagsNewWhitoutCN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, Boolean isSearchInDistrict, Boolean isSearchInCity) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("tags", tags);
         parameters.addValue("excludeTags", excludeTags);
@@ -47,9 +84,32 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
                 "LOWER(utilization_by_doc) NOT REGEXP :excludeTags AND " +
                 "area >= :moreArea AND " +
                 "area <= :lessArea AND " +
-                "(CADASTRAL_NUMBER REGEXP :district OR " +
-                "CADASTRAL_NUMBER REGEXP :city)";
-        System.out.println(SQLQuery);
+                "(CADASTRAL_BLOCK REGEXP :district OR " +
+                "CADASTRAL_BLOCK REGEXP :city) AND " +
+                "INNER_CADASTRAL_NUMBERS =''";
+        System.out.println(parameters);
+        return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
+    }
+
+        @Override
+        public List<Parcel> getListParcelsByTagsNew(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, Boolean isSearchInDistrict, Boolean isSearchInCity) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("tags", tags);
+        parameters.addValue("excludeTags", excludeTags);
+        parameters.addValue("moreArea", moreArea);
+        parameters.addValue("lessArea", lessArea);
+        String city = isSearchInCity ? "18:26:|18:27:|18:28:|18:29:|18:30:" : "В ГОРОДАХ НЕ ИЩЕМ";
+        String district = isSearchInDistrict ? "18:01:|18:02:|18:03:|18:04:|18:05:|18:06:|18:07:|18:08:|18:09:|18:10:|18:11:|18:12:|18:13:|18:14:|18:15:|18:16:|18:17:|18:18:|18:19:|18:20:|18:21:|18:22:|18:23:|18:24:|18:25:" : "В РАЙОНАХ НЕ ИЩЕМ";
+        parameters.addValue("district", district);
+        parameters.addValue("city", city);
+
+        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP :tags AND " +
+                "LOWER(utilization_by_doc) NOT REGEXP :excludeTags AND " +
+                "area >= :moreArea AND " +
+                "area <= :lessArea AND " +
+                "(CADASTRAL_BLOCK REGEXP :district OR " +
+                "CADASTRAL_BLOCK REGEXP :city)";
+        System.out.println(parameters);
         return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
     }
 
@@ -63,23 +123,28 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     }
 
     @Override
+    public void updateParcelsKLADR(List<Parcel> parcels) {
+        String SQLUpdate = "UPDATE PARCELS.PARCEL_LIST_2026 SET " +
+                "KLADR = :KLADR " +
+                "WHERE CADASTRAL_NUMBER = :CADASTRAL_NUMBER";
+        template.batchUpdate(SQLUpdate, updateKLADR(parcels));
+    }
+
+    @Override
     public void concatParcelsKLADRTags(List<Parcel> parcels) {
         String SQLUpdate = "UPDATE PARCELS.PARCEL_LIST_2026 SET " +
-
                 "REGEXP = " +
                 "CASE " +
                 "WHEN REGEXP = '' " +
                 "THEN :REGEXP " +
                 "ELSE CONCAT(REGEXP, '; ', :REGEXP) " +
                 "END, " +
-
                 "EXP_KLADR = " +
                 "CASE " +
                 "WHEN EXP_KLADR = '' " +
                 "THEN :EXP_KLADR " +
                 "ELSE CONCAT(EXP_KLADR, '; ', :EXP_KLADR) " +
                 "END " +
-
                 "WHERE ID = :ID";
 
         template.batchUpdate(SQLUpdate, forKLADR(parcels));
@@ -92,7 +157,8 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     public List<Parcel> getListParcelsByTagsKLADRInnerJoin(String parcelTableName) {
 
         String SQLQuery = "SELECT PVK.ID, PVK.CADASTRAL_NUMBER, AK.CODE_KLADR AS AUX_KLADR, AK.REGEXP AS AUX_REGEXP FROM PARCELS." +
-                parcelTableName + " PVK " +
+                parcelTableName +
+                " PVK " +
                 "INNER JOIN " +
                 "AUXILIARY.KLADR AK " +
                 "ON LOWER(PVK.NOTE) REGEXP AK.REGEXP";
@@ -134,22 +200,12 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     }
 
     @Override
-    public List<Parcel> getListParcelsView(String viewName) {
+    public List<Parcel> getListParcelsView(String tableName) {
         String SQLQuery = "SELECT * FROM PARCELS." +
-                viewName;
+                tableName;
         return jdbcTemplate.query(SQLQuery, new ParcelMapperViewKLADR());
     }
 
-
-    @Override
-    public List<Parcel> getListParcelsByTagsInnerCNCondition(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, Boolean isEmptyInnerCN) {
-
-        if (isEmptyInnerCN) {
-            return getListParcelsByTagsWithoutICN(tags, excludeTags, moreArea, lessArea);
-        } else {
-            return getListParcelsByTagsWithICN(tags, excludeTags, moreArea, lessArea);
-        }
-    }
 
 
     @Override
@@ -258,18 +314,17 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     }
 
     @Override
-    public void concatParcelsPredictedUsageCode(Set<Integer> idList, String predicatedUsageCode) {
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("predicatedUsageCode", predicatedUsageCode);
-        parameters.addValue("idList", idList);
+    public void concatParcelsPredictedUsageCode(List<Parcel> parcels) {
+
         String SQLUpdate = "UPDATE PARCELS.PARCEL_LIST_2026 SET PREDICTED_USAGE_CODE = " +
                 "CASE " +
                 "WHEN PREDICTED_USAGE_CODE = '' " +
-                "THEN :predicatedUsageCode " +
-                "ELSE CONCAT(PREDICTED_USAGE_CODE, '; ', :predicatedUsageCode) " +
+                "THEN :PREDICTED_USAGE_CODE " +
+                "ELSE CONCAT(PREDICTED_USAGE_CODE, '; ', :PREDICTED_USAGE_CODE) " +
                 "END " +
-                "WHERE id IN (:idList)";
-        template.update(SQLUpdate, parameters);
+                "WHERE id IN (:ID)";
+
+        template.batchUpdate(SQLUpdate, excelParcelToDB(parcels));
     }
 
     @Override
@@ -333,8 +388,8 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     @Override
     public void insertParcelList(List<Parcel> parcelList) {
         String insertRowSQL = "INSERT INTO PARCELS.PARCEL_LIST_2026" +
-                "(CADASTRAL_NUMBER, AREA, OKATO, OKTMO, KLADR, DISTRICT, TYPE_DISTRICT, CITY, TYPE_CITY, LOCALITY, TYPE_LOCALITY, SOVIET_VILLAGE, STREET, TYPE_STREET, OTHER, NOTE, APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, USAGE_CODE) " +
-                "VALUES (:CADASTRAL_NUMBER, :AREA, :OKATO, :OKTMO, :KLADR, :DISTRICT, :TYPE_DISTRICT, :CITY, :TYPE_CITY, :LOCALITY, :TYPE_LOCALITY, :SOVIET_VILLAGE, :STREET, :TYPE_STREET, :OTHER, :NOTE, :APPROVAL_DOCUMENT_NAME, :CATEGORY, :UTILIZATION_LAND_USE, :UTILIZATION_BY_DOC, :UTILIZATION_PERMITTED_USE_TEXT, :INNER_CADASTRAL_NUMBERS, :USAGE_CODE)";
+                "(CADASTRAL_NUMBER, CADASTRAL_BLOCK, AREA, OKATO, OKTMO, KLADR, DISTRICT, TYPE_DISTRICT, CITY, TYPE_CITY, LOCALITY, TYPE_LOCALITY, SOVIET_VILLAGE, STREET, TYPE_STREET, OTHER, NOTE, APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, USAGE_CODE) " +
+                "VALUES (:CADASTRAL_NUMBER, :CADASTRAL_BLOCK, :AREA, :OKATO, :OKTMO, :KLADR, :DISTRICT, :TYPE_DISTRICT, :CITY, :TYPE_CITY, :LOCALITY, :TYPE_LOCALITY, :SOVIET_VILLAGE, :STREET, :TYPE_STREET, :OTHER, :NOTE, :APPROVAL_DOCUMENT_NAME, :CATEGORY, :UTILIZATION_LAND_USE, :UTILIZATION_BY_DOC, :UTILIZATION_PERMITTED_USE_TEXT, :INNER_CADASTRAL_NUMBERS, :USAGE_CODE)";
 
         template.batchUpdate(insertRowSQL, excelParcelToDB(parcelList));
     }

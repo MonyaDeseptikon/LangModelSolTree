@@ -33,6 +33,6 @@ public interface ReplaceLatin {
     }
 
      default boolean checkingLatin(String checkString) {
-        return checkString.matches(".*[CcEeTOopPAaHKkXxBMYyЁё].*");
+        return checkString.matches(".*[CcEeTOopPAaHKkXxBMYyЁё'].*");
     }
 }

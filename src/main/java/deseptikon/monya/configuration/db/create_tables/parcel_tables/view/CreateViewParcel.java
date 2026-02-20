@@ -13,9 +13,9 @@ public class CreateViewParcel {
     public static void main(String[] args) throws SQLException {
         CreateViewParcel createViewParcel = new CreateViewParcel();
 
-        createViewParcel.viewKLADR();
+//        createViewParcel.viewKLADR();
         createViewParcel.viewKLADRForTest();
-        createViewParcel.viewKLADRForTestCN();
+//        createViewParcel.viewKLADRForTestCN();
 
 
 
@@ -59,7 +59,7 @@ public class CreateViewParcel {
                 "WHERE LENGTH(KLADR) < 16 " +
                 "AND "+
                 "NOTE !='' " +
-                "AND ROWNUM < 6000" +
+                "AND ROWNUM < 100" +
                 ";");
         closeCon(con);
     }

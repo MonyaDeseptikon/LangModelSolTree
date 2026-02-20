@@ -42,7 +42,7 @@ public class IOExcelDB implements ServiceForExcel, DBtoExcelRowMapper, ParcelIOE
 
 
     @Override
-    public List<Parcel> excelParcelsDirectoryToProvisionalList(String directoryPath, int worksheetIndex) throws IOException, SQLException {
+    public List<Parcel> excelParcelsDirectoryToProvisionalList(String directoryPath, int worksheetIndex, int cadastralNumberCell) throws IOException, SQLException {
         File directory = new File(directoryPath);
         if (!directory.isDirectory())
             throw new RuntimeException("Переданный в метод excelBuildingsDirectoryToInnerCNTable путь, не является папкой");
@@ -58,9 +58,9 @@ public class IOExcelDB implements ServiceForExcel, DBtoExcelRowMapper, ParcelIOE
             FileInputStream is = new FileInputStream(fileExcel);
             ReadableWorkbook wb = new ReadableWorkbook(is);
             Optional<Sheet> sheet = wb.getSheet(worksheetIndex);
-            //Из списка удаляется заголовок и строки с пустым КН
-            int cadastralNumberCell = 2;
             List<Row> rowListFull = sheet.get().read();
+
+            //Из списка удаляется заголовок и строки с пустым КН
             rowListFull.removeFirst();
             List<Row> rowList = rowListFull.stream().filter(r -> r.hasCell(cadastralNumberCell)).toList();
             for (Row row : rowList) {

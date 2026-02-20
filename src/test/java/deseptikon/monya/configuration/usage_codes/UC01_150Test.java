@@ -4,7 +4,7 @@ import deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery;
 import deseptikon.monya.configuration.spring_jdbc.models.Building;
 import deseptikon.monya.configuration.spring_jdbc.models.Parcel;
 import deseptikon.monya.auxiliary.prepare_tags.PrepareTagsUC;
-import deseptikon.monya.usage_codes.model.Conditions;
+import deseptikon.monya.usage_code_new.usage_codes_old.model.Conditions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

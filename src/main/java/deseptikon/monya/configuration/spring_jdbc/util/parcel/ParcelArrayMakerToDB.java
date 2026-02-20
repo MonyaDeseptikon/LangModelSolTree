@@ -10,6 +10,19 @@ import java.util.List;
 
 public interface ParcelArrayMakerToDB {
 
+    default MapSqlParameterSource[] updateKLADR(List<Parcel> parcels) {
+        MapSqlParameterSource[] parameters = new MapSqlParameterSource[parcels.size()];
+        int count = 0;
+        for (Parcel parcel : parcels) {
+            MapSqlParameterSource parameter = new MapSqlParameterSource();
+            parameter.addValue("CADASTRAL_NUMBER", parcel.getCadastralNumber());
+            parameter.addValue("KLADR", parcel.getKLADR());
+
+            parameters[count++] = parameter;
+        }
+        return parameters;
+    }
+
     default MapSqlParameterSource[] forKLADR(List<Parcel> parcels) {
         MapSqlParameterSource[] parameters = new MapSqlParameterSource[parcels.size()];
         int count = 0;
@@ -68,7 +81,9 @@ public interface ParcelArrayMakerToDB {
                 }
                 parcel.setCadastralNumber(parcel.getCadastralNumber().substring(0, 19));
             }
+            parameter.addValue("ID", parcel.getId());
             parameter.addValue("CADASTRAL_NUMBER", parcel.getCadastralNumber());
+            parameter.addValue("CADASTRAL_BLOCK", parcel.getCadastralBlock());
             parameter.addValue("AREA", parcel.getArea());
             parameter.addValue("OKATO", parcel.getOKATO());
             parameter.addValue("OKTMO", parcel.getOKTMO());
@@ -91,7 +106,8 @@ public interface ParcelArrayMakerToDB {
             parameter.addValue("UTILIZATION_PERMITTED_USE_TEXT", parcel.getUtilizationPermittedUseText());
             parameter.addValue("INNER_CADASTRAL_NUMBERS", parcel.getInnerCadastralNumbersString());
             parameter.addValue("USAGE_CODE", parcel.getUsageCode());
-
+            parameter.addValue("PREDICTED_USAGE_CODE", parcel.getPredictedUsageCode());
+//            System.out.println(parcel.getPredictedUsageCode());
             parameters[count++] = parameter;
         }
         return parameters;

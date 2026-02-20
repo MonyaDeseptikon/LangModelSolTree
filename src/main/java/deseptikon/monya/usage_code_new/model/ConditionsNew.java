@@ -1,10 +1,8 @@
 package deseptikon.monya.usage_code_new.model;
 
-import deseptikon.monya.auxiliary.prepare_tags.PrepareTagsUC;
 import deseptikon.monya.auxiliary.prepare_tags.PrepareTagsUCNew;
 import deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery;
 import deseptikon.monya.configuration.spring_jdbc.models.Parcel;
-import deseptikon.monya.usage_codes.model.Conditions;
 
 import java.util.HashSet;
 import java.util.List;
@@ -19,23 +17,37 @@ public class ConditionsNew implements PrepareTagsUCNew {
     private List<String> usageCodeBuildingsMustBe;
     private List<InternalConditions> conditionsNewList;
 
-    private Float shareAreaBuildings;
+    private Float moreThisShareAreaBuildings;
+    private Float lessThisShareAreaBuildings;
+
+
     private Set<Parcel> parcelListCheckedArea;
 
+    //Без проверки ОКСов
     public void assignmentCode(LmstQuery queryTemplate) {
-
         Set<Parcel> parcelListAll = new HashSet<>();
-
         for (ConditionsNew.InternalConditions condition : conditionsNewList) {
-
             parcelListAll.addAll(queryTemplate.getListParcelsByTagsNew(queryTags(condition.getTags()), queryExcludeTags(condition.getExcludeTagsInternal()),
                     condition.getMoreThisArea(), condition.getLessThisArea(), condition.isSearchInDistrict(), condition.isSearchInCity()));
         }
-        Set<Integer> idList = new HashSet<>();
-        parcelListAll.forEach(p -> idList.add(p.getId()));
-        queryTemplate.concatParcelsPredictedUsageCode(idList, getUsageCode());
+        parcelListAll.forEach(p->p.setPredictedUsageCode(usageCode));
+        queryTemplate.concatParcelsPredictedUsageCode(parcelListAll.stream().toList());
+//        System.out.println(parcelListAll.size());
+    }
 
-        System.out.println(parcelListAll.size());
+    //С проверкой ОКС, но без учета площади ОКС по отношению к площади ЗУ
+    public void assignmentCodeInnerCNCheck(LmstQuery queryTemplate) {
+
+        Set<Parcel> parcelListAll = new HashSet<>();
+        for (ConditionsNew.InternalConditions condition : conditionsNewList) {
+            parcelListAll.addAll(queryTemplate.getListParcelsByTagsNewWhitoutCN(queryTags(condition.getTags()), queryExcludeTags(condition.getExcludeTagsInternal()),
+                    condition.getMoreThisArea(), condition.getLessThisArea(), condition.isSearchInDistrict(), condition.isSearchInCity()));
+            parcelListAll.addAll(queryTemplate.getListParcelsByTagsNewWhitCNInnerJoin(queryTags(condition.getTags()), queryExcludeTags(condition.getExcludeTagsInternal()),
+                    condition.getMoreThisArea(), condition.getLessThisArea(), condition.isSearchInDistrict(), condition.isSearchInCity(), usageCodeBuildingsMustBe, moreThisShareAreaBuildings, lessThisShareAreaBuildings));
+        }
+        parcelListAll.forEach(p->p.setPredictedUsageCode(usageCode));
+        queryTemplate.concatParcelsPredictedUsageCode(parcelListAll.stream().toList());
+//        System.out.println(parcelListAll.size());
     }
 
     public class InternalConditions {
@@ -54,6 +66,9 @@ public class ConditionsNew implements PrepareTagsUCNew {
             this.searchInDistrict = searchInDistrict;
             this.searchInCity = searchInCity;
         }
+
+
+
         public List<String> getExcludeTagsInternal() {
             return excludeTagsInternal;
         }
@@ -104,7 +119,13 @@ public class ConditionsNew implements PrepareTagsUCNew {
         }
     }
 
+    public Float getLessThisShareAreaBuildings() {
+        return lessThisShareAreaBuildings;
+    }
 
+    public void setLessThisShareAreaBuildings(Float lessThisShareAreaBuildings) {
+        this.lessThisShareAreaBuildings = lessThisShareAreaBuildings;
+    }
     public String getUsageCode() {
         return usageCode;
     }
@@ -145,12 +166,12 @@ public class ConditionsNew implements PrepareTagsUCNew {
         this.conditionsNewList = conditionsNewList;
     }
 
-    public Float getShareAreaBuildings() {
-        return shareAreaBuildings;
+    public Float getMoreThisShareAreaBuildings() {
+        return moreThisShareAreaBuildings;
     }
 
-    public void setShareAreaBuildings(Float shareAreaBuildings) {
-        this.shareAreaBuildings = shareAreaBuildings;
+    public void setMoreThisShareAreaBuildings(Float moreThisShareAreaBuildings) {
+        this.moreThisShareAreaBuildings = moreThisShareAreaBuildings;
     }
 
     public Set<Parcel> getParcelListCheckedArea() {
@@ -160,5 +181,6 @@ public class ConditionsNew implements PrepareTagsUCNew {
     public void setParcelListCheckedArea(Set<Parcel> parcelListCheckedArea) {
         this.parcelListCheckedArea = parcelListCheckedArea;
     }
+
 }
 

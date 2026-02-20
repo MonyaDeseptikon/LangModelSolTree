@@ -12,5 +12,5 @@ import java.util.Set;
 public interface ParcelIOExcel {
 //    void readExcelFillDBParcelsProvisionalList(String filePath, int worksheetIndex) throws IOException, SQLException;
     void readDBFillExcel(Worksheet ws, Set<Parcel> parcelList) throws FileNotFoundException, SQLException, NoSuchFieldException;
-    List<Parcel> excelParcelsDirectoryToProvisionalList(String directoryPath, int worksheetIndex) throws IOException, SQLException;
+    List<Parcel> excelParcelsDirectoryToProvisionalList(String directoryPath, int worksheetIndex, int cadastralNumberCell) throws IOException, SQLException;
 }

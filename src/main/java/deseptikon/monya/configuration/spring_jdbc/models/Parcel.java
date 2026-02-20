@@ -1,11 +1,25 @@
 package deseptikon.monya.configuration.spring_jdbc.models;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Parcel {
+    //Переопределение сравнения только по Кадастровому номеру, т.к. это уникальное поля.
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Parcel parcel)) return false;
+        return Objects.equals(cadastralNumber, parcel.cadastralNumber);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(cadastralNumber);
+    }
 
     private Integer id;
+
+
     private String cadastralNumber;
+
     private String cadastralBlock;
     private Float area;
     private String OKATO;
@@ -28,10 +42,23 @@ public class Parcel {
     private String SOVIET_VILLAGE;
     private String STREET;
     private String TYPE_STREET;
+
     private String KLADR;
+
     private String TYPE_LOCALITY;
     private String expKLADR;
     private String REGEXP;
+
+    //Для определения доли ОКС на ЗУ (для резалтСет для каждой записи)
+    private Float areaBuilding;
+
+    public Float getAreaBuilding() {
+        return areaBuilding;
+    }
+
+    public void setAreaBuilding(Float areaBuilding) {
+        this.areaBuilding = areaBuilding;
+    }
 
     public String getCadastralBlock() {
         return cadastralBlock;
@@ -129,11 +156,13 @@ public class Parcel {
         this.TYPE_STREET = TYPE_STREET;
     }
 
+
     public String getKLADR() {
         return KLADR;
     }
 
     public void setKLADR(String KLADR) {
+        if (KLADR.length()>17)  KLADR = KLADR.substring(0,17);
         this.KLADR = KLADR;
     }
 
@@ -144,6 +173,7 @@ public class Parcel {
     public void setId(Integer id) {
         this.id = id;
     }
+
 
     public String getCadastralNumber() {
         return cadastralNumber;

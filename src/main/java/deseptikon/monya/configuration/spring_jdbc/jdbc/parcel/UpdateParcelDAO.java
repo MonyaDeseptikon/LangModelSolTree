@@ -11,7 +11,8 @@ public interface UpdateParcelDAO {
 
     void updateParcelsForReplaceLatin(List<Parcel> parcels);
 
-    void concatParcelsPredictedUsageCode(Set<Integer> idList, String predicatedUsageCode);
+    void concatParcelsPredictedUsageCode(List<Parcel> parcels);
     void insertParcelList(List<Parcel> parcelList);
     void concatParcelsKLADRTags(List<Parcel> parcels);
+    void updateParcelsKLADR(List<Parcel> parcels);
 }

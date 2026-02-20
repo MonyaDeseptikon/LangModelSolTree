@@ -22,9 +22,12 @@ public class ParcelsProvisionalHandlerExcel {
         LmstQuery queryTemplate = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
 
         ParcelIOExcel parcelIOExcel = new IOExcelDB();
-//        parcelIOExcel.readExcelFillDBParcelsProvisionalList("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Объекты из группы 04 из предперечня ОКС 2027.xlsx", 1);
 
-        List<Parcel> parcelList = parcelIOExcel.excelParcelsDirectoryToProvisionalList("\\\\192.168.0.118\\каталог оценщиков\\ОЦЕНКА 2026\\Предварительный перечень\\Предварительный перечень ЗУ\\На загрузку в АИС_ЗУ\\1C_для обработки", 0);
+        //Ориентируюсь по столбцу КН, - чтобы не попасть на пустые строки
+        int cadastralNumberCell = 2;
+        List<Parcel> parcelList = parcelIOExcel.excelParcelsDirectoryToProvisionalList(
+                "\\\\192.168.0.118\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Перечень 2026\\18_02_26", 0,
+                cadastralNumberCell);
 
         queryTemplate.insertParcelList(parcelList);
 

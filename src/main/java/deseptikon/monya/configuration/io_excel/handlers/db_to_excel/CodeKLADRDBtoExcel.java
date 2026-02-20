@@ -25,17 +25,14 @@ public class CodeKLADRDBtoExcel {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_spring_config.xml");
         LmstQuery queryTemplate = (LmstQuery) context.getBean("dataSourceForJdbcTemplateLMST");
-        Set<Parcel> parcelList = new HashSet<>();
         ParcelIOExcel parcelIOExcel = new IOExcelDB();
 
         //Данные
-        String viewName = "VIEW_KLADR";
-        parcelList.addAll(queryTemplate.getListParcelsView(viewName));
+//        String tableName = "VIEW_KLADR";
+        String tableName = "PARCEL_LIST_2026";
+        Set<Parcel> parcelList = new HashSet<>(queryTemplate.getListParcelsView(tableName));
 
-
-
-
-        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Присваивание КЛАДР\\Test.xlsx");
+        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Присваивание КЛАДР\\TestKLADR.xlsx");
 
         FileOutputStream os = new FileOutputStream(file);
         Workbook wb = new Workbook(os, "MonyaDes", "1.0");

@@ -30,7 +30,7 @@ public class UsageCodeDBtoExcel {
 
         Set<Parcel> parcelList = new HashSet<>(queryTemplate.getListParcels());
 
-        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Тесты JAVA\\01_010\\TestNew.xlsx");
+        File file = new File("\\\\Server20032\\каталог оценщиков\\1. ОТДЕЛ КАДАСТРОВОЙ ОЦЕНКИ\\ИрхаСА\\Языковая модель\\Тесты JAVA\\TestCommonNewCopy.xlsx");
 
         FileOutputStream os = new FileOutputStream(file);
         Workbook wb = new Workbook(os, "MonyaDes", "1.0");
