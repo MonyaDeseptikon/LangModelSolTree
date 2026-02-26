@@ -21,6 +21,8 @@ public class CommonHandler {
         new UC01_010New().codeHandler(queryTemplate);
         new UC01_180New().codeHandler(queryTemplate);
         new UC04_040New().codeHandler(queryTemplate);
+        new UC06_090New().codeHandler(queryTemplate);
+        new UC02_011New().codeHandler(queryTemplate);
 
         stopWatch.stop();
         long timeTaken = stopWatch.getTime();

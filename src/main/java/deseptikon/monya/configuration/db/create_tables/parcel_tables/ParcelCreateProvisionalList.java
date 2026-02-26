@@ -77,7 +77,8 @@ public class ParcelCreateProvisionalList {
                 "usage_code VARCHAR(15) NULL, " +
                 "PREDICTED_USAGE_CODE VARCHAR(MAX) NULL, " +
                 "EXP_KLADR VARCHAR(MAX) NULL, " +
-                "REGEXP VARCHAR(MAX) NULL" +
+                "REGEXP VARCHAR(MAX) NULL " +
+                "CADASTRAL_BLOCK VARCHAR(20)" +
                 ");");
 
         closeCon(con);
@@ -113,7 +114,7 @@ public class ParcelCreateProvisionalList {
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         statement.execute("ALTER TABLE PARCELS.PARCEL_LIST_2026 ADD COLUMN IF NOT EXISTS PREDICTED_USAGE_CODE VARCHAR(MAX) DEFAULT ('');");
 */
-        statement.execute("UPDATE PARCELS.PARCEL_LIST_2026 SET PREDICTED_USAGE_CODE = '';");
+        statement.execute("UPDATE PARCELS.PARCEL_LIST_2026 SET PREDICTED_USAGE_CODE = null;");
 
         closeCon(con);
     }

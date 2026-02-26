@@ -13,7 +13,8 @@ public class NoteIndex {
     public static void main(String[] args) throws SQLException {
         NoteIndex noteIndex = new NoteIndex();
 
-        noteIndex.simpleIndex();
+//        noteIndex.simpleIndex();
+        noteIndex.dropAllIndexes();
 
 
 
@@ -28,6 +29,14 @@ public class NoteIndex {
         closeCon(con);
     }
 
+    private void dropAllIndexes() throws SQLException {
+        Connection con = getConnections();
+        Statement statement = con.createStatement();
+        statement.execute("DROP INDEX PARCELS.INDEX_NOTE" +
+                ";");
+
+        closeCon(con);
+    }
 
 }
 

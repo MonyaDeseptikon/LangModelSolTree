@@ -11,10 +11,10 @@ public class UtilizationByDocIndex {
 
 
     public static void main(String[] args) throws SQLException {
-        UtilizationByDocIndex noteIndex = new UtilizationByDocIndex();
+        UtilizationByDocIndex utilizationByDocIndex = new UtilizationByDocIndex();
 
-        noteIndex.simpleIndex();
-
+        utilizationByDocIndex.simpleIndex();
+//        utilizationByDocIndex.dropAllIndexes();
 
 
     }
@@ -28,6 +28,14 @@ public class UtilizationByDocIndex {
         closeCon(con);
     }
 
+    private void dropAllIndexes() throws SQLException {
+        Connection con = getConnections();
+        Statement statement = con.createStatement();
+        statement.execute("DROP INDEX  PARCELS.INDEX_UTIL_BY_DOC" +
+                ";");
+
+        closeCon(con);
+    }
 
 }
 

@@ -26,7 +26,7 @@ public class UC01_010New {
         System.out.println(timeTaken / 1000 + " секунд");
     }
 
-    public void codeHandler(LmstQuery queryTemplate){
+    public void codeHandler(LmstQuery queryTemplate) {
 
         ConditionsNew conditionsNew = new ConditionsNew();
         conditionsNew.setMoreThisShareAreaBuildings(0F);
@@ -35,9 +35,16 @@ public class UC01_010New {
                 //только для сельхоз
                 "0801", "0902", "0904", "0905", "0907",
                 //линейные объекты
-                "1010", "1011", "1012", "1013", "1014", "1015", "1016", "1017", "1020", "1021", "1027", "1030", "1031",
+                "1010", "1011", "1012", "1013", "1014", "1015", "1016", "1017", "1020", "1021", "1027",
+                //                "1022"
+                "1022.1", "1022.2", "1022.3",
+//                "1030"
+                "1030.8", "1030.12", "1030.12", "1030.16", "1030.25", "1030.26", "1030.27", "1030.29", "1030.30", "1030.31",
+//                "1031"
+                "1031.1", "1031.2", "1031.3", "1031.4", "1031.5",
                 //только для сельхоз
-                "1009"));
+                "1005", "1006", "1007", "1008", "1009"));
+
         conditionsNew.setInnerCNTableName("BUILDINGS.PARCEL_INNER_CN");
         conditionsNew.setUsageCode("01:010");
         conditionsNew.setExcludeTags(List.of());
@@ -75,6 +82,8 @@ public class UC01_010New {
                 conditionsNew.new InternalConditions(List.of("подсобное", "сельское", "хозяйство"),
                         List.of(), 200000F, Float.POSITIVE_INFINITY, true, false),
                 conditionsNew.new InternalConditions(List.of("размещение", "сельхозугодий"),
+                        List.of(), 200000F, Float.POSITIVE_INFINITY, true, false),
+                conditionsNew.new InternalConditions(List.of("сельскохозяйственные", "угодья"),
                         List.of(), 200000F, Float.POSITIVE_INFINITY, true, false),
                 conditionsNew.new InternalConditions(List.of("сельхозпроизводство"),
                         List.of(), 200000F, Float.POSITIVE_INFINITY, true, false)

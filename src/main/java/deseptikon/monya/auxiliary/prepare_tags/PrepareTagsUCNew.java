@@ -41,9 +41,8 @@ public interface PrepareTagsUCNew {
         if (!internalExcludeTags.isEmpty()) {
             for (String eTag : internalExcludeTags) {
                 eTag = trimEnding(eTag);
-
+                StringBuilder queryTag = new StringBuilder();
                 for (String tag : tags) {
-                    StringBuilder queryTag = new StringBuilder();
                     if (tag.matches(".*[0-9].*")) {
                         tag = tag.replaceAll("\\.", "\\\\.");
                         queryTag.append("[^0-9\\.]").append(tag.trim()).append("($|[^0-9\\.])").append(".*");
@@ -51,15 +50,12 @@ public interface PrepareTagsUCNew {
                         tag = trimEnding(tag);
                         queryTag.append("[^а-яА-Я]").append(tag).append(".*");
                     }
-
-                    if (queryExcludeTags.isEmpty()) {
-                        queryExcludeTags.append("(^|[^а-яА-Я])").append(eTag).append(".*").append(queryTag);
-                    } else {
-                        queryExcludeTags.append("|").append("(^|[^а-яА-Я])").append(eTag).append(".*").append(queryTag);
-                    }
                 }
-
-
+                if (queryExcludeTags.isEmpty()) {
+                    queryExcludeTags.append("(^|[^а-яА-Я])").append(eTag).append(".*").append(queryTag);
+                } else {
+                    queryExcludeTags.append("|").append("(^|[^а-яА-Я])").append(eTag).append(".*").append(queryTag);
+                }
             }
         }
 

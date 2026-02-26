@@ -11,11 +11,11 @@ public class RegexpIndex {
 
 
     public static void main(String[] args) throws SQLException {
-        RegexpIndex cadstralNumberIndex = new RegexpIndex();
+        RegexpIndex regexpIndex = new RegexpIndex();
 
-        cadstralNumberIndex.simpleIndex();
+        regexpIndex.simpleIndex();
 
-
+        regexpIndex.dropAllIndexes();
 
     }
 
@@ -28,6 +28,13 @@ public class RegexpIndex {
         closeCon(con);
     }
 
+    private void dropAllIndexes() throws SQLException {
+        Connection con = getConnections();
+        Statement statement = con.createStatement();
+        statement.execute("DROP INDEX  AUXILIARY.INDEX_REGEXP" +
+                ";");
 
+        closeCon(con);
+    }
 }
 

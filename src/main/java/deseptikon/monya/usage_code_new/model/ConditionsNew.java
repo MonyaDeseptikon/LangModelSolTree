@@ -2,6 +2,7 @@ package deseptikon.monya.usage_code_new.model;
 
 import deseptikon.monya.auxiliary.prepare_tags.PrepareTagsUCNew;
 import deseptikon.monya.configuration.spring_jdbc.jdbc.LmstQuery;
+import deseptikon.monya.configuration.spring_jdbc.jdbc.parcel.GetParcelBigResultset;
 import deseptikon.monya.configuration.spring_jdbc.models.Parcel;
 
 import java.util.HashSet;
@@ -30,9 +31,28 @@ public class ConditionsNew implements PrepareTagsUCNew {
             parcelListAll.addAll(queryTemplate.getListParcelsByTagsNew(queryTags(condition.getTags()), queryExcludeTags(this.getExcludeTags(), condition.getExcludeTagsInternal(), condition.getTags()),
                     condition.getMoreThisArea(), condition.getLessThisArea(), condition.isSearchInDistrict(), condition.isSearchInCity()));
         }
-        parcelListAll.forEach(p->p.setPredictedUsageCode(usageCode));
+        parcelListAll.forEach(p -> p.setPredictedUsageCode(usageCode));
         queryTemplate.concatParcelsPredictedUsageCode(parcelListAll.stream().toList());
 //        System.out.println(parcelListAll.size());
+    }
+
+    //Без проверки ОКСов, упрощенный для больших Resultset
+    public void assignmentCodeSimpleForBigResultset(GetParcelBigResultset queryTemplate) {
+
+        Set<Parcel> parcelListAll = new HashSet<>();
+        for (ConditionsNew.InternalConditions condition : conditionsNewList) {
+            if (condition.getTags().getFirst().matches(".*[0-9].*")) {
+                parcelListAll.addAll(queryTemplate.getListParcelsByCodeBigResultset(queryTags(condition.getTags()), queryExcludeTags(this.getExcludeTags(), condition.getExcludeTagsInternal(), condition.getTags())));
+            } else {
+                parcelListAll.addAll(queryTemplate.getListParcelsByTagsNewWithoutCNBigResultset(queryTags(condition.getTags()), queryExcludeTags(this.getExcludeTags(), condition.getExcludeTagsInternal(), condition.getTags())));
+                parcelListAll.addAll(queryTemplate.getListParcelsByTagsNewWithCNInnerJoinBigResultset(queryTags(condition.getTags()), queryExcludeTags(this.getExcludeTags(), condition.getExcludeTagsInternal(), condition.getTags()),
+                        usageCodeBuildingsMustBe));
+            }
+        }
+        parcelListAll.forEach(p -> p.setPredictedUsageCode(usageCode));
+        queryTemplate.concatParcelsPredictedUsageCode(parcelListAll.stream().toList());
+
+
     }
 
     //С проверкой ОКС и с учетом площади ОКС по отношению к площади ЗУ
@@ -40,12 +60,17 @@ public class ConditionsNew implements PrepareTagsUCNew {
 
         Set<Parcel> parcelListAll = new HashSet<>();
         for (ConditionsNew.InternalConditions condition : conditionsNewList) {
-            parcelListAll.addAll(queryTemplate.getListParcelsByTagsNewWhitoutCN(queryTags(condition.getTags()), queryExcludeTags(this.getExcludeTags(), condition.getExcludeTagsInternal(), condition.getTags()),
-                    condition.getMoreThisArea(), condition.getLessThisArea(), condition.isSearchInDistrict(), condition.isSearchInCity()));
-            parcelListAll.addAll(queryTemplate.getListParcelsByTagsNewWhitCNInnerJoin(queryTags(condition.getTags()), queryExcludeTags(this.getExcludeTags(), condition.getExcludeTagsInternal(), condition.getTags()),
-                    condition.getMoreThisArea(), condition.getLessThisArea(), condition.isSearchInDistrict(), condition.isSearchInCity(), usageCodeBuildingsMustBe, moreThisShareAreaBuildings, lessThisShareAreaBuildings));
+            if (condition.getTags().getFirst().matches(".*[0-9].*")) {
+                parcelListAll.addAll(queryTemplate.getListParcelsByCode(queryTags(condition.getTags()), queryExcludeTags(this.getExcludeTags(), condition.getExcludeTagsInternal(), condition.getTags()),
+                        condition.getMoreThisArea(), condition.getLessThisArea(), condition.isSearchInDistrict(), condition.isSearchInCity()));
+            } else {
+                parcelListAll.addAll(queryTemplate.getListParcelsByTagsNewWhitoutCN(queryTags(condition.getTags()), queryExcludeTags(this.getExcludeTags(), condition.getExcludeTagsInternal(), condition.getTags()),
+                        condition.getMoreThisArea(), condition.getLessThisArea(), condition.isSearchInDistrict(), condition.isSearchInCity()));
+                parcelListAll.addAll(queryTemplate.getListParcelsByTagsNewWhitCNInnerJoin(queryTags(condition.getTags()), queryExcludeTags(this.getExcludeTags(), condition.getExcludeTagsInternal(), condition.getTags()),
+                        condition.getMoreThisArea(), condition.getLessThisArea(), condition.isSearchInDistrict(), condition.isSearchInCity(), usageCodeBuildingsMustBe, moreThisShareAreaBuildings, lessThisShareAreaBuildings));
+            }
         }
-        parcelListAll.forEach(p->p.setPredictedUsageCode(usageCode));
+        parcelListAll.forEach(p -> p.setPredictedUsageCode(usageCode));
         queryTemplate.concatParcelsPredictedUsageCode(parcelListAll.stream().toList());
 //        System.out.println(parcelListAll.size());
     }
@@ -76,7 +101,6 @@ public class ConditionsNew implements PrepareTagsUCNew {
             this.searchInDistrict = searchInDistrict;
             this.searchInCity = searchInCity;
         }
-
 
 
         public List<String> getExcludeTagsInternal() {
@@ -136,6 +160,7 @@ public class ConditionsNew implements PrepareTagsUCNew {
     public void setLessThisShareAreaBuildings(Float lessThisShareAreaBuildings) {
         this.lessThisShareAreaBuildings = lessThisShareAreaBuildings;
     }
+
     public String getUsageCode() {
         return usageCode;
     }

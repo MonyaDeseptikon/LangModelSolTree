@@ -8,22 +8,9 @@ public interface GetParcelDAO {
 
     List<Parcel> getListParcels();
 
-    List<Parcel> getListParcelsByTagsWithoutICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea);
-
-
-
-    List<Parcel> getListParcelsByTags(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea);
-
     List<Parcel> getListParcelsForReplaceLatin(List<String> columnsName);
 
-    List<Parcel> getListParcelsByTagsWithICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea);
-
-    List<Parcel> getListParcelsByTagsJoinICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, String innerCNTableName);
-
-    List<Parcel> getListParcelsByTagsJoinListICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, String innerCNTableName, List<String> usageCodeBuildings);
-
-    List<Parcel> getListParcelsByTagsJoinListICN(StringBuilder tags, StringBuilder excludeTags, String innerCNTableName, List<String> usageCodeBuildings);
-
+    List<Parcel> getListParcelsByCode(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, Boolean isSearchInDistrict, Boolean isSearchInCity);
 
     List<Parcel> getListParcelsByTagsNewWhitCNInnerJoin(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, Boolean isSearchInDistrict, Boolean isSearchInCity,
                                                         List<String> usageCodeBuildingsMustBe, Float moreThisShareAreaBuildings, Float lessThisShareAreaBuildings);

@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionDB {
-    private static final String url = "jdbc:h2:./lmst";
+    private static final String url = "jdbc:h2:./lmst;CACHE_SIZE=500000";
     private static final String user = "";
     private static final String password = "";
 

@@ -3,6 +3,7 @@ package deseptikon.monya.configuration.spring_jdbc.jdbc;
 import deseptikon.monya.configuration.spring_jdbc.jdbc.auxiliary_jdbc.AuxiliaryTableQuery;
 import deseptikon.monya.configuration.spring_jdbc.jdbc.building.BuildingsQuery;
 import deseptikon.monya.configuration.spring_jdbc.jdbc.parcel.CombineMethodsParcel;
+import deseptikon.monya.configuration.spring_jdbc.jdbc.parcel.GetParcelBigResultset;
 import deseptikon.monya.configuration.spring_jdbc.jdbc.parcel.GetParcelDAO;
 import deseptikon.monya.configuration.spring_jdbc.jdbc.parcel.UpdateParcelDAO;
 import deseptikon.monya.configuration.spring_jdbc.models.Building;
@@ -21,7 +22,8 @@ import javax.sql.DataSource;
 import java.util.List;
 import java.util.Set;
 
-public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMakerToDB, BuildingArrayMakerToDB, CombineMethodsParcel, BuildingsQuery, AuxiliaryTableQuery, AuxiliaryArrayMakerToDB {
+public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMakerToDB, BuildingArrayMakerToDB, CombineMethodsParcel,
+        GetParcelBigResultset, BuildingsQuery, AuxiliaryTableQuery, AuxiliaryArrayMakerToDB {
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate template;
@@ -29,6 +31,144 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.template = new NamedParameterJdbcTemplate(jdbcTemplate);
+    }
+
+    @Override
+    public List<Parcel> getListParcelsByCodeBigResultset(StringBuilder tags, StringBuilder excludeTags) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("tags", tags);
+        parameters.addValue("excludeTags", excludeTags);
+
+        String SQLQuery;
+        if (excludeTags.isEmpty()) {
+
+            SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP :tags";
+
+        } else {
+
+            SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP :tags AND " +
+                    "LOWER(utilization_by_doc) NOT REGEXP :excludeTags";
+
+        }
+        System.out.println(parameters);
+        return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
+    }
+
+    @Override
+    public List<Parcel> getListParcelsByTagsNewWithCNInnerJoinBigResultset(StringBuilder tags, StringBuilder excludeTags, List<String> usageCodeBuildingsMustBe) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("tags", tags);
+        parameters.addValue("excludeTags", excludeTags);
+        parameters.addValue("usageCodeBuildingsMustBe", usageCodeBuildingsMustBe);
+
+        String SQLQuery;
+        if (excludeTags.isEmpty()) {
+//                Этот запрос выполняется адски долго - вечность
+//                    "ON (PP.INNER_CADASTRAL_NUMBERS = BI.CADASTRAL_NUMBER OR PP.CADASTRAL_NUMBER = BI.PARCEL_CADASTRAL_NUMBERS) " +
+
+
+            SQLQuery = "SELECT PP.ID, PP.CADASTRAL_NUMBER, PP.CADASTRAL_BLOCK, PP.AREA, PP.CATEGORY, PP.APPROVAL_DOCUMENT_NAME, PP.UTILIZATION_BY_DOC, PP.UTILIZATION_LAND_USE, PP.UTILIZATION_PERMITTED_USE_TEXT, PP.INNER_CADASTRAL_NUMBERS " +
+                    "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
+                    "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
+                    "ON (PP.CADASTRAL_NUMBER = BI.PARCEL_CADASTRAL_NUMBERS) " +
+                    "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags " +
+                    "GROUP BY PP.CADASTRAL_NUMBER" +
+                    "; " +
+
+                    "SELECT * " +
+                    "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
+                    "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
+                    "ON (PP.INNER_CADASTRAL_NUMBERS = BI.CADASTRAL_NUMBER) " +
+                    "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags " +
+                    "GROUP BY PP.CADASTRAL_NUMBER" +
+                    ";";
+        } else {
+            SQLQuery = "SELECT PP.ID, PP.CADASTRAL_NUMBER, PP.CADASTRAL_BLOCK, PP.AREA, PP.CATEGORY, PP.APPROVAL_DOCUMENT_NAME, PP.UTILIZATION_BY_DOC, PP.UTILIZATION_LAND_USE, PP.UTILIZATION_PERMITTED_USE_TEXT, PP.INNER_CADASTRAL_NUMBERS " +
+                    "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
+                    "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
+                    "ON (PP.CADASTRAL_NUMBER = BI.PARCEL_CADASTRAL_NUMBERS) " +
+                    "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
+                    "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags " +
+                    "GROUP BY PP.CADASTRAL_NUMBER" +
+                    "; " +
+                    "SELECT * " +
+                    "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
+                    "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
+                    "ON (PP.INNER_CADASTRAL_NUMBERS = BI.CADASTRAL_NUMBER) " +
+                    "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
+                    "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags " +
+                    "GROUP BY PP.CADASTRAL_NUMBER";
+        }
+        System.out.println(parameters);
+        return template.query(SQLQuery, parameters, new ParcelMapperJoinINCForBigResultset());
+    }
+
+    @Override
+    public List<Parcel> getListParcelsByTagsNewWithoutCNBigResultset(StringBuilder tags, StringBuilder excludeTags) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("tags", tags);
+        parameters.addValue("excludeTags", excludeTags);
+
+        String SQLQuery;
+        if (excludeTags.isEmpty()) {
+
+            SQLQuery = "SELECT * FROM PARCELS.VIEW_INNER_CN_NULL WHERE " +
+                    "LOWER(utilization_by_doc) REGEXP :tags";
+
+        } else {
+
+            SQLQuery = "SELECT * FROM PARCELS.VIEW_INNER_CN_NULL WHERE " +
+                    "LOWER(utilization_by_doc) REGEXP :tags AND " +
+                    "LOWER(utilization_by_doc) NOT REGEXP :excludeTags";
+        }
+        System.out.println(parameters);
+        return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
+    }
+
+
+    @Override
+    public List<Parcel> getListParcelsByCode(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, Boolean isSearchInDistrict, Boolean isSearchInCity) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("tags", tags);
+        parameters.addValue("excludeTags", excludeTags);
+        parameters.addValue("moreArea", moreArea);
+        parameters.addValue("lessArea", lessArea);
+        String city = isSearchInCity ? "18:26:|18:27:|18:28:|18:29:|18:30:" : "В ГОРОДАХ НЕ ИЩЕМ";
+        String district = isSearchInDistrict ? "18:01:|18:02:|18:03:|18:04:|18:05:|18:06:|18:07:|18:08:|18:09:|18:10:|18:11:|18:12:|18:13:|18:14:|18:15:|18:16:|18:17:|18:18:|18:19:|18:20:|18:21:|18:22:|18:23:|18:24:|18:25:" : "В РАЙОНАХ НЕ ИЩЕМ";
+        parameters.addValue("district", district);
+        parameters.addValue("city", city);
+
+        String SQLQuery;
+        if (excludeTags.isEmpty()) {
+            if (isSearchInDistrict && isSearchInCity) {
+                SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP :tags AND " +
+                        "area >= :moreArea AND " +
+                        "area <= :lessArea";
+            } else {
+                SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP :tags AND " +
+                        "area >= :moreArea AND " +
+                        "area <= :lessArea AND " +
+                        "(CADASTRAL_BLOCK REGEXP :district OR " +
+                        "CADASTRAL_BLOCK REGEXP :city)";
+            }
+        } else {
+            if (isSearchInDistrict && isSearchInCity) {
+                SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP :tags AND " +
+                        "LOWER(utilization_by_doc) NOT REGEXP :excludeTags AND " +
+                        "area >= :moreArea AND " +
+                        "area <= :lessArea";
+            } else {
+                SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP :tags AND " +
+                        "LOWER(utilization_by_doc) NOT REGEXP :excludeTags AND " +
+                        "area >= :moreArea AND " +
+                        "area <= :lessArea AND " +
+                        "(CADASTRAL_BLOCK REGEXP :district OR " +
+                        "CADASTRAL_BLOCK REGEXP :city)";
+            }
+
+        }
+        System.out.println(parameters);
+        return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
     }
 
     @Override
@@ -49,38 +189,137 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
 
         String SQLQuery;
         if (excludeTags.isEmpty()) {
-             SQLQuery = "SELECT " +
-                    "PP.ID, PP.CADASTRAL_NUMBER, CADASTRAL_BLOCK, PP.AREA, " +
-                    "APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, " +
-                    "SUM(BI.AREA) AS AREA_BUILDINGS " +
-                    "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
-                    "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
-                    "ON PP.INNER_CADASTRAL_NUMBERS REGEXP BI.CADASTRAL_NUMBER " +
-                    "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
-                    "PP.area >= :moreArea AND " +
-                    "PP.area <= :lessArea AND " +
-                    "(PP.CADASTRAL_BLOCK REGEXP :district OR " +
-                    "PP.CADASTRAL_BLOCK REGEXP :city) AND " +
-                    "BI.AREA/PP.AREA > :moreThisShareAreaBuildings AND " +
-                    "BI.AREA/PP.AREA < :lessThisShareAreaBuildings " +
-                    "GROUP BY PP.CADASTRAL_NUMBER";
+            if (isSearchInDistrict && isSearchInCity) {
+                SQLQuery = "SELECT " +
+                        "PP.ID, PP.CADASTRAL_NUMBER, CADASTRAL_BLOCK, PP.AREA, " +
+                        "APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, " +
+                        "SUM(BI.AREA) AS AREA_BUILDINGS " +
+                        "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
+                        "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
+                        "ON PP.CADASTRAL_NUMBER = BI.PARCEL_CADASTRAL_NUMBERS " +
+                        "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
+                        "PP.area >= :moreArea AND " +
+                        "PP.area <= :lessArea AND " +
+                        "BI.AREA/PP.AREA > :moreThisShareAreaBuildings AND " +
+                        "BI.AREA/PP.AREA < :lessThisShareAreaBuildings " +
+                        "GROUP BY PP.CADASTRAL_NUMBER; " +
+
+                        "SELECT " +
+                        "PP.ID, PP.CADASTRAL_NUMBER, CADASTRAL_BLOCK, PP.AREA, " +
+                        "APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, " +
+                        "SUM(BI.AREA) AS AREA_BUILDINGS " +
+                        "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
+                        "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
+                        "ON PP.INNER_CADASTRAL_NUMBERS = BI.CADASTRAL_NUMBER " +
+                        "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
+                        "PP.area >= :moreArea AND " +
+                        "PP.area <= :lessArea AND " +
+                        "BI.AREA/PP.AREA > :moreThisShareAreaBuildings AND " +
+                        "BI.AREA/PP.AREA < :lessThisShareAreaBuildings " +
+                        "GROUP BY PP.CADASTRAL_NUMBER";
+
+
+
+            } else {
+                SQLQuery = "SELECT " +
+                        "PP.ID, PP.CADASTRAL_NUMBER, CADASTRAL_BLOCK, PP.AREA, " +
+                        "APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, " +
+                        "SUM(BI.AREA) AS AREA_BUILDINGS " +
+                        "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
+                        "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
+                        "ON PP.CADASTRAL_NUMBER = BI.PARCEL_CADASTRAL_NUMBERS " +
+                        "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
+                        "PP.area >= :moreArea AND " +
+                        "PP.area <= :lessArea AND " +
+                        "(PP.CADASTRAL_BLOCK REGEXP :district OR " +
+                        "PP.CADASTRAL_BLOCK REGEXP :city) AND " +
+                        "BI.AREA/PP.AREA > :moreThisShareAreaBuildings AND " +
+                        "BI.AREA/PP.AREA < :lessThisShareAreaBuildings " +
+                        "GROUP BY PP.CADASTRAL_NUMBER; " +
+
+                        "SELECT " +
+                        "PP.ID, PP.CADASTRAL_NUMBER, CADASTRAL_BLOCK, PP.AREA, " +
+                        "APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, " +
+                        "SUM(BI.AREA) AS AREA_BUILDINGS " +
+                        "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
+                        "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
+                        "ON PP.INNER_CADASTRAL_NUMBERS = BI.CADASTRAL_NUMBER " +
+                        "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
+                        "PP.area >= :moreArea AND " +
+                        "PP.area <= :lessArea AND " +
+                        "(PP.CADASTRAL_BLOCK REGEXP :district OR " +
+                        "PP.CADASTRAL_BLOCK REGEXP :city) AND " +
+                        "BI.AREA/PP.AREA > :moreThisShareAreaBuildings AND " +
+                        "BI.AREA/PP.AREA < :lessThisShareAreaBuildings " +
+                        "GROUP BY PP.CADASTRAL_NUMBER";
+            }
         } else {
-             SQLQuery = "SELECT " +
-                    "PP.ID, PP.CADASTRAL_NUMBER, CADASTRAL_BLOCK, PP.AREA, " +
-                    "APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, " +
-                    "SUM(BI.AREA) AS AREA_BUILDINGS " +
-                    "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
-                    "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
-                    "ON PP.INNER_CADASTRAL_NUMBERS REGEXP BI.CADASTRAL_NUMBER " +
-                    "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
-                    "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags AND " +
-                    "PP.area >= :moreArea AND " +
-                    "PP.area <= :lessArea AND " +
-                    "(PP.CADASTRAL_BLOCK REGEXP :district OR " +
-                    "PP.CADASTRAL_BLOCK REGEXP :city) AND " +
-                    "BI.AREA/PP.AREA > :moreThisShareAreaBuildings AND " +
-                    "BI.AREA/PP.AREA < :lessThisShareAreaBuildings " +
-                    "GROUP BY PP.CADASTRAL_NUMBER";
+            if (isSearchInDistrict && isSearchInCity) {
+                SQLQuery = "SELECT " +
+                        "PP.ID, PP.CADASTRAL_NUMBER, CADASTRAL_BLOCK, PP.AREA, " +
+                        "APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, " +
+                        "SUM(BI.AREA) AS AREA_BUILDINGS " +
+                        "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
+                        "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
+                        "ON PP.CADASTRAL_NUMBER = BI.PARCEL_CADASTRAL_NUMBERS " +
+                        "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
+                        "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags AND " +
+                        "PP.area >= :moreArea AND " +
+                        "PP.area <= :lessArea AND " +
+                        "BI.AREA/PP.AREA > :moreThisShareAreaBuildings AND " +
+                        "BI.AREA/PP.AREA < :lessThisShareAreaBuildings " +
+                        "GROUP BY PP.CADASTRAL_NUMBER; "+
+
+                        "SELECT " +
+                        "PP.ID, PP.CADASTRAL_NUMBER, CADASTRAL_BLOCK, PP.AREA, " +
+                        "APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, " +
+                        "SUM(BI.AREA) AS AREA_BUILDINGS " +
+                        "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
+                        "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
+                        "ON PP.INNER_CADASTRAL_NUMBERS = BI.CADASTRAL_NUMBER " +
+                        "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
+                        "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags AND " +
+                        "PP.area >= :moreArea AND " +
+                        "PP.area <= :lessArea AND " +
+                        "BI.AREA/PP.AREA > :moreThisShareAreaBuildings AND " +
+                        "BI.AREA/PP.AREA < :lessThisShareAreaBuildings " +
+                        "GROUP BY PP.CADASTRAL_NUMBER";
+            } else {
+                SQLQuery = "SELECT " +
+                        "PP.ID, PP.CADASTRAL_NUMBER, CADASTRAL_BLOCK, PP.AREA, " +
+                        "APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, " +
+                        "SUM(BI.AREA) AS AREA_BUILDINGS " +
+                        "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
+                        "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
+                        "ON PP.CADASTRAL_NUMBER = BI.PARCEL_CADASTRAL_NUMBERS " +
+                        "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
+                        "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags AND " +
+                        "PP.area >= :moreArea AND " +
+                        "PP.area <= :lessArea AND " +
+                        "(PP.CADASTRAL_BLOCK REGEXP :district OR " +
+                        "PP.CADASTRAL_BLOCK REGEXP :city) AND " +
+                        "BI.AREA/PP.AREA > :moreThisShareAreaBuildings AND " +
+                        "BI.AREA/PP.AREA < :lessThisShareAreaBuildings " +
+                        "GROUP BY PP.CADASTRAL_NUMBER; " +
+
+                        "SELECT " +
+                        "PP.ID, PP.CADASTRAL_NUMBER, CADASTRAL_BLOCK, PP.AREA, " +
+                        "APPROVAL_DOCUMENT_NAME, CATEGORY, UTILIZATION_LAND_USE, UTILIZATION_BY_DOC, UTILIZATION_PERMITTED_USE_TEXT, INNER_CADASTRAL_NUMBERS, " +
+                        "SUM(BI.AREA) AS AREA_BUILDINGS " +
+                        "FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
+                        "(SELECT * FROM BUILDINGS.PARCEL_INNER_CN WHERE USAGE_CODE IN(:usageCodeBuildingsMustBe)) BI " +
+                        "ON PP.INNER_CADASTRAL_NUMBERS = BI.CADASTRAL_NUMBER " +
+                        "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
+                        "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags AND " +
+                        "PP.area >= :moreArea AND " +
+                        "PP.area <= :lessArea AND " +
+                        "(PP.CADASTRAL_BLOCK REGEXP :district OR " +
+                        "PP.CADASTRAL_BLOCK REGEXP :city) AND " +
+                        "BI.AREA/PP.AREA > :moreThisShareAreaBuildings AND " +
+                        "BI.AREA/PP.AREA < :lessThisShareAreaBuildings " +
+                        "GROUP BY PP.CADASTRAL_NUMBER";
+
+            }
         }
         System.out.println(parameters);
         return template.query(SQLQuery, parameters, new ParcelMapperJoinINC());
@@ -98,19 +337,40 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
         parameters.addValue("district", district);
         parameters.addValue("city", city);
 
-        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP :tags AND " +
-                "LOWER(utilization_by_doc) NOT REGEXP :excludeTags AND " +
-                "area >= :moreArea AND " +
-                "area <= :lessArea AND " +
-                "(CADASTRAL_BLOCK REGEXP :district OR " +
-                "CADASTRAL_BLOCK REGEXP :city) AND " +
-                "INNER_CADASTRAL_NUMBERS =''";
+        String SQLQuery;
+        if (excludeTags.isEmpty()) {
+            if (isSearchInDistrict && isSearchInCity) {
+                SQLQuery = "SELECT * FROM PARCELS.VIEW_INNER_CN_NULL WHERE LOWER(utilization_by_doc) REGEXP :tags AND " +
+                        "area >= :moreArea AND " +
+                        "area <= :lessArea" ;
+            } else {
+                SQLQuery = "SELECT * FROM PARCELS.VIEW_INNER_CN_NULL WHERE LOWER(utilization_by_doc) REGEXP :tags AND " +
+                        "area >= :moreArea AND " +
+                        "area <= :lessArea AND " +
+                        "(CADASTRAL_BLOCK REGEXP :district OR " +
+                        "CADASTRAL_BLOCK REGEXP :city)";
+            }
+        } else {
+            if (isSearchInDistrict && isSearchInCity) {
+                SQLQuery = "SELECT * FROM PARCELS.VIEW_INNER_CN_NULL WHERE LOWER(utilization_by_doc) REGEXP :tags AND " +
+                        "LOWER(utilization_by_doc) NOT REGEXP :excludeTags AND " +
+                        "area >= :moreArea AND " +
+                        "area <= :lessArea";
+            } else {
+                SQLQuery = "SELECT * FROM PARCELS.VIEW_INNER_CN_NULL WHERE LOWER(utilization_by_doc) REGEXP :tags AND " +
+                        "LOWER(utilization_by_doc) NOT REGEXP :excludeTags AND " +
+                        "area >= :moreArea AND " +
+                        "area <= :lessArea AND " +
+                        "(CADASTRAL_BLOCK REGEXP :district OR " +
+                        "CADASTRAL_BLOCK REGEXP :city)";
+            }
+        }
         System.out.println(parameters);
         return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
     }
 
-        @Override
-        public List<Parcel> getListParcelsByTagsNew(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, Boolean isSearchInDistrict, Boolean isSearchInCity) {
+    @Override
+    public List<Parcel> getListParcelsByTagsNew(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, Boolean isSearchInDistrict, Boolean isSearchInCity) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("tags", tags);
         parameters.addValue("excludeTags", excludeTags);
@@ -227,100 +487,6 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
 
 
     @Override
-    public List<Parcel> getListParcelsByTags(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea) {
-
-        Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
-        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND " +
-                // Это было ошибкой, - осуществляется поиск фразы Optional.Empty : Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
-                "LOWER(utilization_by_doc) NOT REGEXP ? AND " +
-                "area >= ? AND " +
-                "area <= ?";
-        return jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted(), arg);
-    }
-
-    @Override
-    public List<Parcel> getListParcelsByTagsWithoutICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea) {
-        Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
-        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND " +
-                // Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
-                "LOWER(utilization_by_doc) NOT REGEXP ? AND " +
-                "inner_cadastral_numbers = '' AND " +
-                "area >= ? AND " +
-                "area <= ?";
-        return jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted(), arg);
-    }
-
-    @Override
-    public List<Parcel> getListParcelsByTagsWithICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea) {
-        Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
-        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE LOWER(utilization_by_doc) REGEXP ? AND " +
-                // Это было ошибкой, - осуществляется поиск фразы Optional.Empty : Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
-                "LOWER(utilization_by_doc) NOT REGEXP ? AND " +
-                "inner_cadastral_numbers != '' AND " +
-                "area >= ? AND " +
-                "area <= ?";
-        return jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted(), arg);
-    }
-
-    public List<Parcel> getListParcelsByTagsJoinICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, String innerCNTableName) {
-        Object[] arg = new Object[]{tags, excludeTags, moreArea, lessArea};
-        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
-                innerCNTableName + " PI " +
-                "ON PP.inner_cadastral_numbers REGEXP PI.CADASTRAL_NUMBER " +
-                "WHERE LOWER(PP.utilization_by_doc) REGEXP ? AND " +
-                // Это было ошибкой, - осуществляется поиск фразы Optional.Empty : Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
-                "LOWER(PP.utilization_by_doc) NOT REGEXP ? AND " +
-                "PP.area >= ? AND " +
-                "PP.area <= ?";
-        return jdbcTemplate.query(SQLQuery, new ParcelMapperPredicted(), arg);
-    }
-
-
-    public List<Parcel> getListParcelsByTagsJoinListICN(StringBuilder tags, StringBuilder excludeTags, Float moreArea, Float lessArea, String innerCNTableName, List<String> usageCodeBuildings) {
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("tags", tags);
-        parameters.addValue("excludeTags", excludeTags);
-        parameters.addValue("moreArea", moreArea);
-        parameters.addValue("lessArea", lessArea);
-        parameters.addValue("usageCodeBuildings", usageCodeBuildings);
-
-        String SQLQuery = "SELECT * FROM PARCELS.PARCEL_LIST_2026 PP INNER JOIN " +
-                "(SELECT * FROM " +
-                innerCNTableName + " " +
-                "WHERE USAGE_CODE IN(:usageCodeBuildings)) " +
-                "BI " +
-                "ON PP.inner_cadastral_numbers REGEXP BI.CADASTRAL_NUMBER " +
-                "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
-                // Это было ошибкой, - осуществляется поиск фразы Optional.Empty : Если приходит значение (только для REGEX !) Пустая строка (не null), то условие не учитывается!!!
-                "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags AND " +
-                "PP.area >= :moreArea AND " +
-                "PP.area <= :lessArea";
-        return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
-
-    }
-
-    //Переопределение метода getListParcelsByTagsJoinListICN
-    @Override
-    public List<Parcel> getListParcelsByTagsJoinListICN(StringBuilder tags, StringBuilder excludeTags, String innerCNTableName, List<String> usageCodeBuildings) {
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("tags", tags);
-        parameters.addValue("excludeTags", excludeTags);
-        parameters.addValue("usageCodeBuildings", usageCodeBuildings);
-
-        String SQLQuery = "SELECT * FROM " +
-                "(SELECT * FROM PARCELS.PARCEL_LIST_2026 WHERE inner_cadastral_numbers != '') PP " +
-                "INNER JOIN " +
-                "(SELECT * FROM " +
-                innerCNTableName + " " +
-                "WHERE USAGE_CODE IN(:usageCodeBuildings)) " +
-                "BI " +
-                "ON PP.inner_cadastral_numbers REGEXP BI.CADASTRAL_NUMBER " +
-                "WHERE LOWER(PP.utilization_by_doc) REGEXP :tags AND " +
-                "LOWER(PP.utilization_by_doc) NOT REGEXP :excludeTags";
-        return template.query(SQLQuery, parameters, new ParcelMapperPredicted());
-    }
-
-    @Override
     public void updatePredictedUC(Set<Integer> idList, String predictedUsageCode) {
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
@@ -335,7 +501,7 @@ public class LmstQuery implements GetParcelDAO, UpdateParcelDAO, ParcelArrayMake
 
         String SQLUpdate = "UPDATE PARCELS.PARCEL_LIST_2026 SET PREDICTED_USAGE_CODE = " +
                 "CASE " +
-                "WHEN PREDICTED_USAGE_CODE = '' " +
+                "WHEN PREDICTED_USAGE_CODE IS NULL " +
                 "THEN :PREDICTED_USAGE_CODE " +
                 "ELSE CONCAT(PREDICTED_USAGE_CODE, '; ', :PREDICTED_USAGE_CODE) " +
                 "END " +
